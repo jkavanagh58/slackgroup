@@ -294,7 +294,7 @@
             ".NOTES",
             "\tFile Name: $TM_FILENAME",
             "\tDate Created: ${date:Insert today’s date (Ctrl+Shift+I)}",
-            "\tAuthor: John J. Kavanagh",
+            "\tAuthor: $author",
             "\tGeneral notes",
             "#>"
         ],

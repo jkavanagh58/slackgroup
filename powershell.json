@@ -265,7 +265,7 @@
         "description": "Advanced function"
     },
     "Help": {
-        "prefix": "JJK - Help",
+        "prefix": "hdrcomment",
         "body": [
             "<#",
             ".SYNOPSIS",

@@ -264,7 +264,7 @@
         ],
         "description": "Advanced function"
     },
-    "Help": {
+    "Customized Help Based Comment block": {
         "prefix": "hdrcomment",
         "body": [
             "<#",

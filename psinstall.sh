@@ -1,3 +1,4 @@
+#! shell script to install PS Core on Ubuntu 
 # Import the public repository GPG keys
 curl https://packages.microsoft.com/keys/microsoft.asc | sudo apt-key add -
 # Register the Microsoft Ubuntu repository

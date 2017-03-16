@@ -15,8 +15,8 @@ Visual Studio Code | Free and covers pretty much any language and format you wou
 
 ### Premium
 **Name** | **Notes** |
-| ------------- | :-------------| 
-| Sapien Software Suite | Pricey but PrimalScript and PowerShell Studio!!!!! |
+| ------------- | :------------- | 
+| [SAPIEN Software Suite  Microsoft PowerShell Scripting tools](https://www.sapien.com/software/sapien_software_suite) | Pricey but PrimalScript and PowerShell Studio |
 | ISE Steroids | Nice add-on to ISE |
 
 

@@ -1,3 +1,17 @@
+<#
+.SYNOPSIS
+	Update server DNS client config
+.DESCRIPTION
+	Long description
+.EXAMPLE
+	C:\etc>.\set-ipv2a.ps1
+	Example of how to use this cmdlet
+.NOTES
+	File Name: set-ipv2a.ps1
+	Date Created: 03.17.2017
+	Author: dwoz
+	03.17.2017 JJK: TODO: add debug output and logging
+#>
 Begin {
 	$file = 'C:\etc\srv03sb.csv'
 	$computers = Import-Csv -Path $file -Header ComputerName, IPAdress, DNSServer1, DNSServer2, DNSServer3 

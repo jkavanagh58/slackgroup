@@ -308,5 +308,16 @@
     "}"
     ],
     "description": "my standard begin block"
-}
+},
+    "Mandatory Parameter with Help Message": {
+            "prefix": "manparamhelp",
+            "body": [
+                "[Parameter(Mandatory=$$true,\r",
+                "\tValueFromPipeline=$$true,\r",
+                   "\tValueFromPipelineByPropertyName=$$true,\r",
+                   "\tHelpMessage = ${1:helpmessage})]\r",
+                "\t[String]${2:parametername}\r"
+            ],
+            "description": "Manadatory Parameter of String Type with Help Message"
+    }
 }

@@ -94,6 +94,7 @@ Begin {
 
 
 # /* Below here is where I am testing work with snippets
+# TODO: Library any snippets added
 
 [Parameter(Mandatory=$true,
                    ValueFromPipeline=$true,
@@ -109,4 +110,22 @@ Param(
 		ValueFromPipelineByPropertyName=$true,
 		HelpMessage = "Test message")]
 		[String]$varParam
+)
+
+# Custom object Snippet
+# Prefix "pscustom"
+$obj = [pscustomobject]@{
+	FieldName = FieldValue;
+}
+
+# Param with validation script
+# Prefix "manparamvalidate"
+Param(
+	[Parameter(Mandatory = $true,
+		ValueFromPipeline = $true,
+		Position = 1,
+		HelpMessage = "Type the help message here in quotes")]
+		[ValidateScript({ test-path $_ })]
+		[System.String]$varSome
+	
 )

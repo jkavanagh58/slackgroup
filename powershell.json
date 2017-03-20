@@ -319,5 +319,18 @@
                 "\t[String]${2:parametername}\r"
             ],
             "description": "Manadatory Parameter of String Type with Help Message"
+    },
+    
+    "Mandatory Parameter with Validation Script":{
+        "prefix": "manparamvalidate",
+        "body": [
+            "[Parameter(Mandatory = $$true,\r",
+			        "\tValueFromPipeline = $$true,\r",
+			        "\tPosition = 1,\r",
+			        "\tHelpMessage = ${1:helpmessage})]\r",
+	        "\t[ValidateScript({ ${2:ValidationScript} })]\r",
+	        "\t[System.String]${3:paramName}\r"
+        ],
+        "description": "Mandatory Parameter of a String with Validation Script"
     }
 }

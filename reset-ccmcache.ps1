@@ -4,7 +4,6 @@ $cacheItems = (Get-ChildItem C:\windows\ccmcache -recurse -force| Measure-Object
 "{0:N2}" -f ($colItems.sum / 1MB) + " MB"
 }
 $start = get-ccmcachesize
-
 #Connect to Resource Manager COM Object
 $resman = new-object -com "UIResource.UIResourceMgr"
 $cacheInfo = $resman.GetCacheInfo()

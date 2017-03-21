@@ -3,6 +3,11 @@
 Unlock-AdAccount -Identity jktest -Verbose
 if ((get-aduser jktest -Properties LockedOut).LockedOut){Unlock-ADAccount -Identity jktest -Verbose}  
 
+# testing regex
+$String="12.1.1.1"
+$IPv4Regex = '((?:(?:0?0?\d|0?[1-9]\d|1\d\d|2[0-5][0-5]|2[0-4]\d)\.){3}(?:0?0?\d|0?[1-9]\d|1\d\d|2[0-5][0-5]|2[0-4]\d))'
+[regex]::Matches($String, $IPv4Regex) 
+
 # How to lock an account
 $Password = ConvertTo-SecureString 'NotMyPassword' -AsPlainText -Force
 Get-AdUser jktest |

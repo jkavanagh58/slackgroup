@@ -28,6 +28,7 @@
     Author: slack group
     03.21.2016 JJK: TODO: verify name pattern and if consistent awk it to split the name and version number
     03.21.2017 JJK: Filename pattern is not consistent, will look for a regex way
+    03.21.2017 JJK: TODO: use REST to get a list of new and updated extensions
 #>
 
 # List the installed extensions

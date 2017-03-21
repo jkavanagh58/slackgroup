@@ -320,7 +320,7 @@
             ],
             "description": "Manadatory Parameter of String Type with Help Message"
     },
-    
+    // New Snippet need more like this
     "Mandatory Parameter with Validation Script":{
         "prefix": "manparamvalidate",
         "body": [

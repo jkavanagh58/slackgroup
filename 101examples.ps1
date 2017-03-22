@@ -1,5 +1,13 @@
 # Scratch file for submitting code, tips, snippets, etc...
 
+# Does vscode warn about function name
+Function machine-code {
+	[cmdletBinding()]
+	param($somevar)
+	# Does this get a warning?
+}
+
+
 Unlock-AdAccount -Identity jktest -Verbose
 if ((get-aduser jktest -Properties LockedOut).LockedOut){Unlock-ADAccount -Identity jktest -Verbose}  
 

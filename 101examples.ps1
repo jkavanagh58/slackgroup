@@ -134,3 +134,7 @@ Param(
 		[System.String]$varSome
 	
 )
+# Prefix ipparam
+Param (
+	
+)

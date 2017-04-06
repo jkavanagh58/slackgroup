@@ -1,5 +1,6 @@
 # Just a place for testing work amongst the slack group
 <#
+Code I would use
 [CmdletBinding(SupportsShouldProcess)]
 Param(
     [String]$sourcePath = "\\clvprdinfs001\IT_FileSrv\jkav",
@@ -15,7 +16,8 @@ ForEach ($obj in $newfiles){
     copy-item $obj.FullName -Destination $destPath -Force
 }
 #>
-# This will be re-written
+# This will be re-written since there is no need for the if statement if you collect all the files in the
+# get-childitem object
 $thisdate = get-date -f yyyyMMdd
 $Curr_date = get-date
 $Max_days = "-20"

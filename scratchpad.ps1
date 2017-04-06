@@ -31,3 +31,4 @@ Foreach($file in (Get-ChildItem $pubSource))
         Copy-Item -Path $file.fullname -Destination $taskP     
     }
 }
+get-installedmodule | sort-object Name | select-object Name, Version, @{N="OnlineVersion";e={(find-module -Name $_.Name).version}}

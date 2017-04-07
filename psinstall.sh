@@ -30,8 +30,7 @@ sudo apt-get update
 # Install vscode
 sudo apt-get install code 
 # / Optional if you would prefere insiders build
-<<<<<<< HEAD
 # sudo apt-get install code-insiders 
 =======
 # sudo apt-get install code-insiders 
->>>>>>> ccacb54168518ae2e5b42fa4550f2caa15b61ee5
+

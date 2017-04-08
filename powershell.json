@@ -264,41 +264,46 @@
         ],
         "description": "Advanced function"
     },
-    "Customized Help Based Comment block": {
-        "prefix": "hdrcomment",
-        "body": [
-            "<#",
-            ".SYNOPSIS",
-            "\tShort description",
-            ".DESCRIPTION",
-            "\tLong description",
-            ".PARAMETER Path",
-            "\tSpecifies a path to one or more locations.",
-            ".PARAMETER LiteralPath",
-            "\tSpecifies a path to one or more locations. Unlike Path, the value of LiteralPath is used exactly as it",
-            "\tis typed. No characters are interpreted as wildcards. If the path includes escape characters, enclose",
-            "\tit in single quotation marks. Single quotation marks tell Windows PowerShell not to interpret any",
-            "\tcharacters as escape sequences.",
-            ".PARAMETER InputObject",
-            "\tSpecifies the object to be processed.  You can also pipe the objects to this command.",
-            ".EXAMPLE",
-            "\tC:\\PS>",
-            "\tExample of how to use this cmdlet",
-            ".EXAMPLE",
-            "\tC:\\PS>",
-            "\tAnother example of how to use this cmdlet",
-            ".INPUTS",
-            "\tInputs to this cmdlet (if any)",
-            ".OUTPUTS",
-            "\tOutput from this cmdlet (if any)",
-            ".NOTES",
-            "\tFile Name: $TM_FILENAME",
-            "\tDate Created: ${date:Insert today’s date (Ctrl+Shift+I)}",
-            "\tAuthor: $author",
-            "\tGeneral notes",
-            "#>"
-        ],
-        "description": "Help comment block - Customized"
+    "Help": {
+    "prefix": "JJK - Help",
+    "body": [
+      "<#",
+      ".SYNOPSIS",
+      "\tShort description",
+      ".DESCRIPTION",
+      "\tLong description",
+      ".PARAMETER Path",
+      "\tSpecifies a path to one or more locations.",
+      ".PARAMETER LiteralPath",
+      "\tSpecifies a path to one or more locations. Unlike Path, the value of LiteralPath is used exactly as it",
+      "\tis typed. No characters are interpreted as wildcards. If the path includes escape characters, enclose",
+      "\tit in single quotation marks. Single quotation marks tell Windows PowerShell not to interpret any",
+      "\tcharacters as escape sequences.",
+      ".PARAMETER InputObject",
+      "\tSpecifies the object to be processed.  You can also pipe the objects to this command.",
+      ".EXAMPLE",
+      "\tC:\\PS>",
+      "\tExample of how to use this cmdlet",
+      ".EXAMPLE",
+      "\tC:\\PS>",
+      "\tAnother example of how to use this cmdlet",
+      ".INPUTS",
+      "\tInputs to this cmdlet (if any)",
+      ".OUTPUTS",
+      "\tOutput from this cmdlet (if any)",
+      ".NOTES",
+      "\t===========================================================================\r"
+	  "\tCreated with: 	Visual Studio Code\r"
+	  "\tCreated on:   	$date\r"
+	  "\tCreated by:   	John Kavanagh\r"
+	  "\tOrganization: 	TekSystems\r"
+	  "\tFilename:     	add-grplocaladmin.ps1\r"
+	  "\t===========================================================================\r"
+      "\t$date $initials: Enter first comment here\r"
+      "#>\r"
+    ],
+    "description": "Help comment block - Customized"
+  },
     }
     "my Begin Block" : {
     "prefix": "myBegin",

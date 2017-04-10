@@ -1,3 +1,4 @@
+#Requires -Version 3
 <#
 .SYNOPSIS
     Performs a search and replace for config files.
@@ -32,6 +33,7 @@
     04.10.2017 JJk: TODO: Provide output for any changes made.
     04.10.2017 JJK: TDOD: -Enhancement- Provide search and only attempt replace against files 
                             where pattern exists.
+    04.10.2017 JJK: Test run working, removing Debug statements
 #>
 [CmdletBinding(SupportsShouldProcess=$True)]
 Param(
@@ -54,9 +56,8 @@ Param(
 If (Test-path $configFldr){
     $configFiles = get-childitem *.Config -Path $configFldr -Recurse
     Foreach ($cFile in $configFiles){
-        (Get-Content $cfile.PSPath) |
-        Foreach-Object { $_ -replace $curval, $newVal } |
-        Set-Content $cfile.PSPath 
+        (Get-Content $cfile.FullName).replace($curval, $newval) | 
+            Set-Content $cfile.FullName 
     }
 }
 Else {"Unable to find {0}" -f $configFldr}

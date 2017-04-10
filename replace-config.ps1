@@ -14,9 +14,6 @@
 .EXAMPLE
     C:\PS>c:\etc\scripts\replace-config.ps1 -configFldr "c:\etc\test" -curVal "JJK=$false" -newVal "JJK=$true"
     Replace any instance of JJK=$fale to JJK=$true for any file found in c:\etc\test and it's sub-directories
-.EXAMPLE
-    C:\PS>
-    Another example of how to use this cmdlet
 .NOTES
     ===========================================================================
     Created with: 	Visual Studio Code

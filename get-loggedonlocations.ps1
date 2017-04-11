@@ -5,7 +5,9 @@
     Was written with an admin account in mind so it limits the search to servers but could be modified to run against
     enabled computers. For each computer that is found a simple online test is initiated if that test finds the computer is
     reachable the current processes are checked. Each instance of explorer is evaluated for the owner. If the username matches the owner
-    it is reported.
+    it is reported. I use this in conjunction with get-lockedoutlocation when trying to find a reason for an account to continue
+    to get unlocked. I scoped this to servers as that was more applicable for my use but the get-adcomputer can be changed based
+    on need.
 .PARAMETER username
     Specifies the logonname to evaluate and report on.
 .EXAMPLE
@@ -14,6 +16,7 @@
 .NOTES
     Author: John J. Kavanagh
     03.09.2017 JJK: TODO: Create Advanced function out of this script.
+    04.06.2017 JJK: TODO: Provide switch param set to pick the computer type to run against
 #>
 Param($username)
 $username = "admjkavanagh"

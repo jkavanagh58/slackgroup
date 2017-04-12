@@ -54,7 +54,11 @@ Param(
     HelpMessage = "Replace text with this value")]
     [String]$newVal
 )
-
+# Test for special characters
+if ($curval -match '[\W]' -or $newVal -match '[\W]'){
+    Write-Error "Special characters are not currently supported"
+    Exit
+}
 If (Test-path $configFldr){
     $configFiles = get-childitem *.Config -Path $configFldr -Recurse
     Foreach ($cFile in $configFiles){

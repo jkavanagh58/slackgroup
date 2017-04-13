@@ -294,7 +294,7 @@
       ".NOTES",
       "\t===========================================================================\r"
 	  "\tCreated with: 	Visual Studio Code\r"
-	  "\tCreated on:   	$date\r"
+	  "\tCreated on:   	$datecreated\r"
 	  "\tCreated by:   	John Kavanagh\r"
 	  "\tOrganization: 	TekSystems\r"
 	  "\tFilename:     	add-grplocaladmin.ps1\r"

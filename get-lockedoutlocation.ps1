@@ -1,134 +1,95 @@
-﻿#Requires -Version 2.0
-<# 
-	.SYNOPSIS 
-		The synopsis goes here. This can be one line, or many. 
-	
-	.DESCRIPTION 
-		The description is usually a longer, more detailed explanation of what the script or function does. Take as many lines as you need. 
-	
-	.PARAMETER computername
-		Here, the dotted keyword is followed by a single parameter name. Don't precede that with a hyphen. The following lines describe the purpose of the parameter: 
-	
-	.PARAMETER filePath Provide a PARAMETER section for each parameter that your script or function accepts.
-	
-	.EXAMPLE
-		Get-LockedOutLocation -Identity servicecucm 
-	
-	.NOTES
-        12.07.2016 JJK: Make function and add to module.
-
-	.AUTHOR
-		John J Kavanagh
- #>
-Function Get-LockedOutLocation
-{
-<#
+﻿<#
 .SYNOPSIS
-	This function will locate the computer that processed a failed user logon attempt which caused the user account to become locked out.
-
+    Reports where an account is being locked out from.
 .DESCRIPTION
-	This function will locate the computer that processed a failed user logon attempt which caused the user account to become locked out. 
-	The locked out location is found by querying the PDC Emulator for locked out events (4740).  
-	The function will display the BadPasswordTime attribute on all of the domain controllers to add in further troubleshooting.
-
+    Searches domain controllers for lock out events for a specific user account and eventID 4740. 
+    Helps to determine where an account is getting locked out from. For example a mobile
+    device that has not been updated with a new password.
+.PARAMETER Identity
+    Specifies the account to search for. samAccountName is the best value to search
+    for.
 .EXAMPLE
-	PS C:\>Get-LockedOutLocation -User Joe.Davis
-
-
-	This example will find the locked out location for Joe Davis.
-.NOTE
-	
+    C:\PS>c:\etc\scripts\get-lockedoutlocation.ps1 -Identity logonname
+    Example of how to use this cmdlet
+.NOTES
+    ===========================================================================
+    Created with: 	Visual Studio Code
+    Created on:   	04.14.2017
+    Created by:   	John Kavanagh
+    Organization: 	KavanaghTech
+    Filename:     	get-lockedoutlocation.ps1
+    ===========================================================================
+    04.14.2017 JJK: Converted from function to script process
 #>
-    [CmdletBinding()]
-
-    Param(
-      [Parameter(Mandatory=$True)]
-      [String]$Identity      
-    )
-    
-    Begin
-    { 
-        $DCCounter = 0 
-        $LockedOutStats = @()   
-                
-        Try
-        {
-            Import-Module ActiveDirectory -ErrorAction Stop
+[CmdletBinding()]
+Param(
+    [Parameter(Mandatory=$true,
+        ValueFromPipeline=$true,
+        ValueFromPipelineByPropertyName=$true,
+        HelpMessage = "Enter the samAccountName to report on")]
+        [String]$Identity
+)
+Begin { 
+    $DCCounter = 0 
+    $LockedOutStats = @()   
+    Try {
+        Import-Module ActiveDirectory -ErrorAction Stop
+    }
+    Catch {
+        Write-Warning $_
+        Break
+    }
+}#end begin
+Process {
+    #Get all domain controllers in domain
+    $DomainControllers = Get-ADDomainController -Filter *
+    $PDCEmulator = ($DomainControllers | Where-Object {$_.OperationMasterRoles -contains "PDCEmulator"})
+    Write-Verbose "Finding the domain controllers in the domain"
+    Foreach($DC in $DomainControllers) {
+        $DCCounter++
+        Write-Progress -Activity "Contacting DCs for lockout info" -Status "Querying $($DC.Hostname)" -PercentComplete (($DCCounter/$DomainControllers.Count) * 100)
+        Try {
+            $UserInfo = Get-ADUser -Identity $Identity  -Server $DC.Hostname -Properties AccountLockoutTime,LastBadPasswordAttempt,BadPwdCount,LockedOut -ErrorAction Stop
         }
-        Catch
-        {
-           Write-Warning $_
-           Break
+        Catch {
+            Write-Warning $_
+            Continue
         }
-    }#end begin
-    Process
-    {
-        
-        #Get all domain controllers in domain
-        $DomainControllers = Get-ADDomainController -Filter *
-        $PDCEmulator = ($DomainControllers | Where-Object {$_.OperationMasterRoles -contains "PDCEmulator"})
-        
-        Write-Verbose "Finding the domain controllers in the domain"
-        Foreach($DC in $DomainControllers)
-        {
-            $DCCounter++
-            Write-Progress -Activity "Contacting DCs for lockout info" -Status "Querying $($DC.Hostname)" -PercentComplete (($DCCounter/$DomainControllers.Count) * 100)
-            Try
-            {
-                $UserInfo = Get-ADUser -Identity $Identity  -Server $DC.Hostname -Properties AccountLockoutTime,LastBadPasswordAttempt,BadPwdCount,LockedOut -ErrorAction Stop
-            }
-            Catch
-            {
-                Write-Warning $_
-                Continue
-            }
-            If($UserInfo.LastBadPasswordAttempt)
-            {    
-                $LockedOutStats += New-Object -TypeName PSObject -Property @{
-                        Name                   = $UserInfo.SamAccountName
-                        SID                    = $UserInfo.SID.Value
-                        LockedOut              = $UserInfo.LockedOut
-                        BadPwdCount            = $UserInfo.BadPwdCount
-                        BadPasswordTime        = $UserInfo.BadPasswordTime            
-                        DomainController       = $DC.Hostname
-                        AccountLockoutTime     = $UserInfo.AccountLockoutTime
-                        LastBadPasswordAttempt = ($UserInfo.LastBadPasswordAttempt).ToLocalTime()
-                    }          
-            }#end if
-        }#end foreach DCs
-        $LockedOutStats | Format-Table -Property Name,LockedOut,DomainController,BadPwdCount,AccountLockoutTime,LastBadPasswordAttempt -AutoSize
-
-        #Get User Info
-        Try
-        {  
-           Write-Verbose "Querying event log on $($PDCEmulator.HostName)"
-           $LockedOutEvents = Get-WinEvent -ComputerName $PDCEmulator.HostName -FilterHashtable @{LogName='Security';Id=4740} -ErrorAction Stop | Sort-Object -Property TimeCreated -Descending
-        }
-        Catch 
-        {          
-           Write-Warning $_
-           Continue
-        }#end catch     
-                                 
-        Foreach($Event in $LockedOutEvents)
-        {            
-           If($Event | Where {$_.Properties[2].value -match $UserInfo.SID.Value})
-           { 
-              
-              $Event | Select-Object -Property @(
-                @{Label = 'User';               Expression = {$_.Properties[0].Value}}
-                @{Label = 'DomainController';   Expression = {$_.MachineName}}
-                @{Label = 'EventId';            Expression = {$_.Id}}
-                @{Label = 'LockedOutTimeStamp'; Expression = {$_.TimeCreated}}
-                @{Label = 'Message';            Expression = {$_.Message -split "`r" | Select -First 1}}
-                @{Label = 'LockedOutLocation';  Expression = {$_.Properties[1].Value}}
-              )
-                                                
-            }#end ifevent
-            
-       }#end foreach lockedout event
-       
-    }#end process
-   
-}#end function
+        If($UserInfo.LastBadPasswordAttempt) {    
+            $LockedOutStats += New-Object -TypeName PSObject -Property @{
+            Name                   = $UserInfo.SamAccountName
+            SID                    = $UserInfo.SID.Value
+            LockedOut              = $UserInfo.LockedOut
+            BadPwdCount            = $UserInfo.BadPwdCount
+            BadPasswordTime        = $UserInfo.BadPasswordTime            
+            DomainController       = $DC.Hostname
+            AccountLockoutTime     = $UserInfo.AccountLockoutTime
+            LastBadPasswordAttempt = ($UserInfo.LastBadPasswordAttempt).ToLocalTime()
+            }#end PSCustomObject          
+        }#end if
+    }#end foreach DCs
+    $LockedOutStats | Format-Table -Property Name,LockedOut,DomainController,BadPwdCount,AccountLockoutTime,LastBadPasswordAttempt -AutoSize
+    #Get User Info
+    Try {  
+        Write-Verbose "Querying event log on $($PDCEmulator.HostName)"
+        $LockedOutEvents = Get-WinEvent -ComputerName $PDCEmulator.HostName -FilterHashtable @{LogName='Security';Id=4740} -ErrorAction Stop | Sort-Object -Property TimeCreated -Descending
+    }
+    Catch {          
+        Write-Warning $_
+        Continue
+    }#end catch     
+                                
+    Foreach($Event in $LockedOutEvents) {            
+        If($Event | Where {$_.Properties[2].value -match $UserInfo.SID.Value}) { 
+            $Event | Select-Object -Property @(
+            @{Label = 'User';               Expression = {$_.Properties[0].Value}}
+            @{Label = 'DomainController';   Expression = {$_.MachineName}}
+            @{Label = 'EventId';            Expression = {$_.Id}}
+            @{Label = 'LockedOutTimeStamp'; Expression = {$_.TimeCreated}}
+            @{Label = 'Message';            Expression = {$_.Message -split "`r" | Select -First 1}}
+            @{Label = 'LockedOutLocation';  Expression = {$_.Properties[1].Value}}
+            )
+        }#end ifevent
+    }#end foreach lockedout event
+}#end process
 

@@ -32,3 +32,16 @@ Foreach($file in (Get-ChildItem $pubSource))
     }
 }
 get-installedmodule | sort-object Name | select-object Name, Version, @{N="OnlineVersion";e={(find-module -Name $_.Name).version}}
+
+<#
+    Reboot a computer via CIM
+    This is really just about using CIM to invoke a method. Personally I prefer the restart-computer cmdlet
+    since it provides the Wait and For parameters so that you can restart a computer and then pause processing
+    until the computer is back up.
+#>
+invoke-cimmethod -ClassName Win32_operatingsystem -computer $varComputer -MethodName Reboot
+# WMI is still a little slicker here but just a quick start
+$slack = get-ciminstance -ClassName Win32_Process -Filter "Name = 'Slack.exe'"
+# I need to clean this up because if one is dependent it fails as where
+# (get-process slack).kill() is rock solid
+$slack | ForEach {Invoke-CimMethod -InputObject $_ -Method Terminate}

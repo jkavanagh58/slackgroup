@@ -297,7 +297,7 @@
 	  "\tCreated on:   	$datecreated\r"
 	  "\tCreated by:   	John Kavanagh\r"
 	  "\tOrganization: 	TekSystems\r"
-	  "\tFilename:     	add-grplocaladmin.ps1\r"
+	  "\tFilename:     	$TM_FILENAME\r"
 	  "\t===========================================================================\r"
       "\t$date $initials: Enter first comment here\r"
       "#>\r"

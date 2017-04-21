@@ -304,16 +304,7 @@
     ],
     "description": "Help comment block - Customized"
   },
-    }
-    "my Begin Block" : {
-    "prefix": "myBegin",
-    "body": [
-    "Begin {",
-    "\tWrite-Verbose \"[$((Get-Date).TimeofDay) BEGIN] Starting $($$mycommand.myinvocation)\"",
-    "}"
-    ],
-    "description": "my standard begin block"
-},
+    
     "Mandatory Parameter with Help Message": {
             "prefix": "manparamhelp",
             "body": [
@@ -326,7 +317,7 @@
             "description": "Manadatory Parameter of String Type with Help Message"
     },
     
-    "Mandatory Parameter with Validation Script":{
+    "Mandatory Parameter with Validation Script": {
         "prefix": "manparamvalidate",
         "body": [
             "[Parameter(Mandatory = $$true,\r",

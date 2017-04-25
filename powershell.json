@@ -18,7 +18,7 @@
         "prefix": "pscustom",
         "body": [
             "$$obj = [pscustomobject]@{",
-			"\tFieldName = FieldValue;",
+            "\tFieldName = FieldValue;",
             "}"
         ],
         "description": "Skeleton for adding a PowerShell Custom Object"
@@ -55,7 +55,7 @@
         ],
         "description": "Do...until loop"
     },
-    "Test":{
+    "Test": {
         "prefix": "lrn",
         "body": "$admcreds = set-adm",
         "description": "Just some learning how to create snippets"
@@ -126,19 +126,22 @@
         ],
         "description": "Switch statement"
     },
+
     "Try catch": {
         "prefix": "try",
         "body": [
             "try {",
-            "\t${_}",
+            "\t# Process to run\r",
+            "\t${1:code}\r",
             "}",
-            "catch [${System.Exception}] {",
-            "\t# Exception is stored in the automatic variable $_",
-            "\t$0",
+            "catch  {\r",
+            "\t# Handle the failure\r",
+            "\t${2:error}",
             "}"
         ],
-        "description": "Try catch"
+        "description": "Try catch statement"
     },
+
     "Try catch finally": {
         "prefix": "trycf",
         "body": [
@@ -151,7 +154,8 @@
             "}",
             "finally {",
             "\t$1",
-            "}"        ],
+            "}"
+        ],
         "description": "Try catch finally"
     },
 
@@ -265,46 +269,46 @@
         "description": "Advanced function"
     },
     "Help": {
-    "prefix": "JJK - Help",
-    "body": [
-      "<#",
-      ".SYNOPSIS",
-      "\tShort description",
-      ".DESCRIPTION",
-      "\tLong description",
-      ".PARAMETER Path",
-      "\tSpecifies a path to one or more locations.",
-      ".PARAMETER LiteralPath",
-      "\tSpecifies a path to one or more locations. Unlike Path, the value of LiteralPath is used exactly as it",
-      "\tis typed. No characters are interpreted as wildcards. If the path includes escape characters, enclose",
-      "\tit in single quotation marks. Single quotation marks tell Windows PowerShell not to interpret any",
-      "\tcharacters as escape sequences.",
-      ".PARAMETER InputObject",
-      "\tSpecifies the object to be processed.  You can also pipe the objects to this command.",
-      ".EXAMPLE",
-      "\tC:\\PS>",
-      "\tExample of how to use this cmdlet",
-      ".EXAMPLE",
-      "\tC:\\PS>",
-      "\tAnother example of how to use this cmdlet",
-      ".INPUTS",
-      "\tInputs to this cmdlet (if any)",
-      ".OUTPUTS",
-      "\tOutput from this cmdlet (if any)",
-      ".NOTES",
-      "\t===========================================================================\r"
-	  "\tCreated with: 	Visual Studio Code\r"
-	  "\tCreated on:   	$datecreated\r"
-	  "\tCreated by:   	John Kavanagh\r"
-	  "\tOrganization: 	TekSystems\r"
-	  "\tFilename:     	$TM_FILENAME\r"
-	  "\t===========================================================================\r"
-      "\t$date $initials: Enter first comment here\r"
-      "#>\r"
-    ],
-    "description": "Help comment block - Customized"
-  },
-    
+        "prefix": "JJK - Help",
+        "body": [
+            "<#",
+            ".SYNOPSIS",
+            "\tShort description",
+            ".DESCRIPTION",
+            "\tLong description",
+            ".PARAMETER Path",
+            "\tSpecifies a path to one or more locations.",
+            ".PARAMETER LiteralPath",
+            "\tSpecifies a path to one or more locations. Unlike Path, the value of LiteralPath is used exactly as it",
+            "\tis typed. No characters are interpreted as wildcards. If the path includes escape characters, enclose",
+            "\tit in single quotation marks. Single quotation marks tell Windows PowerShell not to interpret any",
+            "\tcharacters as escape sequences.",
+            ".PARAMETER InputObject",
+            "\tSpecifies the object to be processed.  You can also pipe the objects to this command.",
+            ".EXAMPLE",
+            "\tC:\\PS>",
+            "\tExample of how to use this cmdlet",
+            ".EXAMPLE",
+            "\tC:\\PS>",
+            "\tAnother example of how to use this cmdlet",
+            ".INPUTS",
+            "\tInputs to this cmdlet (if any)",
+            ".OUTPUTS",
+            "\tOutput from this cmdlet (if any)",
+            ".NOTES",
+            "\t===========================================================================\r"
+            "\tCreated with: 	Visual Studio Code\r"
+            "\tCreated on:   	$datecreated\r"
+            "\tCreated by:   	John Kavanagh\r"
+            "\tOrganization: 	TekSystems\r"
+            "\tFilename:     	$TM_FILENAME\r"
+            "\t===========================================================================\r"
+            "\t$date $initials: Enter first comment here\r"
+            "#>\r"
+        ],
+        "description": "Help comment block - Customized"
+    },
+
     "Mandatory Parameter with Help Message": {
         "prefix": "manparamhelp",
         "body": [

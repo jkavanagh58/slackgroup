@@ -146,17 +146,19 @@
         "prefix": "trycf",
         "body": [
             "try {",
-            "\t${_}",
+            "\t# Process to run\r",
+            "\t${1:code}\r",
             "}",
-            "catch [${System.Exception}] {",
-            "\t# Exception is stored in the automatic variable $_",
-            "\t$0",
-            "}",
-            "finally {",
-            "\t$1",
+            "catch  {\r",
+            "\t# Handle the failure\r",
+            "\t${2:error}",
+            "}\r",
+            "finally  {\r",
+            "\t# Finalize try statement\r",
+            "\t${3:finally}",
             "}"
         ],
-        "description": "Try catch finally"
+        "description": "Try catch finally statement"
     },
 
     "Try finallly": {

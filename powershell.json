@@ -306,26 +306,32 @@
   },
     
     "Mandatory Parameter with Help Message": {
-            "prefix": "manparamhelp",
-            "body": [
-                "[Parameter(Mandatory=$$true,\r",
-                "\tValueFromPipeline=$$true,\r",
-                   "\tValueFromPipelineByPropertyName=$$true,\r",
-                   "\tHelpMessage = ${1:helpmessage})]\r",
-                "\t[String]${2:parametername}\r"
-            ],
-            "description": "Manadatory Parameter of String Type with Help Message"
+        "prefix": "manparamhelp",
+        "body": [
+            "[CmdletBinding(SupportsShouldProcess=$true,ConfirmImpact='Medium')\r",
+            "Param(\r",
+            "[Parameter(Mandatory=$$true,\r",
+            "\tValueFromPipeline=$$true,\r",
+            "\tValueFromPipelineByPropertyName=$$true,\r",
+            "\tHelpMessage = ${1:helpmessage})]\r",
+            "\t[String]${2:parametername}\r",
+            ")\r"
+        ],
+        "description": "Manadatory Parameter of String Type with Help Message"
     },
-    
+
     "Mandatory Parameter with Validation Script": {
         "prefix": "manparamvalidate",
         "body": [
-            "[Parameter(Mandatory = $$true,\r",
-			        "\tValueFromPipeline = $$true,\r",
-			        "\tPosition = 1,\r",
-			        "\tHelpMessage = ${1:helpmessage})]\r",
-	        "\t[ValidateScript({ ${2:ValidationScript} })]\r",
-	        "\t[System.String]${3:paramName}\r"
+            "[CmdletBinding(SupportsShouldProcess=$true,ConfirmImpact='Medium')\r",
+            "Param(\r",
+            "\t[Parameter(Mandatory = $$true,\r",
+            "\tValueFromPipeline = $$true,\r",
+            "\tPosition = 1,\r",
+            "\tHelpMessage = ${1:helpmessage})]\r",
+            "\t[ValidateScript({ ${2:ValidationScript} })]\r",
+            "\t[System.String]${3:paramName}\r",
+            ")\r"
         ],
         "description": "Mandatory Parameter of a String with Validation Script"
     }

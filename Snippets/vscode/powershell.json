@@ -298,14 +298,14 @@
             ".OUTPUTS",
             "\tOutput from this cmdlet (if any)",
             ".NOTES",
-            "\t===========================================================================\r"
-            "\tCreated with: 	Visual Studio Code\r"
-            "\tCreated on:   	$datecreated\r"
-            "\tCreated by:   	John Kavanagh\r"
-            "\tOrganization: 	TekSystems\r"
-            "\tFilename:     	$TM_FILENAME\r"
-            "\t===========================================================================\r"
-            "\t$date $initials: Enter first comment here\r"
+            "\t===========================================================================\r",
+            "\tCreated with: 	Visual Studio Code\r",
+            "\tCreated on:   	$datecreated\r",
+            "\tCreated by:   	John Kavanagh\r",
+            "\tOrganization: 	TekSystems\r",
+            "\tFilename:     	$TM_FILENAME\r",
+            "\t===========================================================================\r",
+            "\t$date $initials: Enter first comment here\r",
             "#>\r"
         ],
         "description": "Help comment block - Customized"
@@ -341,7 +341,7 @@
         ],
         "description": "Mandatory Parameter of a String with Validation Script"
     },
-    
+
         "Standard Logging": {
         "prefix": "addlog",
         "body": [

@@ -1,0 +1,54 @@
+﻿<?xml version='1.0' encoding='utf-8' ?>
+    <Snippets  xmlns='http://schemas.microsoft.com/PowerShell/Snippets'>
+        <Snippet Version='1.0.0'>
+            <Header>
+                <Title>101 - Comment Based Help</Title>
+                <Description>Basic structure for Comment Based Help</Description>
+                <Author>Kavanagh, John J.</Author>
+                <SnippetTypes>
+                    <SnippetType>Expansion</SnippetType>
+                </SnippetTypes>
+            </Header>
+
+            <Code>
+                <Script Language='PowerShell' CaretOffset='0'>
+                    <![CDATA[<#
+.SYNOPSIS
+    Short description
+.DESCRIPTION
+    Long description
+.PARAMETER Path
+    Specifies a path to one or more locations.
+.PARAMETER LiteralPath
+    Specifies a path to one or more locations. Unlike Path, the value of LiteralPath is used exactly as it
+    is typed. No characters are interpreted as wildcards. If the path includes escape characters, enclose
+    it in single quotation marks. Single quotation marks tell Windows PowerShell not to interpret any
+    characters as escape sequences.
+.PARAMETER InputObject
+    Specifies the object to be processed.  You can also pipe the objects to this command.
+.EXAMPLE
+    C:\PS>
+    Example of how to use this cmdlet
+.EXAMPLE
+    C:\PS>
+    Another example of how to use this cmdlet
+.INPUTS
+    Inputs to this cmdlet (if any)
+.OUTPUTS
+    Output from this cmdlet (if any)
+.NOTES
+    ===========================================================================
+    Created with: 	Visual Studio Code
+    Created on:   	datecreated
+    Created by:   	John Kavanagh
+    Organization: 	TekSystems
+    Filename:     	Untitled-1
+    ===========================================================================
+    date initials: Enter first comment here
+#>]]>
+                </Script>
+            </Code>
+
+    </Snippet>
+</Snippets>
+

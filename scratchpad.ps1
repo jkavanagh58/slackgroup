@@ -19,6 +19,7 @@ ForEach ($obj in $newfiles){
 # This will be re-written since there is no need for the if statement if you collect all the files in the
 # get-childitem object
 $thisdate = get-date -f yyyyMMdd
+$mythisdate = get-date -UFormat %Y%M%d
 $Curr_date = get-date
 $Max_days = "-20"
 $pub = "server1"

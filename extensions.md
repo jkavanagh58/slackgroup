@@ -1,8 +1,9 @@
-
 # Visual Studio Code extensions.
+
 A listing of the Visual Studio Code extensions
+
 Name | Version | Comment
------ | ----- | ----
+----- | ----- | -----
 Powershell | 0.12.2 | The one that brought us here
 Powershell Stack Overflow Search | -- | Convenient way to look up a cmdlet right from vscode.
 BlueDawn Theme | 0.0.2 | The editor theme I have been using.

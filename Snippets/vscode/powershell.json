@@ -340,5 +340,20 @@
             ")\r"
         ],
         "description": "Mandatory Parameter of a String with Validation Script"
+    },
+    
+        "Standard Logging": {
+        "prefix": "addlog",
+        "body": [
+            "Function write-logevent {\r",
+            "Param(\r",
+            "\t[String]$$script:Logfile = 'c:\\etc\\testlog.txt',\r",
+            "\t[String]$$logText,\r",
+            "\t[String]$$logTime = (get-date -UFormat %m%d%Y%H%M%S)\r",
+            ")\r",
+            "'{0}:{1}' -f $$logTime, $$logText | out-file $$script:logfile -Append\r",
+            "} #End write-logevent\r"
+        ],
+        "description": "Need to develop a standard logging function/method"
     }
 }

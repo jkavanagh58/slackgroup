@@ -39,7 +39,7 @@ get-installedmodule | sort-object Name | select-object Name, Version, @{N="Onlin
 .LINK
     https://blogs.msdn.microsoft.com/powershell/2013/08/19/cim-cmdlets-some-tips-tricks/
 #>
-get-cimclass -ClassName Win32_OperatingSystem | select Version, Caption
+(get-cimclass -ClassName win32_operatingsystem).CimClassMethods
 <#
     Reboot a computer via CIM
     This is really just about using CIM to invoke a method. Personally I prefer the restart-computer cmdlet

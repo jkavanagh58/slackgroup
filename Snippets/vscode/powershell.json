@@ -314,22 +314,22 @@
     "Mandatory Parameter with Help Message": {
         "prefix": "manparamhelp",
         "body": [
-            "[CmdletBinding(SupportsShouldProcess=$true,ConfirmImpact='Medium')\r",
+            "[CmdletBinding(SupportsShouldProcess=$$true,ConfirmImpact='Medium')]\r",
             "Param(\r",
-            "[Parameter(Mandatory=$$true,\r",
+            "\t[Parameter(Mandatory=$$true,\r",
             "\tValueFromPipeline=$$true,\r",
             "\tValueFromPipelineByPropertyName=$$true,\r",
             "\tHelpMessage = ${1:helpmessage})]\r",
             "\t[String]${2:parametername}\r",
             ")\r"
         ],
-        "description": "Manadatory Parameter of String Type with Help Message"
+        "description": "Mandatory Parameter of String Type with Help Message"
     },
 
     "Mandatory Parameter with Validation Script": {
         "prefix": "manparamvalidate",
         "body": [
-            "[CmdletBinding(SupportsShouldProcess=$true,ConfirmImpact='Medium')\r",
+            "[CmdletBinding(SupportsShouldProcess=$$true,ConfirmImpact='Medium')]\r",
             "Param(\r",
             "\t[Parameter(Mandatory = $$true,\r",
             "\tValueFromPipeline = $$true,\r",

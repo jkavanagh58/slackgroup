@@ -325,7 +325,7 @@
             "[Parameter(Mandatory=$$true,\r",
             "\tValueFromPipeline=$$true,\r",
             "\tValueFromPipelineByPropertyName=$$true,\r",
-            "\tHelpMessage = ${1:helpmessage})]\r",
+            "\tHelpMessage = \"Enter your help message here.\")]\r",
             "\t[String]${2:parametername}\r",
             ")\r"
         ],
@@ -339,7 +339,7 @@
             "\t[Parameter(Mandatory = $$true,\r",
             "\tValueFromPipeline = $$true,\r",
             "\tPosition = 1,\r",
-            "\tHelpMessage = ${1:helpmessage})]\r",
+            "\tHelpMessage = \"Enter Help Message Here\")]\r",
             "\t[ValidateScript({ ${2:ValidationScript} })]\r",
             "\t[System.String]${3:paramName}\r",
             ")\r"

@@ -25,14 +25,12 @@ $Max_days = "-20"
 $pub = "server1"
 $taskP = New-Item -ItemType Directory -Path "C:\etc\temp\PTC\PTC issues\$thisdate\$pub\Taskmanager\Publisher"
 $pubSource = "\\clvprdinfs001\IT_FileSrv\Jkav"
-Foreach($file in (Get-ChildItem $pubSource))
-{
-    if($file.LastWriteTime -gt ($Curr_date).adddays($Max_days))
-    {
+Foreach ($file in (Get-ChildItem $pubSource)) {
+    if ($file.LastWriteTime -gt ($Curr_date).adddays($Max_days)) {
         Copy-Item -Path $file.fullname -Destination $taskP     
     }
 }
-get-installedmodule | sort-object Name | select-object Name, Version, @{N="OnlineVersion";e={(find-module -Name $_.Name).version}}
+get-installedmodule | sort-object Name | select-object Name, Version, @{N = "OnlineVersion"; e = {(find-module -Name $_.Name).version}}
 
 <# 
 // CIM //

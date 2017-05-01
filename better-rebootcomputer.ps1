@@ -7,8 +7,6 @@
     then further action.
 .PARAMETER ServerName
     Name of the computer to be restarted.
-.PARAMETER InputObject
-    Specifies the object to be processed.  You can also pipe the objects to this command.
 .EXAMPLE
     C:\PS>.\better-rebootcomputer.ps1 -servername testmachine
     Example of how to use this cmdlet

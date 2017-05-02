@@ -50,3 +50,19 @@ $slack = get-ciminstance -ClassName Win32_Process -Filter "Name = 'Slack.exe'"
 # I need to clean this up because if one is dependent it fails as where
 # (get-process slack).kill() is rock solid but this is an example
 $slack | ForEach {Invoke-CimMethod -InputObject $_ -Method Terminate}
+
+
+$usercreds = get-credential "john.kavanagh@wegmans.com"
+send-mailmessage -From "john.kavanagh@wegmans.com" -to "john.kavanagh@wegmans.com" -Body "PowerShell Message" -BodyAsHtml -Subject "Long winded" -SmtpServer "smtp.wegmans.com" -Credential $usercreds
+$usercreds = get-credential "john.kavanagh@wegmans.com"
+# Now lets splat it
+$mailargs = @{
+    From       = "John.Kavanagh@wegmans.com"
+    To         = "John.Kavanagh@wegmans.com"
+    Body       = "PowerShell Message"
+    BodyAsHTML = $true
+    Subject    = "Splatted"
+    SmtpServer = "smtp.wegmans.com"
+    Credential = $usercreds
+}
+send-mailmessage @mailargs

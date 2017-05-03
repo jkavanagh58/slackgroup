@@ -19,7 +19,8 @@
     Organization: 	TekSystems
     Filename:     	new-workstation.ps1
     ===========================================================================
-    commentdate initials: Enter first comment here
+    05.03.2017 JJK: Added chocolateyget provider as it helps with certain packages so streamlining
+                    all chocolatey packages to use this provider.
 #>
 # Simple reporting
 "#------------------------------------------------------------------------------------------------------#"
@@ -45,12 +46,15 @@ ForEach ($module in $modules){
 }
 # Install Chocolatey
 Install-PackageProvider chocolatey -Scope AllUsers -Confirm:$False -Force
-# Sysinternals
-find-package sysinternals | install-package -confirm:$False -Force
-# VSCode and PowerShell extension
-find-package sysinternals | install-package -confirm:$False -Force
-find-package vscode-powershell | Install-package -confirm:$false -Force
-
+# Adding this provider to handle chocolatey better
+Find-PackageProvider ChocolateyGet -Verbose
+Install-PackageProvider ChocolateyGet -Verbose -Force -Confirm:$False
+Import-PackageProvider ChocolateyGet
+$packages = "sysinternals","visualstudiocode","vscode-powershell"
+ForEach ($package in $packages){
+    "Installing {0} package" -f $package
+    install-package -Name $package -confirm:$False -Force -ProviderName ChocolateyGet
+}
 # use get-module not get-installedmodule if PowerCLI was installed traditionally
 If(!(get-module -Name *vmware* -ListAvailable)){
     "PowerCLI needs to be installed."

@@ -66,3 +66,7 @@ $mailargs = @{
     Credential = $usercreds
 }
 send-mailmessage @mailargs
+
+# test-connection vs ping
+
+$returnedIP = (test-connection wks-jkavanag-01 -Count 1 -Quiet).IPV4Address

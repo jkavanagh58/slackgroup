@@ -314,7 +314,12 @@
 
     "CmdletBinding - Supports Whatif":{
         "prefix": "cmdletbinding",
-        "body": "[CmdletBinding(SupportsShouldProcess=$$true,ConfirmImpact='Medium')]\r",
+        "body": [
+            "[CmdletBinding(SupportsShouldProcess=$$true,ConfirmImpact='Medium')]\r",
+            "Param(\r",
+            "\t\r",
+            ")\r"
+        ],
         "description": "Cmdletbinding with support for whatif"
     },
 

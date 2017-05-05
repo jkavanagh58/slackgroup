@@ -50,7 +50,7 @@ Install-PackageProvider chocolatey -Scope AllUsers -Confirm:$False -Force
 Find-PackageProvider ChocolateyGet -Verbose
 Install-PackageProvider ChocolateyGet -Verbose -Force -Confirm:$False
 Import-PackageProvider ChocolateyGet
-$packages = "sysinternals","visualstudiocode","vscode-powershell"
+$packages = "sysinternals","visualstudiocode","vscode-powershell","SDelete"
 ForEach ($package in $packages){
     "Installing {0} package" -f $package
     install-package -Name $package -confirm:$False -Force -ProviderName ChocolateyGet

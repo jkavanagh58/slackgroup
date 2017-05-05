@@ -326,13 +326,11 @@
     "Mandatory Parameter with Help Message": {
         "prefix": "manparamhelp",
         "body": [
-            "Param(\r",
-            "[Parameter(Mandatory=$$true,\r",
+            "\t[Parameter(Mandatory=$$true,\r",
             "\tValueFromPipeline=$$true,\r",
             "\tValueFromPipelineByPropertyName=$$true,\r",
-            "\tHelpMessage = \"Enter your help message here.\")]\r",
-            "\t[String]${2:parametername}\r",
-            ")\r"
+            "\tHelpMessage = \"Enter Help Message Here\")]\r",
+            "\t[String]${2:parametername}\r"
         ],
         "description": "Manadatory Parameter of String Type with Help Message"
     },
@@ -340,14 +338,12 @@
     "Mandatory Parameter with Validation Script": {
         "prefix": "manparamvalidate",
         "body": [
-            "Param(\r",
             "\t[Parameter(Mandatory = $$true,\r",
             "\tValueFromPipeline = $$true,\r",
             "\tPosition = 1,\r",
             "\tHelpMessage = \"Enter Help Message Here\")]\r",
             "\t[ValidateScript({ ${2:ValidationScript} })]\r",
-            "\t[System.String]${3:paramName}\r",
-            ")\r"
+            "\t[System.String]${3:paramName}\r"
         ],
         "description": "Mandatory Parameter of a String with Validation Script"
     },

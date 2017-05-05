@@ -28,7 +28,7 @@
 "#------------------------------------------------------------------------------------------------------#"
 ""
 $modules = "ImportExcel","psreadline","nameit","ScriptBrowser","posh-SSH","TreeSize"
-ForEach ($module in $modules){
+ForEach ($module in $modules){  # Loop through PowerShell modules
     # Only using SkipPublisherCheck because I know these modules
     if (!(get-module -Name $module)){
         try{
@@ -51,7 +51,7 @@ Find-PackageProvider ChocolateyGet -Verbose
 Install-PackageProvider ChocolateyGet -Verbose -Force -Confirm:$False
 Import-PackageProvider ChocolateyGet
 $packages = "sysinternals","visualstudiocode","vscode-powershell","SDelete"
-ForEach ($package in $packages){
+ForEach ($package in $packages){   # Loop through Chocolatey packages
     "Installing {0} package" -f $package
     install-package -Name $package -confirm:$False -Force -ProviderName ChocolateyGet
 }

@@ -26,6 +26,7 @@
     Filename:		test-isvirtual.ps1
     ===========================================================================
     05.09.2017 JJK: TODO: Add Model return for Hyper-V machines
+    05.09.2017 JJK: Changed to Manufacturer for eval; added Or statement for Microsoft or VMWare
 #>
 [CmdletBinding(SupportsShouldProcess=$true,ConfirmImpact='Medium')]
 Param(
@@ -43,5 +44,5 @@ Else {
     # Cannot use ComputerName variable against local machine
     $varCompInfo = get-ciminstance -ClassName Win32_ComputerSystem
 }
-If ($varCompInfo.Model -like "VMWare*"){Return $True}
+If ($varCompInfo.Manufacturer -like "VMWare*" -Or $varCompInfo.Manufacturer -like "Microsoft*"){Return $True}
 Else {Return $False}

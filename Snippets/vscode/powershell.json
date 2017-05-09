@@ -55,11 +55,7 @@
         ],
         "description": "Do...until loop"
     },
-    "Test": {
-        "prefix": "lrn",
-        "body": "$admcreds = set-adm",
-        "description": "Just some learning how to create snippets"
-    },
+
     "Else statement": {
         "prefix": "else",
         "body": [
@@ -69,6 +65,7 @@
         ],
         "description": "Else statement"
     },
+
     "ElseIf statement": {
         "prefix": "elseif",
         "body": [
@@ -78,6 +75,7 @@
         ],
         "description": "Elseif statement"
     },
+
     "Foreach statement": {
         "prefix": "foreach",
         "body": [
@@ -87,6 +85,7 @@
         ],
         "description": "Foreach statement"
     },
+
     "For loop": {
         "prefix": "for",
         "body": [
@@ -96,6 +95,7 @@
         ],
         "description": "For loop"
     },
+    
     "If statement": {
         "prefix": "if",
         "body": [

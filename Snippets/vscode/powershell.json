@@ -95,7 +95,7 @@
         ],
         "description": "For loop"
     },
-    
+
     "If statement": {
         "prefix": "if",
         "body": [
@@ -173,6 +173,7 @@
         ],
         "description": "Try finally"
     },
+
     "While loop": {
         "prefix": "while",
         "body": [
@@ -235,6 +236,7 @@
         ],
         "description": "Function"
     },
+
     "Function advanced": {
         "prefix": "funcadv",
         "body": [
@@ -270,7 +272,7 @@
         ],
         "description": "Advanced function"
     },
-    
+
     "Help": {
         "prefix": "JJK - Help",
         "body": [
@@ -312,7 +314,7 @@
         "description": "Help comment block - Customized"
     },
 
-    "CmdletBinding - Supports Whatif":{
+    "CmdletBinding - Supports Whatif": {
         "prefix": "cmdletbinding",
         "body": [
             "[CmdletBinding(SupportsShouldProcess=$$true,ConfirmImpact='Medium')]\r",
@@ -348,7 +350,7 @@
         "description": "Mandatory Parameter of a String with Validation Script"
     },
 
-        "Standard Logging": {
+    "Standard Logging": {
         "prefix": "addlog",
         "body": [
             "Function write-logevent {\r",

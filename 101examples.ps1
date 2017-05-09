@@ -112,7 +112,7 @@ Begin {
 [Parameter(Mandatory=$true,
                    ValueFromPipeline=$true,
                    ValueFromPipelineByPropertyName=$true,
-                   HelpMessage = $1:helpmessage)]
+                   HelpMessage = "Just a test")]
         [String]$2:parametername
 
 		# Let's try it

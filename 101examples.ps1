@@ -13,7 +13,8 @@ Function machine-code {
 	param($somevar)
 	# Does this get a warning?
 }
-
+# .Net nslookup
+[system.net.dns]::GetHostAddresses($srv.Name)
 
 Unlock-AdAccount -Identity jktest -Verbose
 if ((get-aduser jktest -Properties LockedOut).LockedOut){Unlock-ADAccount -Identity jktest -Verbose}  

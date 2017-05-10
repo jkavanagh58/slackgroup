@@ -3,17 +3,10 @@
     Short description
 .DESCRIPTION
     Long description
-.PARAMETER Path
-    Specifies a path to one or more locations.
-.PARAMETER LiteralPath
-    Specifies a path to one or more locations. Unlike Path, the value of LiteralPath is used exactly as it
-    is typed. No characters are interpreted as wildcards. If the path includes escape characters, enclose
-    it in single quotation marks. Single quotation marks tell Windows PowerShell not to interpret any
-    characters as escape sequences.
-.PARAMETER InputObject
-    Specifies the object to be processed.  You can also pipe the objects to this command.
+.PARAMETER machineName
+    Specifies the computer to evaluate. Parameter is validated using test-connection.
 .EXAMPLE
-    C:\PS> if ((.\test-isvirtual.ps1 -machineName somemachinename) ){"Virtual"}Else{"Physical"}
+    C:\PS> if ((.\test-isvirtual.ps1 -machineName wks-jkavanag-01) ){"Virtualized on {0}" -f $virtType}Else{"Physical"}
     Example of how to use this cmdlet
 .OUTPUTS
     Boolean
@@ -27,6 +20,8 @@
     ===========================================================================
     05.09.2017 JJK: TODO: Add Model return for Hyper-V machines
     05.09.2017 JJK: Changed to Manufacturer for eval; added Or statement for Microsoft or VMWare
+    05.09.2017 JJK: TODO: Test using HyperVisorPresent value from CIM query - does not work
+    05.09.2017 JJK: TODO: Return virtualization type
 #>
 [CmdletBinding(SupportsShouldProcess=$true,ConfirmImpact='Medium')]
 Param(
@@ -44,5 +39,9 @@ Else {
     # Cannot use ComputerName variable against local machine
     $varCompInfo = get-ciminstance -ClassName Win32_ComputerSystem
 }
-If ($varCompInfo.Manufacturer -like "VMWare*" -Or $varCompInfo.Manufacturer -like "Microsoft*"){Return $True}
-Else {Return $False}
+switch ($varCompInfo.Manufacturer) {
+    {$_ -like "VMWare*"} { $global:virtType = "VMWare";Return $True }
+    {$_ -like "VMWare*"} { $global:virtType = "HyperV";Return $True }
+    Default {Return $False}
+}
+

@@ -29,7 +29,7 @@ Param(
 [System.Reflection.Assembly]::LoadWithPartialName("Microsoft.EnterpriseManagement.OperationsManager.Common") 
 [System.Reflection.Assembly]::LoadWithPartialName("Microsoft.EnterpriseManagement.OperationsManager")
 
-$MGConnSetting = New-Object Microsoft.EnterpriseManagement.ManagementGroupConnectionSettings("CLVPRDVSSCOM001.cgicleve.com") 
+$MGConnSetting = New-Object Microsoft.EnterpriseManagement.ManagementGroupConnectionSettings("FQDN of Management Server") 
 $MG = New-Object Microsoft.EnterpriseManagement.ManagementGroup($MGConnSetting) 
 $Admin = $MG.Administration
 $agentManagedComputerType = [Microsoft.EnterpriseManagement.Administration.AgentManagedComputer]; 

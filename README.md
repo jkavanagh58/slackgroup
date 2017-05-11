@@ -8,4 +8,4 @@ Scripts posted in this repo are:
 - Responses to script requests from Trello cards
 - Examples or just scripts we have amassed and would like to share
 
-`If you repeat it, PowerShell it`
+[`If you repeat it, PowerShell it`](http://blogs.microsoft.co.il/scriptfanatic/)

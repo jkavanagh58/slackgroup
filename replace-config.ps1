@@ -13,7 +13,7 @@
     Specifies the new value to replace the current value with.
 .EXAMPLE
     C:\PS>c:\etc\scripts\replace-config.ps1 -configFldr "c:\etc\test" -curVal "JJK=$false" -newVal "JJK=$true"
-    Replace any instance of JJK=$fale to JJK=$true for any file found in c:\etc\test and it's sub-directories
+    Replace any instance of JJK=$false to JJK=$true for any file found in c:\etc\test and it's sub-directories
 .NOTES
     ===========================================================================
     Created with: 	Visual Studio Code

@@ -26,7 +26,7 @@
 Param()
 Begin {
     $modules = "ImportExcel","psreadline","nameit","ScriptBrowser","posh-SSH","TreeSize"
-    $packages = "sysinternals","visualstudiocode","vscode-powershell","SDelete"
+    $packages = "sysinternals","visualstudiocode","vscode-powershell","SDelete","sublimetext3","sublimetext3.PackageControl"
     # Simple reporting
     "#------------------------------------------------------------------------------------------------------#"
     "`tYou are currently running PowerShell $($PSVersionTable.PSVersion)."

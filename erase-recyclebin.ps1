@@ -17,7 +17,11 @@
 $sdelete = "C:\Chocolatey\lib\sdelete.2.00\tools\sdelete.exe"
 if (test-path $sdelete){
     $Recycler = (New-Object -ComObject Shell.Application).NameSpace(0xa)
-    $Recycler.items() | foreach { . $sdelete -p 7 $_.path -nobanner}
+    $varItems = $Recycler.items()
+    foreach ($item in $varItems) { 
+        "Secure delete of {0}." -f $item.Name
+        . $sdelete -p 7 $item.path -nobanner
+    }
 }
 Else {
     "Unable to find sdelete executable."

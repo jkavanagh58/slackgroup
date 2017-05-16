@@ -154,3 +154,6 @@ Param(
 Param (
 	
 )
+# 4 - forceful
+# 0 - graceful
+Invoke-CimMethod -ClassName Win32_Operatingsystem -ComputerName DC -MethodName Win32Shutdown -Arguments @{ Flags = 4 }

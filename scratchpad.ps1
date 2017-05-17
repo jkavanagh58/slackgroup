@@ -82,5 +82,32 @@ Stop-Service lanmanserver -Force
 # https://www.powershellgallery.com/packages/Test-WannaCryVulnerability/1.4/DisplayScript
 install-script -Name Test-wannacryVulnerability -Path c:\etc\scripts -RequiredVersion 2.0 -Scope AllUsers
 
-# Disable SMB1 Protocol
+# Disable SMB1 Protocol 
 Set-SmbServerConfiguration -EnableSMB1Protocol $false
+
+# Disable SMB1 Feature
+Disable-WindowsOptionalFeature -FeatureName SMB1Protocol -Online
+
+
+# Only check for SMB1 - Remote
+$cimsession = New-CimSession -ComputerName somecomputer -credential $admcreds 
+$smbVals = get-smbserverconfiguration -cimSession $cimsession 
+If ($smbvals.EnableSMB1Protocol){"`nSMB1 Should be disabled"}Else{"`nSMB1 is not enabled"}
+$cimsession.Dispose()
+
+# Check for SMB1 and Disable - Remote
+$cimsession = New-CimSession -ComputerName somecomputer -credential $admcreds 
+$smbVals = get-smbserverconfiguration -cimSession $cimsession 
+If ($smbvals.EnableSMB1Protocol){
+    "`nSMB1 Being disabled"
+    try {
+        # Process to run
+        Set-SmbServerConfiguration -CimSession $cimsession -EnableSMB1Protocol $False -confirm:$False
+    }
+    catch  {
+        # Handle the failure
+        Write-Warning -Message "Unable to remotely disabled SMB1 Protocol"
+    }
+}
+Else {"`nSMB1 is not enabled"}
+$cimsession.Dispose()

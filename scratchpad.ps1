@@ -81,3 +81,6 @@ Stop-Service lanmanserver -Force
 
 # https://www.powershellgallery.com/packages/Test-WannaCryVulnerability/1.4/DisplayScript
 install-script -Name Test-wannacryVulnerability -Path c:\etc\scripts -RequiredVersion 2.0 -Scope AllUsers
+
+# Disable SMB1 Protocol
+Set-SmbServerConfiguration -EnableSMB1Protocol $false

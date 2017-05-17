@@ -288,8 +288,11 @@ function Unlock-useraccount
 		Use the users logon name/samaccountname for quicker find
 	.EXAMPLE
 		PS C:\> Unlock-useraccount -userlogon 'Value1'
+    .EXAMPLE
+        PS C:\etc\scripts\unlock-useraccount -userlogon 'username' -credential (get-credential)
 	.NOTES
 		01.17.2017 JJK: Reviewing to cover every possible outcome from input to cmdlet action.
+        05.17.2017 JJK: Add credential parameter option to run with alternate credentials
 #>
 [CmdletBinding(ConfirmImpact = 'Low')]
 param
@@ -297,7 +300,11 @@ param
 	[Parameter(Mandatory = $true,
 			   ValueFromPipeline = $true,
 			   HelpMessage = 'Use the users logon name/samaccountname for quicker find')]
-        	   [System.String]$userlogon
+        	   [System.String]$userlogon,
+    [Parameter(Mandatory = $false,
+			    ValueFromPipeline = $true,
+			    HelpMessage = 'Ensure you are using the correct credentials for this operation')]
+                [System.Management.Automation.PSCredential]$Credential 
 )
 Begin {
     try { Get-Module -Name ActiveDirectory | Out-Null }

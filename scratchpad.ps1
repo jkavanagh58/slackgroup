@@ -78,3 +78,6 @@ IF(Test-Path -Path $netBTKey) { 
 } 
 Set-Service lanmanserver -StartupType Disabled 
 Stop-Service lanmanserver -Force
+
+# https://www.powershellgallery.com/packages/Test-WannaCryVulnerability/1.4/DisplayScript
+install-script -Name Test-wannacryVulnerability -Path c:\etc\scripts -RequiredVersion 2.0 -Scope AllUsers

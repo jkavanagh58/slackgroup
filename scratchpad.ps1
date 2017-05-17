@@ -70,3 +70,11 @@ send-mailmessage @mailargs
 # test-connection vs ping
 
 $returnedIP = (test-connection wks-jkavanag-01 -Count 1 -Quiet).IPV4Address
+
+# Port 445 - File and Printer Sharing
+$netBTKey = "HKLM:\SYSTEM\CurrentControlSet\Services\NetBT\Parameters" 
+IF(Test-Path -Path $netBTKey) { 
+    Set-ItemProperty -Path $netBTKey -Name "SMBDeviceEnabled" -Value 0 
+} 
+Set-Service lanmanserver -StartupType Disabled 
+Stop-Service lanmanserver -Force

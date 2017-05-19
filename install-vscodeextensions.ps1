@@ -1,8 +1,11 @@
 <#
 .SYNOPSIS
-	Short description
+	Script to "normalize" Visual Studio Code for PowerShell users
 .DESCRIPTION
-	Long description
+	Script will create an environment/workspace for PowerShell. The script makes sure the PowerShell
+	API is enabled. Extensions based on a preferred set of extensions will install those extensions.
+	This script will not run inside of Visual Studio Code so it will exit with that notice. The script will
+	also end any current instances of Visual Studio Code before performing the environment/workspace changes.
 .EXAMPLE
 	C:\etc\scripts>.\install-vscodeextensions.ps1
 .NOTES
@@ -16,6 +19,8 @@
 	05.19.2017 JJK: Removed wakatime as the install name does not match publisher provided name
 	05.19.2017 JJK: TODO: Add higher level process to check to see if vscode is installed
 	05.19.2017 JJK: TODO: need to handle already installed differently than unable to install 
+	05.19.2017 JJK: TODO: Use and external source for preferred extensions to allow that list to be built
+					dynamically
 #>
 [CmdletBinding(SupportsShouldProcess=$true,ConfirmImpact='Low')]
 Param(
@@ -24,6 +29,7 @@ Param(
 	$isRunning = (get-process).Name -contains "code"
 )
 Begin{
+# Stop Script if trying to run in vscode
 if ($host.Name -like "Visual Studio Code*"){
 	"This script will not run in the Visual Studio Code Integrated Terminal"
 	Break

@@ -40,6 +40,7 @@ $extArray = @(
 	"denisgerguri.hunspell-spellchecker",
 	"vscode-wakatime",
 	"Compulim.vscode-ipaddress",
+	"AndrewMoll.WeatherExtension",
 	"DougFinke.vscode-PSStackoverflow"
 )
 $curExt = invoke-expression -command "code --list-extensions"
@@ -62,6 +63,7 @@ ForEach ($ext in $extArray){
 		"{0} extension is already installed"
 	}
 	Else{
+		# This needs work as it is not catching all result strings
 		$instVal = invoke-expression -Command "code --install-extension $ext"
 		Switch -wildcard ($instVal){
 			"*successfully installed!"	{"{0} Installed" -f $ext}

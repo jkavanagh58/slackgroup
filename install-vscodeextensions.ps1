@@ -41,6 +41,7 @@ $extArray = @(
 	"vscode-wakatime",
 	"Compulim.vscode-ipaddress",
 	"AndrewMoll.WeatherExtension",
+	"gerane.Theme-Blackboard",
 	"DougFinke.vscode-PSStackoverflow"
 )
 $curExt = invoke-expression -command "code --list-extensions"

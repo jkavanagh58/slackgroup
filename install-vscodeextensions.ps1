@@ -42,6 +42,9 @@ $extArray = @(
 	"Compulim.vscode-ipaddress",
 	"AndrewMoll.WeatherExtension",
 	"gerane.Theme-Blackboard",
+	"Compulim.vscode-ipaddress",
+	"RolandGreim.sharecode",
+	"sidthesloth.html5-boilerplate",
 	"DougFinke.vscode-PSStackoverflow"
 )
 $curExt = invoke-expression -command "code --list-extensions"
@@ -73,6 +76,14 @@ ForEach ($ext in $extArray){
 			default 					{"Return message {0}" -f $instval}	
 		}
 	}
+}
+# Install suggested fonts
+$FONTS = 0x14
+$objShell = New-Object -ComObject Shell.Application
+$objFolder = $objShell.Namespace($FONTS)
+$files = Get-ChildItem fira*.* -path c:\etc\scripts
+ForEach ($file in $files){
+	$objFolder.copyHere($File.fullname,0x10)
 }
 } # End Process
 End{

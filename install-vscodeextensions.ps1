@@ -21,6 +21,8 @@
 	05.19.2017 JJK: TODO: need to handle already installed differently than unable to install 
 	05.19.2017 JJK: TODO: Use and external source for preferred extensions to allow that list to be built
 					dynamically
+	05.21.2017 JJK: Added a font install routine for the firacode font
+	05.21.2017 JJK: TODO: download fonts from github
 #>
 [CmdletBinding(SupportsShouldProcess=$true,ConfirmImpact='Low')]
 Param(

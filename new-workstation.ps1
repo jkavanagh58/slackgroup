@@ -21,11 +21,12 @@
     ===========================================================================
     05.03.2017 JJK: Added chocolateyget provider as it helps with certain packages so streamlining
                     all chocolatey packages to use this provider.
+    05.21.2017 JJK: Added Office365 module (msonline)
 #>
 [CmdletBinding(SupportsShouldProcess=$true,ConfirmImpact='Medium')]
 Param()
 Begin {
-    $modules = "ImportExcel","psreadline","nameit","ScriptBrowser","posh-SSH","TreeSize"
+    $modules = "ImportExcel","psreadline","nameit","ScriptBrowser","posh-SSH","TreeSize","msonline"
     $packages = "sysinternals","visualstudiocode","vscode-powershell","SDelete","sublimetext3","sublimetext3.PackageControl"
     # Simple reporting
     "#------------------------------------------------------------------------------------------------------#"

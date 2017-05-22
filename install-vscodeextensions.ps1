@@ -31,6 +31,12 @@ Param(
 	$isRunning = (get-process).Name -contains "code"
 )
 Begin{
+ $packages = "sysinternals","visualstudiocode","vscode-powershell","SDelete"
+    # Simple reporting
+    "#------------------------------------------------------------------------------------------------------#"
+    "`tYou are currently running PowerShell $($PSVersionTable.PSVersion)."
+    "#------------------------------------------------------------------------------------------------------#"
+    ""
 # Stop Script if trying to run in vscode
 if ($host.Name -like "Visual Studio Code*"){
 	"This script will not run in the Visual Studio Code Integrated Terminal"
@@ -49,9 +55,16 @@ $extArray = @(
 	"sidthesloth.html5-boilerplate",
 	"DougFinke.vscode-PSStackoverflow"
 )
-$curExt = invoke-expression -command "code --list-extensions"
 }
 Process {
+# Chocolatey stuff
+Find-PackageProvider ChocolateyGet -verbose
+Install-PackageProvider ChocolateyGet -verbose
+Import-PackageProvider ChocolateyGet
+ForEach ($pkg in $packages){
+	set-location $env:ProgramFiles
+	Install-package -Name $pkg -Force -Confirm:$False -ProviderName ChocolateyGet
+}
 # Just because it should be 
 Invoke-expression -command "code --enable-proposed-api powershell"
 If ($isRunning){
@@ -64,6 +77,7 @@ If ($isRunning){
 		"In order for your workspace to show the new extension restart Visual Studio Code"
 	}
 }
+$curExt = invoke-expression -command "code --list-extensions"
 ForEach ($ext in $extArray){
 	if ($curExt -contains $ext){
 		"{0} extension is already installed"

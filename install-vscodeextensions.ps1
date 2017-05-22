@@ -71,6 +71,7 @@ ForEach ($ext in $extArray){
 	Else{
 		# This needs work as it is not catching all result strings
 		$instVal = invoke-expression -Command "code --install-extension $ext"
+		# Need to test return verbiage 
 		Switch -wildcard ($instVal){
 			"*successfully installed!"	{"{0} Installed" -f $ext}
 			"*returned 400"				{"{0} returned a 400 error" -f $ext}
@@ -85,6 +86,7 @@ $objShell = New-Object -ComObject Shell.Application
 $objFolder = $objShell.Namespace($FONTS)
 $files = Get-ChildItem fira*.* -path c:\etc\scripts
 ForEach ($file in $files){
+	# copy font file to Fonts Folder
 	$objFolder.copyHere($File.fullname,0x10)
 }
 } # End Process

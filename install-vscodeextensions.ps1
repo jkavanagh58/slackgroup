@@ -23,6 +23,8 @@
 					dynamically
 	05.21.2017 JJK: Added a font install routine for the firacode font
 	05.21.2017 JJK: TODO: download fonts from github
+	05.21.2017 JJK: Test for presence of vscode
+	05.21.2017 JJK: Testing - to delete extensions remove-item but be necessary
 #>
 [CmdletBinding(SupportsShouldProcess=$true,ConfirmImpact='Low')]
 Param(
@@ -31,12 +33,22 @@ Param(
 	$isRunning = (get-process).Name -contains "code"
 )
 Begin{
- $packages = "sysinternals","visualstudiocode","vscode-powershell","SDelete"
-    # Simple reporting
+# Simple reporting
     "#------------------------------------------------------------------------------------------------------#"
     "`tYou are currently running PowerShell $($PSVersionTable.PSVersion)."
     "#------------------------------------------------------------------------------------------------------#"
     ""
+# Check to verify Visual Studio Code is installed 
+ if (!(get-package -Name "Microsoft Visual Studio Code*" -ErrorAction SilentlyContinue)){
+	 "Visual Studio Code is not installed"
+	 Exit
+}
+Else {
+	# Also just to check in case vscode has been installed and no reboot
+	if (!(invoke-expression -command "code -v" )){
+		"Visual Studio Code appears to be installed but requires a reboot"
+	}
+}
 # Stop Script if trying to run in vscode
 if ($host.Name -like "Visual Studio Code*"){
 	"This script will not run in the Visual Studio Code Integrated Terminal"
@@ -45,8 +57,8 @@ if ($host.Name -like "Visual Studio Code*"){
 # Configure vscode with suggested extensions
 # array of suggested extensions
 $extArray = @(
+	"ms-vscode.PowerShell",
 	"denisgerguri.hunspell-spellchecker",
-	"vscode-wakatime",
 	"Compulim.vscode-ipaddress",
 	"AndrewMoll.WeatherExtension",
 	"gerane.Theme-Blackboard",
@@ -57,16 +69,7 @@ $extArray = @(
 )
 }
 Process {
-# Chocolatey stuff
-Find-PackageProvider ChocolateyGet -verbose
-Install-PackageProvider ChocolateyGet -verbose
-Import-PackageProvider ChocolateyGet
-ForEach ($pkg in $packages){
-	set-location $env:ProgramFiles
-	Install-package -Name $pkg -Force -Confirm:$False -ProviderName ChocolateyGet
-}
-# Just because it should be 
-Invoke-expression -command "code --enable-proposed-api powershell"
+
 If ($isRunning){
 	"Visual Studio Code is running and will be closed"
 	Try{
@@ -84,8 +87,8 @@ ForEach ($ext in $extArray){
 	}
 	Else{
 		# This needs work as it is not catching all result strings
-		$instVal = invoke-expression -Command "code --install-extension $ext"
-		# Need to test return verbiage 
+		$instVal = (invoke-expression -Command "code --install-extension $ext")
+		#Need to test return verbiage 
 		Switch -wildcard ($instVal){
 			"*successfully installed!"	{"{0} Installed" -f $ext}
 			"*returned 400"				{"{0} returned a 400 error" -f $ext}
@@ -94,6 +97,8 @@ ForEach ($ext in $extArray){
 		}
 	}
 }
+# Just because it should be 
+Invoke-expression -command "code --enable-proposed-api powershell"
 # Install suggested fonts
 $FONTS = 0x14
 $objShell = New-Object -ComObject Shell.Application

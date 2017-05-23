@@ -1,4 +1,4 @@
-# New Workstaion Install
+# New Workstation Install
 
 
 ## Purpose

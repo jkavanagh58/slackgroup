@@ -1,28 +1,18 @@
-#requires -Module ImportExcel
+#Requires -Module ImportExcel
 <#
 .SYNOPSIS
-	Short description
+	Server Report to Excel
 .DESCRIPTION
-	Long description
-.PARAMETER Path
-	Specifies a path to one or more locations.
-.PARAMETER LiteralPath
-	Specifies a path to one or more locations. Unlike Path, the value of LiteralPath is used exactly as it
-	is typed. No characters are interpreted as wildcards. If the path includes escape characters, enclose
-	it in single quotation marks. Single quotation marks tell Windows PowerShell not to interpret any
-	characters as escape sequences.
-.PARAMETER InputObject
-	Specifies the object to be processed.  You can also pipe the objects to this command.
+	ActiveDirectory Query for all Computer objects with OperatingSystem name like Server. Query selects
+	Name, DistinguishedName, OperatingSystem, Description and then calculates the online status with the 
+	test-connection cmdlet. ImportExcel Module is then used to store the query results in an Excel file.
 .EXAMPLE
-	C:\PS>
+	C:\etc\scripts>.\get-serverreportexcel.ps1
 	Example of how to use this cmdlet
-.EXAMPLE
-	C:\PS>
-	Another example of how to use this cmdlet
-.INPUTS
-	Inputs to this cmdlet (if any)
 .OUTPUTS
 	Excel File
+.LINK ImportExcel Module
+	https://github.com/dfinke/ImportExcel
 .NOTES
 	===========================================================================
 	Created with:	Visual Studio Code
@@ -33,8 +23,10 @@
 	===========================================================================
 	date initials: Enter first comment here
 #>
-get-adcomputer -Filter {OperatingSystem -like "*Server*"} -Properties OperatingSystem,Description | 
+
+$adServers = get-adcomputer -Filter {OperatingSystem -like "*Server*"} -Properties OperatingSystem,Description | 
 select Name, DistinguishedName, OperatingSystem, Description,
- @{Name="Online";Exp={if(test-connection -ComputerName $_.Name -Count 1 -Quiet){$Online=$True}Else{$Online=$False}}} |
-sort-Object -Property Name | 
-Export-Excel -Path c:\etc\serverlist.xlsx -WorkSheetname (get-date -F MMddyyyy) -TableName wfm -PassThru
+	@{Name="Online";Exp={if(test-connection -ComputerName $_.Name -Count 1 -Quiet){$Online=$True}Else{$Online=$False}}} |
+sort-Object -Property Name 
+"Writing {0} Server objects to Excel Worksheet" -f $adServers.count
+$adServers = Export-Excel -Path c:\etc\serverlist.xlsx -WorkSheetname (get-date -F MMddyyyy) -TableName wfm -PassThru

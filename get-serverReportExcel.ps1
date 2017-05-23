@@ -21,12 +21,19 @@
 	Organization:	TekSystems
 	Filename:		get-serverReportExcel.ps1
 	===========================================================================
-	date initials: Enter first comment here
+	05.22.2017 JJK:	Removed verbose from Export-Excel
+	05.22.2017 JJK:	TODO: Use PSCustomObject to replace Select-Object
 #>
-
-$adServers = get-adcomputer -Filter {OperatingSystem -like "*Server*"} -Properties OperatingSystem,Description | 
-select Name, DistinguishedName, OperatingSystem, Description,
-	@{Name="Online";Exp={if(test-connection -ComputerName $_.Name -Count 1 -Quiet){$Online=$True}Else{$Online=$False}}} |
-sort-Object -Property Name 
+"Gathering servers"
+$adServers = get-adcomputer -Filter {OperatingSystem -like "*Server*"} -Properties OperatingSystem,Description 
+$serverlist = $adservers | select Name, DistinguishedName, OperatingSystem, Description,
+							@{Name="Online";Exp={if(test-connection -ComputerName $_.Name -Count 1 ){
+										$True
+									}
+									Else{
+										$False
+									}
+								}
+							} 
 "Writing {0} Server objects to Excel Worksheet" -f $adServers.count
-$adServers = Export-Excel -Path c:\etc\serverlist.xlsx -WorkSheetname (get-date -F MMddyyyy) -TableName wfm -PassThru
+$serverlist | sort-object -Property Name |  Export-Excel -Path c:\etc\serverlist.xlsx -WorkSheetname (get-date -F MMddyyyy) -TableName wfm 

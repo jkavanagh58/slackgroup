@@ -28,7 +28,7 @@
 #>
 [CmdletBinding(SupportsShouldProcess=$true,ConfirmImpact='Low')]
 Param(
-	$timer = [diagnostics.stopwatch]::StartNew()
+	$timer = [diagnostics.stopwatch]::StartNew(),
 	$rptname = get-date -F MMddyyyy
 )
 $timer.start()

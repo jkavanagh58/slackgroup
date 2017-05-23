@@ -20,12 +20,19 @@
 	Organization: 	TekSystems
 	Filename:     	new-workstation.ps1
 	===========================================================================
-	05.03.2017 JJK: Added chocolateyget provider as it helps with certain packages so streamlining
+	05.03.2017 JJK:	Added chocolateyget provider as it helps with certain packages so streamlining
 					all chocolatey packages to use this provider.
-	05.22.107 JJK:  Added PowerCLI to list of modules to be installed
+	05.22.2017 JJK:	Added PowerCLI to list of modules to be installed
+	05.23.2017 JJK:	PSVersion check. Since some environments do not allow WMF updates just notify user of WMF5
+	05.23.2017 JJK:	Added dotNetVersion variable for version check process
 #>
 [CmdletBinding(SupportsShouldProcess=$true,ConfirmImpact='Medium')]
-Param()
+Param(
+	$psMajorVersion = $psversiontable.psversion.Major,
+	$dotNetVersion = 	(Get-ChildItem 'HKLM:\SOFTWARE\Microsoft\NET Framework Setup\NDP' -recurse | 
+        				Get-ItemProperty -name Version -EA 0 | 
+        				Measure-Object -Property Version -Maximum).Maximum
+)
 Begin {
 	$modules = @(
 		"ImportExcel",
@@ -49,6 +56,13 @@ Begin {
 	""
 }
 Process {
+	If ($psversiontable.psversion.Major -lt 5){
+		# Notify WMF 5 is available
+		switch ([environment]::OSVersion.Version) {
+			condition { action; break }
+			Default {}
+		}
+	}
 	ForEach ($module in $modules){  # Loop through PowerShell modules
 		# Only using SkipPublisherCheck because I know these modules
 		if (!(get-module -Name $module)){

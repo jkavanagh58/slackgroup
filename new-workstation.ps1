@@ -28,9 +28,9 @@
 #>
 [CmdletBinding(SupportsShouldProcess=$true,ConfirmImpact='Medium')]
 Param(
-	$psMajorVersion = $psversiontable.psversion.Major,
+	$psVersion = $psversiontable.psversion,
 	$dotNetVersion = 	(Get-ChildItem 'HKLM:\SOFTWARE\Microsoft\NET Framework Setup\NDP' -recurse | 
-        				Get-ItemProperty -name Version -EA 0 | 
+        				Get-ItemProperty -name Version -EA SilentlyContinue | 
         				Measure-Object -Property Version -Maximum).Maximum
 )
 Begin {
@@ -56,12 +56,9 @@ Begin {
 	""
 }
 Process {
-	If ($psversiontable.psversion.Major -lt 5){
-		# Notify WMF 5 is available
-		switch ([environment]::OSVersion.Version) {
-			condition { action; break }
-			Default {}
-		}
+	switch ([environment]::OSVersion.Version) {
+		-eq 10 { If ($psversion.Major -eq 5 -AND $psversion.Minor -eq 1){"Good to go"}Else{"The most current version of PowerShell is 5.1"} }
+		Default {}
 	}
 	ForEach ($module in $modules){  # Loop through PowerShell modules
 		# Only using SkipPublisherCheck because I know these modules

@@ -4,7 +4,7 @@
 ## Purpose
 Provide a process to take a new workstation and get PowerShell and other Admin tools installed and current.
 
-## Tasks 
+## Tasks
 
 * [ ] Verify PowerShell version, advise if not latest
 * [ ] Install Recommend Modules

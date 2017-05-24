@@ -34,7 +34,7 @@ Param (
 	$Report = @()
 )
 $timer.start()
-$rptname = get-date -f MMddyyyhhmm
+$rptname = get-date -f MMddyyyHHmm
 "Gathering servers"
 $adServers = get-adcomputer -Filter {OperatingSystem -like "*Server*"} -Properties OperatingSystem,Description 
 Write-progress -Activity "Creating records"

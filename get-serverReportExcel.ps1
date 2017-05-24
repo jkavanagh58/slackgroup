@@ -27,11 +27,12 @@
 	05.22.2017 JJK: Set rptname param to name table same as sheetname
 #>
 [CmdletBinding(SupportsShouldProcess=$true,ConfirmImpact='Low')]
-Param(
-	$timer = [diagnostics.stopwatch]::StartNew(),
-	$rptname = get-date -F MMddyyyy
+Param (
+	$timer=[System.Diagnostics.Stopwatch]::StartNew(),
+	[String]$rptname
 )
 $timer.start()
+$rptname = get-date -f MMddyyyhhmm
 "Gathering servers"
 $adServers = get-adcomputer -Filter {OperatingSystem -like "*Server*"} -Properties OperatingSystem,Description 
 $serverlist = $adservers | select Name, DistinguishedName, OperatingSystem, Description,

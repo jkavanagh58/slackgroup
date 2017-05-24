@@ -7,9 +7,10 @@ Begin{
     # Nothing to process here 
     $cred = Get-Credential
     $curFile = get-content $path -Raw | convertFrom-json
-    if ($curFile.username -eq $cred.username){"Updating existing object"}
-    Else {"Will be adding to the credential list"}
-    
+    <#
+        if ($curFile.username -eq $cred.username){"Updating existing object"}
+        Else {"Will be adding to the credential list"}
+    #>
 }  
 Process{
   $cred = Get-Credential

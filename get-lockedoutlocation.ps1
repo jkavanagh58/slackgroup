@@ -20,6 +20,8 @@
 	Filename:     	get-lockedoutlocation.ps1
 	===========================================================================
 	04.14.2017 JJK: Converted from function to script process
+	05.24.2017 JJK:	TODO: Add break if account is not lockedout
+	05.24.2017 JJK:	TODO: Add credential param for winevent call
 #>
 [CmdletBinding()]
 Param(
@@ -32,6 +34,7 @@ Param(
 Begin { 
 	$DCCounter = 0 
 	$LockedOutStats = @()   
+	# Just in case current environment has Module AutoLoad disabled
 	Try {
 		Import-Module ActiveDirectory -ErrorAction Stop
 	}
@@ -72,7 +75,7 @@ Process {
 	#Get User Info
 	Try {  
 		Write-Verbose "Querying event log on $($PDCEmulator.HostName)"
-		$LockedOutEvents = Get-WinEvent -ComputerName $PDCEmulator.HostName -FilterHashtable @{LogName = 'Security'; Id = 4740} -ErrorAction Stop | Sort-Object -Property TimeCreated -Descending
+		$LockedOutEvents = Get-WinEvent -ComputerName $PDCEmulator.HostName -FilterHashtable @{LogName = 'Security'; Id = 4740} -ErrorAction Stop -Credential $admcreds | Sort-Object -Property TimeCreated -Descending
 	}
 	Catch {          
 		Write-Warning $_

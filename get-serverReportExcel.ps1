@@ -53,11 +53,12 @@ ForEach ($srv in $adservers | Sort-Object -Property Name){
         Name              = $srv.name
         DistinguishedName = $srv.DistinguishedName
         OperatingSystem   = $srv.OperatingSystem
+        Description       = $srv.Description
     }
 	$Report += $obj
 }
 "Writing {0} Server objects to Excel Worksheet" -f $adServers.count
 #$serverlist | sort-object -Property Name |  Export-Excel -Path c:\etc\serverlist.xlsx -WorkSheetname $rptname -TableName $rptname
-$Report |  Export-Excel -Path c:\etc\serverlist.xlsx -WorkSheetname $rptname -TableName $rptname.ToString() -AutoSize
+$Report |  Export-Excel -Path c:\etc\serverlist.xlsx -WorkSheetname $rptname -TableName "Servers-$rptname" -AutoSize
 $timer.Stop()
 "The script took {0} minutes to complete" -f ($timer.elapsed.TotalSeconds / 60)

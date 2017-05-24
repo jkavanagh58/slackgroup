@@ -21,15 +21,19 @@
 	===========================================================================
 	04.14.2017 JJK: Converted from function to script process
 	05.24.2017 JJK:	TODO: Add break if account is not lockedout
-	05.24.2017 JJK:	TODO: Add credential param for winevent call
+	05.24.2017 JJK:	ADDED Add credential param for winevent call
 #>
 [CmdletBinding()]
 Param(
-	[Parameter(Mandatory=$true,
-		ValueFromPipeline=$true,
-		ValueFromPipelineByPropertyName=$true,
-		HelpMessage = "Enter the samAccountName to report on")]
-		[String]$Identity
+    [Parameter(Mandatory = $true,
+        ValueFromPipeline = $true,
+        ValueFromPipelineByPropertyName = $true,
+        HelpMessage = "Enter the samAccountName to report on")]
+    [String]$Identity,
+    [Parameter(Mandatory = $false,
+        ValueFromPipeline = $true,
+        HelpMessage = 'Ensure you are using the correct credentials for this operation')]
+    [System.Management.Automation.PSCredential]$Credential 
 )
 Begin { 
 	$DCCounter = 0 
@@ -75,7 +79,7 @@ Process {
 	#Get User Info
 	Try {  
 		Write-Verbose "Querying event log on $($PDCEmulator.HostName)"
-		$LockedOutEvents = Get-WinEvent -ComputerName $PDCEmulator.HostName -FilterHashtable @{LogName = 'Security'; Id = 4740} -ErrorAction Stop -Credential $admcreds | Sort-Object -Property TimeCreated -Descending
+		$LockedOutEvents = Get-WinEvent -ComputerName $PDCEmulator.HostName -FilterHashtable @{LogName = 'Security'; Id = 4740} -ErrorAction Stop -Credential $Credential | Sort-Object -Property TimeCreated -Descending
 	}
 	Catch {          
 		Write-Warning $_

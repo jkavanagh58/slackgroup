@@ -25,6 +25,7 @@
 	05.22.2017 JJK:	TODO: Use PSCustomObject to replace Select-Object
 	05.22.2017 JJK: Added timer to report script duration
 	05.22.2017 JJK: Set rptname param to name table same as sheetname
+	05.22.2017 JJK: Removed OnLine loop as this will trigger security
 #>
 [CmdletBinding(SupportsShouldProcess=$true,ConfirmImpact='Low')]
 Param (
@@ -36,37 +37,27 @@ $timer.start()
 $rptname = get-date -f MMddyyyhhmm
 "Gathering servers"
 $adServers = get-adcomputer -Filter {OperatingSystem -like "*Server*"} -Properties OperatingSystem,Description 
-<#
-$serverlist = $adservers | select Name, DistinguishedName, OperatingSystem, Description,
-							@{Name="Online";Exp={if(test-connection -ComputerName $_.Name -Count 1 ){
-										$True
-									}
-									Else{
-										$False
-									}
-								}
-							} 
-#>
 Write-progress -Activity "Creating records"
 ForEach ($srv in $adservers | Sort-Object -Property Name){
 	$i++
-	Write-Progress -Activity "Evaluating $srv.Name" -Status "Percent Processed:" -PercentComplete (($i/$adservers.count) * 100)
+	Write-Progress -Activity "Evaluating $($srv.Name)" -Status "Percent Processed:" -PercentComplete (($i/$adservers.count) * 100) -CurrentOperation $i
+	<#
 	If (test-connection -ComputerName $srv.Name -Count 1 -ErrorAction SilentlyContinue){
 		$Online = $True
 	}
 	Else {
 		$Online = $False
 	}
-	$obj = [pscustomobject]@{
-		Name = $srv.name;
-		DistinguishedName = $srv.DistinguishedName;
-		OperatingSystem = $srv.OperatingSystem;
-		OnLine = $Online
-	}
+	#>
+    $obj = [pscustomobject]@{
+        Name              = $srv.name
+        DistinguishedName = $srv.DistinguishedName
+        OperatingSystem   = $srv.OperatingSystem
+    }
 	$Report += $obj
 }
 "Writing {0} Server objects to Excel Worksheet" -f $adServers.count
 #$serverlist | sort-object -Property Name |  Export-Excel -Path c:\etc\serverlist.xlsx -WorkSheetname $rptname -TableName $rptname
-$Report |  Export-Excel -Path c:\etc\serverlist.xlsx -WorkSheetname $rptname -TableName $rptname -AutoSize
+$Report |  Export-Excel -Path c:\etc\serverlist.xlsx -WorkSheetname $rptname -TableName $rptname.ToString() -AutoSize
 $timer.Stop()
-"The script took {0} seconds to complete" -f $timer.elapsed.TotalSeconds
+"The script took {0} minutes to complete" -f ($timer.elapsed.TotalSeconds / 60)

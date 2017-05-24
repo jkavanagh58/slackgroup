@@ -8,8 +8,10 @@
 .PARAMETER Identity
 	Specifies the account to search for. samAccountName is the best value to search
 	for.
+.PARAMETER Credential
+	Specifies the an account which has rights to perform a winevent query against a DC.
 .EXAMPLE
-	C:\PS>c:\etc\scripts\get-lockedoutlocation.ps1 -Identity logonname
+	C:\PS>c:\etc\scripts\get-lockedoutlocation.ps1 -Identity logonname -Credential $admincreds
 	Example of how to use this cmdlet
 .NOTES
 	===========================================================================

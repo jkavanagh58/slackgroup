@@ -6,14 +6,17 @@
         ],
         "description": "Switch condition statement"
     },
-
-    "Condition single quoted string statement": {
-        "prefix": "condsqstr",
-        "body": [
-            "'${_}' { ${0}; break }"
+    "Credential Parameter": {
+        "prefix": "credparam",
+        "Body": [
+            "\t[Parameter(Mandatory = $$false,\r",
+            "\t\tValueFromPipeline = $$true,\r",
+            "\t\tHelpMessage = 'Ensure you are using the correct credentials for this operation')]\r",
+            "\t[System.Management.Automation.PSCredential]$$Credential\r"
         ],
-        "description": "Switch condition single quoted string statement"
+        "Description": "Add a credential object parameter"
     },
+
     "PS Custom Object": {
         "prefix": "pscustom",
         "body": [

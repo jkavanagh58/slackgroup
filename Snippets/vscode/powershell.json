@@ -8,13 +8,13 @@
     },
     "Credential Parameter": {
         "prefix": "credparam",
-        "Body": [
+        "body": [
             "\t[Parameter(Mandatory = $$false,\r",
             "\t\tValueFromPipeline = $$true,\r",
             "\t\tHelpMessage = 'Ensure you are using the correct credentials for this operation')]\r",
             "\t[System.Management.Automation.PSCredential]$$Credential\r"
         ],
-        "Description": "Add a credential object parameter"
+        "description": "Add a credential object parameter"
     },
 
     "PS Custom Object": {

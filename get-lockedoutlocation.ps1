@@ -55,18 +55,18 @@ Process {
 			Write-Warning $_
 			Continue
 		}
-		If($UserInfo.LastBadPasswordAttempt) {    
-			$LockedOutStats += New-Object -TypeName PSObject -Property @{
-			Name                   = $UserInfo.SamAccountName
-			SID                    = $UserInfo.SID.Value
-			LockedOut              = $UserInfo.LockedOut
-			BadPwdCount            = $UserInfo.BadPwdCount
-			BadPasswordTime        = $UserInfo.BadPasswordTime            
-			DomainController       = $DC.Hostname
-			AccountLockoutTime     = $UserInfo.AccountLockoutTime
-			LastBadPasswordAttempt = ($UserInfo.LastBadPasswordAttempt).ToLocalTime()
-			}#end PSCustomObject          
-		}#end if
+        If ($UserInfo.LastBadPasswordAttempt) {    
+            $LockedOutStats += New-Object -TypeName PSObject -Property @{
+                Name                   = $UserInfo.SamAccountName
+                SID                    = $UserInfo.SID.Value
+                LockedOut              = $UserInfo.LockedOut
+                BadPwdCount            = $UserInfo.BadPwdCount
+                BadPasswordTime        = $UserInfo.BadPasswordTime
+                DomainController       = $DC.Hostname
+                AccountLockoutTime     = $UserInfo.AccountLockoutTime
+                LastBadPasswordAttempt = ($UserInfo.LastBadPasswordAttempt).ToLocalTime()
+            }#end PSCustomObject          
+        }#end if
 	}#end foreach DCs
 	$LockedOutStats | Format-Table -Property Name,LockedOut,DomainController,BadPwdCount,AccountLockoutTime,LastBadPasswordAttempt -AutoSize
 	#Get User Info

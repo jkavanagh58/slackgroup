@@ -6,6 +6,7 @@
         ],
         "description": "Switch condition statement"
     },
+
     "Credential Parameter": {
         "prefix": "credparam",
         "body": [
@@ -277,7 +278,7 @@
     },
 
     "Help": {
-        "prefix": "JJK - Help",
+        "prefix": "JJKHelp",
         "body": [
             "<#",
             ".SYNOPSIS",

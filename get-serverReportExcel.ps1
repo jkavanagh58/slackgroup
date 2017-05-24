@@ -29,12 +29,14 @@
 [CmdletBinding(SupportsShouldProcess=$true,ConfirmImpact='Low')]
 Param (
 	$timer=[System.Diagnostics.Stopwatch]::StartNew(),
-	[String]$rptname
+	[String]$rptname,
+	$Report - @()
 )
 $timer.start()
 $rptname = get-date -f MMddyyyhhmm
 "Gathering servers"
 $adServers = get-adcomputer -Filter {OperatingSystem -like "*Server*"} -Properties OperatingSystem,Description 
+<#
 $serverlist = $adservers | select Name, DistinguishedName, OperatingSystem, Description,
 							@{Name="Online";Exp={if(test-connection -ComputerName $_.Name -Count 1 ){
 										$True
@@ -44,7 +46,24 @@ $serverlist = $adservers | select Name, DistinguishedName, OperatingSystem, Desc
 									}
 								}
 							} 
+#>
+ForEach ($srv in $adservers | Sort-Object -Property Name){
+	If (test-connection -ComputerName $srv.Name -Count 1 -ErrorAction SilentlyContinue){
+		$Online = $True
+	}
+	Else {
+		$Online = $False
+	}
+	$obj = [pscustomobject]@{
+		Name = $srv.name;
+		DistinguishedName = $srv.DistinguishedName;
+		OperatingSystem = $srv.OperatingSystem;
+		OnLine = $Online
+	}
+	$Report += $obj
+}
 "Writing {0} Server objects to Excel Worksheet" -f $adServers.count
-$serverlist | sort-object -Property Name |  Export-Excel -Path c:\etc\serverlist.xlsx -WorkSheetname $rptname -TableName $rptname
+#$serverlist | sort-object -Property Name |  Export-Excel -Path c:\etc\serverlist.xlsx -WorkSheetname $rptname -TableName $rptname
+$Report | |  Export-Excel -Path c:\etc\serverlist.xlsx -WorkSheetname $rptname -TableName $rptname
 $timer.Stop()
 "The script took {0} seconds to complete" -f $timer.elapsed.TotalSeconds

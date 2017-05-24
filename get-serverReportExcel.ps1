@@ -30,7 +30,7 @@
 Param (
 	$timer=[System.Diagnostics.Stopwatch]::StartNew(),
 	[String]$rptname,
-	$Report - @()
+	$Report = @()
 )
 $timer.start()
 $rptname = get-date -f MMddyyyhhmm
@@ -47,7 +47,10 @@ $serverlist = $adservers | select Name, DistinguishedName, OperatingSystem, Desc
 								}
 							} 
 #>
+Write-progess -Activity "Creating records"
 ForEach ($srv in $adservers | Sort-Object -Property Name){
+	$i++
+	Write-Progess -Activity "Evaluating $srv.Name" -Status "Percent Processed:" -PercentComplete (($i/$adservers.count) * 100)
 	If (test-connection -ComputerName $srv.Name -Count 1 -ErrorAction SilentlyContinue){
 		$Online = $True
 	}
@@ -64,6 +67,6 @@ ForEach ($srv in $adservers | Sort-Object -Property Name){
 }
 "Writing {0} Server objects to Excel Worksheet" -f $adServers.count
 #$serverlist | sort-object -Property Name |  Export-Excel -Path c:\etc\serverlist.xlsx -WorkSheetname $rptname -TableName $rptname
-$Report | |  Export-Excel -Path c:\etc\serverlist.xlsx -WorkSheetname $rptname -TableName $rptname
+$Report |  Export-Excel -Path c:\etc\serverlist.xlsx -WorkSheetname $rptname -TableName $rptname -AutoSize
 $timer.Stop()
 "The script took {0} seconds to complete" -f $timer.elapsed.TotalSeconds

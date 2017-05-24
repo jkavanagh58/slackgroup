@@ -47,10 +47,10 @@ $serverlist = $adservers | select Name, DistinguishedName, OperatingSystem, Desc
 								}
 							} 
 #>
-Write-progess -Activity "Creating records"
+Write-progress -Activity "Creating records"
 ForEach ($srv in $adservers | Sort-Object -Property Name){
 	$i++
-	Write-Progess -Activity "Evaluating $srv.Name" -Status "Percent Processed:" -PercentComplete (($i/$adservers.count) * 100)
+	Write-Progress -Activity "Evaluating $srv.Name" -Status "Percent Processed:" -PercentComplete (($i/$adservers.count) * 100)
 	If (test-connection -ComputerName $srv.Name -Count 1 -ErrorAction SilentlyContinue){
 		$Online = $True
 	}

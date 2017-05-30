@@ -307,7 +307,7 @@ param
                 [System.Management.Automation.PSCredential]$Credential 
 )
 Begin {
-    try { Get-Module -Name ActiveDirectory | Out-Null }
+    try { Get-Module -Name ActiveDirectory -ListAvailable | Out-Null }
 	Catch {
     	Write-Error "Active Directory Module is not installed on this machine"
 		Exit
@@ -329,6 +329,6 @@ Process {
 	Else {"Active Directory is reporting that {0} is not locked out at this time." -f $usracct.samAccountName }
 }
 End {
-		
+    remove-variable userlogon, Credential 
 }
 } #End unlock-useraccount

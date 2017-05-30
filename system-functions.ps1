@@ -75,28 +75,28 @@ Param(
 			ParameterSetName = '',  
 			ValueFromPipeline = $True)]  
 		[array]$computer,  
-		[Parameter(  
-			Position = 1,  
-			Mandatory = $True,  
-			ParameterSetName = '')]  
-			[array]$port,  
-		[Parameter(  
-			Mandatory = $False,  
-			ParameterSetName = '')]  
-			[int]$TCPtimeout=1000,  
-		[Parameter(  
-			Mandatory = $False,  
-			ParameterSetName = '')]  
-			[int]$UDPtimeout=1000,             
-		[Parameter(  
-			Mandatory = $False,  
-			ParameterSetName = '')]  
-			[switch]$TCP,  
-		[Parameter(  
-			Mandatory = $False,  
-			ParameterSetName = '')]  
-			[switch]$UDP                                    
-		)  
+	[Parameter(  
+		Position = 1,  
+		Mandatory = $True,  
+		ParameterSetName = '')]  
+	[array]$port,  
+	[Parameter(  
+		Mandatory = $False,  
+		ParameterSetName = '')]  
+	[int]$TCPtimeout=1000,  
+	[Parameter(  
+		Mandatory = $False,  
+		ParameterSetName = '')]  
+	[int]$UDPtimeout=1000,             
+	[Parameter(  
+		Mandatory = $False,  
+		ParameterSetName = '')]  
+	[switch]$TCP,  
+	[Parameter(  
+		Mandatory = $False,  
+		ParameterSetName = '')]  
+	[switch]$UDP                                    
+)  
 	Begin {  
 		If (!$tcp -AND !$udp) {$tcp = $True}  
 		#Typically you never do this, but in this case I felt it was for the benefit of the function  

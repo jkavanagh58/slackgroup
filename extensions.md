@@ -14,6 +14,7 @@ Excel Viewer | 1.1.13 | Helps when testing output or input from an Excel or CSV 
 gerane.Theme-Blackboard | | One of the themes I am narrowing down to my every day theme
 gerane.Theme-BlueDawn | | One of the themes I am narrowing down to my every day theme
 [Get the weather](https://marketplace.visualstudio.com/items?itemName=AndrewMoll.WeatherExtension) |  | Useless but nice to put the weather info in your status bar
+[HTML Boilerplate](https://marketplace.visualstudio.com/items?itemName=sidthesloth.html5-boilerplate) | | For those of us who don't know HTML, a good kickstart
 
 To search online for Visual Studio Code extenstions look [here](https://marketplace.visualstudio.com/VSCode)
 

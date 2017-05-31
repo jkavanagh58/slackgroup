@@ -36,10 +36,10 @@ unlock-adaccount <samAccountName>
 get-adcomputer -properties OperatingSystem -Filter "OperatingSystem -like 'W*7*'" | sort Name
 
 # List all Windows Servers in a domain
-Get-ADComputer -SearchBase 'dc=swagelok,dc=com' -Properties OperatingSystem -Filter {OperatingSystem -like 'W*Server*'} |
+Get-ADComputer -SearchBase 'dc=domain,dc=com' -Properties OperatingSystem -Filter {OperatingSystem -like 'W*Server*'} |
 	sort Name | select Name, OperatingSystem
 # Conversely 
-Get-ADComputer -SearchBase 'dc=swagelok,dc=com' -Properties OperatingSystem -Filter {OperatingSystem -notlike 'W*Server*'} |
+Get-ADComputer -SearchBase 'dc=domain,dc=com' -Properties OperatingSystem -Filter {OperatingSystem -notlike 'W*Server*'} |
 	sort Name | select Name, OperatingSystem
 
 # List all domain controllers

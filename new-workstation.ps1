@@ -12,6 +12,8 @@
 	https://github.com/OneGet/oneget
 .LINK
 	https://github.com/PowerShell/PowerShell-Docs/tree/staging/gallery
+.LINK Visual Studio Code and PowerShell Extension
+	https://github.com/PowerShell/vscode-powershell
 .NOTES
 	===========================================================================
 	Created with: 	Visual Studio Code
@@ -25,6 +27,7 @@
 	05.22.2017 JJK:	Added PowerCLI to list of modules to be installed
 	05.23.2017 JJK:	PSVersion check. Since some environments do not allow WMF updates just notify user of WMF5
 	05.23.2017 JJK:	Added dotNetVersion variable for version check process
+	05.31.2017 JJK: Added VSCode and PowerShell extension install routine from official repo
 #>
 [CmdletBinding(SupportsShouldProcess=$true,ConfirmImpact='Medium')]
 Param(
@@ -45,8 +48,6 @@ Begin {
 	)
 	$packages = @(
 		"sysinternals",
-		"visualstudiocode",
-		"vscode-powershell",
 		"SDelete"
 	)
 	# Simple reporting
@@ -76,6 +77,8 @@ Process {
 			"Module {0} already exists on this machine" -f $module
 		}
 	}
+	# Install Visual Studio Code and the PowerShell Extension
+	Install-Script Install-VSCode -Scope CurrentUser; Install-VSCode.ps1
 	# Install Chocolatey
 	Install-PackageProvider chocolatey -Scope AllUsers -Confirm:$False -Force
 	# Adding this provider to handle chocolatey better

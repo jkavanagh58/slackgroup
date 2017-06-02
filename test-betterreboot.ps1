@@ -5,16 +5,15 @@
 	Long description
 .PARAMETER victim
 	Computer name for machine to be restarted
-.PARAMETER LiteralPath
-	Specifies a path to one or more locations. Unlike Path, the value of LiteralPath is used exactly as it
-	is typed. No characters are interpreted as wildcards. If the path includes escape characters, enclose
-	it in single quotation marks. Single quotation marks tell Windows PowerShell not to interpret any
-	characters as escape sequences.
 .PARAMETER timer
-	Timer used to track how long the restart takes
+	Stopwatch instance for recording  amount of time from beginning to the completed
+	restart process.
+.PARAMETER followUp
+	If restart takes longer than 90 seconds this will be set to True to trigger 
+	follow up message is needed.
 .EXAMPLE
-	C:\PS>
-	Example of how to use this cmdlet
+	C:\etc\scripts>.\test-betterreboot.ps1
+	Example of how to use this script
 .NOTES
 	===========================================================================
 	Created with:	Visual Studio Code
@@ -32,6 +31,10 @@
 
 [CmdletBinding(SupportsShouldProcess=$true,ConfirmImpact='Medium')]
 Param(
+	[Parameter(Mandatory=$true,
+		ValueFromPipeline=$true,
+		ValueFromPipelineByPropertyName=$true,
+		HelpMessage = "Enter the computername for reboot")]
 	[String]$victim,
 	$timer = [System.Diagnostics.Stopwatch]::StartNew(),
 	[boolean]$followUp = $False

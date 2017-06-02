@@ -12,7 +12,7 @@
 	If restart takes longer than 90 seconds this will be set to True to trigger 
 	follow up message is needed.
 .EXAMPLE
-	C:\etc\scripts>.\test-betterreboot.ps1
+	C:\etc\scripts>.\test-betterreboot.ps1 -victim somecomputer
 	Example of how to use this script
 .NOTES
 	===========================================================================

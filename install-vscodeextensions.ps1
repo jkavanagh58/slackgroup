@@ -1,3 +1,4 @@
+#Requires -RunAsAdministrator
 <#
 .SYNOPSIS
 	Script to "normalize" Visual Studio Code for PowerShell users
@@ -99,7 +100,8 @@ ForEach ($ext in $extArray){
 }
 # Just because it should be 
 Invoke-expression -command "code --enable-proposed-api powershell"
-# Install suggested fonts
+<# 
+Install suggested fonts
 $FONTS = 0x14
 $objShell = New-Object -ComObject Shell.Application
 $objFolder = $objShell.Namespace($FONTS)
@@ -108,6 +110,7 @@ ForEach ($file in $files){
 	# copy font file to Fonts Folder
 	$objFolder.copyHere($File.fullname,0x10)
 }
+#>
 } # End Process
 End{
 	"Restarting Visual Studio Code"

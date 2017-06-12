@@ -26,6 +26,7 @@
 	05.21.2017 JJK: TODO: download fonts from github
 	05.21.2017 JJK: Test for presence of vscode
 	05.21.2017 JJK: Testing - to delete extensions remove-item but be necessary
+	06.12.2017 JJK: TODO: Use call operator versus invoke-expression
 #>
 [CmdletBinding(SupportsShouldProcess=$true,ConfirmImpact='Low')]
 Param(
@@ -99,7 +100,7 @@ ForEach ($ext in $extArray){
 	}
 }
 # Just because it should be 
-Invoke-expression -command "code --enable-proposed-api powershell"
+& code --enable-proposed-api powershell
 <# 
 Install suggested fonts
 $FONTS = 0x14
@@ -114,7 +115,7 @@ ForEach ($file in $files){
 } # End Process
 End{
 	"Restarting Visual Studio Code"
-	invoke-expression -Command "code"
+	& code
 }
 
 

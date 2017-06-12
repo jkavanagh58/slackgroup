@@ -48,7 +48,8 @@ Begin {
 	)
 	$packages = @(
 		"sysinternals",
-		"SDelete"
+		"SDelete",
+		"visualstudiocode"
 	)
 	# Simple reporting
 	"#------------------------------------------------------------------------------------------------------#"

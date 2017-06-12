@@ -82,14 +82,14 @@ If ($isRunning){
 		"In order for your workspace to show the new extension restart Visual Studio Code"
 	}
 }
-$curExt = invoke-expression -command "code --list-extensions"
+$curExt = & code --list-extensions
 ForEach ($ext in $extArray){
 	if ($curExt -contains $ext){
 		"{0} extension is already installed"
 	}
 	Else{
 		# This needs work as it is not catching all result strings
-		$instVal = (invoke-expression -Command "code --install-extension $ext")
+		$instVal = & code --install-extension $ext
 		#Need to test return verbiage 
 		Switch -wildcard ($instVal){
 			"*successfully installed!"	{"{0} Installed" -f $ext}

@@ -22,6 +22,12 @@
 [CmdletBinding()]
 Param (
 	# add vcenter param and credential param
+		[Parameter(Mandatory=$true,
+		ValueFromPipeline=$true,
+		ValueFromPipelineByPropertyName=$true,
+		HelpMessage = "Enter Help Message Here")]
+		[String]$vcenter
+	
 )
 if (!($defaultviserver)){
 	"You must be connected to a VCenter host"

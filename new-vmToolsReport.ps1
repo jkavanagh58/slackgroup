@@ -59,7 +59,6 @@ if (!($defaultVIServers)){
 	Else {
 		Connect-viserver -Server $vserver
 	}
-	
 }
 # Collect Data Report
 $VMs = Get-View -ViewType VirtualMachine -Property name, guest, config.version, runtime.PowerState

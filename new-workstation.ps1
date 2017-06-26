@@ -49,7 +49,8 @@ Begin {
 	$packages = @(
 		"sysinternals",
 		"SDelete",
-		"visualstudiocode"
+		"visualstudiocode",
+		"paint.net"
 	)
 	# Simple reporting
 	"#------------------------------------------------------------------------------------------------------#"

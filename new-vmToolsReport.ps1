@@ -44,6 +44,9 @@ Param(
 	[Parameter(Mandatory=$False)]
 		[Alias("ShowReport")]
 	[Switch]$Show,
+	[Parameter(Mandatory=$False)]
+		[Alias("UpdateTools")]
+	[Switch]$Update,
 	[Parameter(Mandatory = $false,
 		ValueFromPipeline = $true,
 		HelpMessage = 'Ensure you are using the correct credentials for this operation')]
@@ -60,6 +63,20 @@ if (!($defaultVIServers)){
 		Connect-viserver -Server $vserver
 	}
 }
+Function start-toolsupdate {
+Param(
+	[Parameter(Mandatory=$True,Position=1)]
+	[System.String]$vmname
+)
+try {
+	"Updating the VMWare Tools for {0}" -f $vmname
+	Update-Tools -VM $vmname -NoReboot
+}
+catch [System.Exception] {
+	"Unable to update tools for {0}" -f $vmname
+	$_.Exception.Message
+}
+}
 # Collect Data Report
 $VMs = Get-View -ViewType VirtualMachine -Property name, guest, config.version, runtime.PowerState
 $Report = @() #Array for assembling report data
@@ -70,6 +87,7 @@ ForEach ($vm in $VMs){
 		VMName = $vm.Name
 		ToolsStatus = $vm.Guest.ToolsStatus
 	}
+	# Process vmtools update of -UpdateNow parameter has been entered
 	$Report += $vmobj
 }
 $Report | Group-Object -Property ToolsStatus | Select-Object -Property Name, Count | Sort-Object -Property Count | Format-Table -AutoSize

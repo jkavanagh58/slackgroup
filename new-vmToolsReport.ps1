@@ -40,7 +40,7 @@ Param(
 		ValueFromPipeline=$true,
 		ValueFromPipelineByPropertyName=$true,
 		HelpMessage = "VCenter to report on")]
-	[String]$vserver = "vcenter.yourdomain.com",
+	[Array]$vserver = "vcenter.yourdomain.com",
 	[Parameter(Mandatory=$False)]
 		[Alias("ShowReport")]
 	[Switch]$Show,
@@ -82,9 +82,10 @@ $VMs = Get-View -ViewType VirtualMachine -Property name, guest, config.version, 
 $Report = @() #Array for assembling report data
 }
 Process {
-ForEach ($vm in $VMs){
+ForEach ($vm in $VMs.Where{$_.Runtime.PowerState -eq "PoweredOn"}){
 	$vmobj = [pscustomobject]@{
 		VMName = $vm.Name
+		HostName = (get-vm -Name $vm.name).vmhost
 		ToolsStatus = $vm.Guest.ToolsStatus
 	}
 	# Process vmtools update of -UpdateNow parameter has been entered
@@ -93,10 +94,11 @@ ForEach ($vm in $VMs){
 $Report | Group-Object -Property ToolsStatus | Select-Object -Property Name, Count | Sort-Object -Property Count | Format-Table -AutoSize
 # Create Excel File
 $Report | Group-Object -Property ToolsStatus | Select-Object -Property Name, Count | Sort-Object -Property Count |
-	Export-Excel -Path c:\etc\VMReport.xlsx  -Worksheetname "VM Tools Report" -AutoSize -Title "VM Tools Report"
-$Report.Where{$_.ToolsStatus -eq "ToolsOld"} | Sort-Object -Property VMName | export-excel -Path c:\etc\VMReport.xlsx -WorkSheetname "Tools Need Updated" -AutoSize
-$Report.Where{$_.ToolsStatus -eq "ToolsOk"} | Sort-Object -Property VMName | export-excel -Path c:\etc\VMReport.xlsx -WorkSheetname "Tools Up-To-Date" -AutoSize
-$Report.Where{$_.ToolsStatus -eq "ToolsNotInstalled" -OR $_.ToolsStatus -eq "ToolsNotRunning"} | Sort-Object -Property VMName | export-excel -Path c:\etc\VMReport.xlsx -WorkSheetname "No Tools or Not Running" -AutoSize
+	Export-Excel -Path c:\etc\VMReport.xlsx  -Worksheetname "1 - VM Tools Report" -TitleFillPattern None -TitleBackgroundColor Gray -Title "VM Tools Report" -AutoSize
+$Report = $Report | Sort-Object -Property VMName 
+$Report.Where{$_.ToolsStatus -eq "ToolsOld"} | export-excel -Path c:\etc\VMReport.xlsx -WorkSheetname "Tools Need Updated" -AutoSize -TableName "NeedUpdate" -TableStyle Light1
+$Report.Where{$_.ToolsStatus -eq "ToolsOk"} | export-excel -Path c:\etc\VMReport.xlsx -WorkSheetname "Tools Up-To-Date" -AutoSize -TableName "Current" -TableStyle Light2
+$Report.Where{$_.ToolsStatus -eq "ToolsNotInstalled" -OR $_.ToolsStatus -eq "ToolsNotRunning"} | export-excel -Path c:\etc\VMReport.xlsx -WorkSheetname "No Tools or Not Running" -TableName "NotInstalledRunning" -TableStyle Light3 -AutoSize
 }
 End {
 If ($Show){

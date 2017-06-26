@@ -73,7 +73,6 @@ Process {
 			Catch{
 				Write-error -Message "Unable to install $module" 
 			}
-			
 		}
 		Else {
 			"Module {0} already exists on this machine" -f $module
@@ -87,7 +86,6 @@ Process {
 	Find-PackageProvider ChocolateyGet -Verbose
 	Install-PackageProvider ChocolateyGet -Verbose -Force -Confirm:$False
 	Import-PackageProvider ChocolateyGet
-
 	ForEach ($package in $packages){   # Loop through Chocolatey packages
 		try{
 			"Installing {0} package" -f $package

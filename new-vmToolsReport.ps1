@@ -64,6 +64,9 @@ if (!($defaultVIServers)){
 		Connect-viserver -Server $vserver
 	}
 }
+ForEach ($inst in $defaultVIServers){
+	"Connected to {0}" -f $inst
+}
 Function start-toolsupdate {
 Param(
 	[Parameter(Mandatory=$True,Position=1)]
@@ -79,14 +82,25 @@ catch [System.Exception] {
 }
 }
 # Collect Data Report
-$VMs = Get-View -ViewType VirtualMachine -Property name, guest, config.version, runtime.PowerState
+$VMs = Get-View -ViewType VirtualMachine -Property name, guest, config.version, config.managedby.ExtensionKey, runtime.PowerState
 $Report = @() #Array for assembling report data
 }
 Process {
-ForEach ($vm in $VMs.Where{$_.Runtime.PowerState -eq "poweredOn"}){
-	$vmobj = [pscustomobject]@{
-		VMName = $vm.Name
-		ToolsStatus = $vm.Guest.ToolsStatus
+ForEach ($vm in $VMs){
+	$vm.config.managedby.extensionkey
+	if ($vm.config.managedby.extensionkey -eq "com.vmware.vcDr"){
+		$vmobj = [pscustomobject]@{
+			VMName = $vm.Name
+			SRM = $True
+			ToolsStatus = $vm.Guest.ToolsStatus
+		}
+	}
+	Else {
+		$vmobj = [pscustomobject]@{
+			VMName = $vm.Name
+			SRM = $False
+			ToolsStatus = $vm.Guest.ToolsStatus
+		}
 	}
 	# Process vmtools update of -UpdateNow parameter has been entered
 	$Report += $vmobj

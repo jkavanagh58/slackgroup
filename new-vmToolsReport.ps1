@@ -35,6 +35,7 @@
 	06.22.2017 JJK: Credenital parameter to connect alternate credentials
 	06.26.2017 JJK: TODO: Install Tools where status is not installed
 	06.26.2017 JJK: Added SRM Reference
+	06.26.2017 JJK: Adding ESX hostname to report data might add too much time
 #>
 [CmdletBinding(SupportsShouldProcess=$true,ConfirmImpact='Low')]
 Param(
@@ -88,7 +89,7 @@ $Report = @() #Array for assembling report data
 }
 Process {
 ForEach ($vm in $VMs){
-	$vm.config.managedby.extensionkey
+	(get-vm -Name $vm.Name).VMHost.Name
 	if ($vm.config.managedby.extensionkey -eq "com.vmware.vcDr"){
 		$vmobj = [pscustomobject]@{
 			VMName = $vm.Name

@@ -33,6 +33,7 @@
 	06.21.2017 JJK: Add Switch Param for showing spreadsheet
 	06.21.2017 JJK:	TODO: work on report file process
 	06.22.2017 JJK: Credenital parameter to connect alternate credentials
+	06.22.2017 JJK: TODO: Install Tools where status is not installed
 #>
 [CmdletBinding(SupportsShouldProcess=$true,ConfirmImpact='Low')]
 Param(
@@ -82,10 +83,9 @@ $VMs = Get-View -ViewType VirtualMachine -Property name, guest, config.version, 
 $Report = @() #Array for assembling report data
 }
 Process {
-ForEach ($vm in $VMs.Where{$_.Runtime.PowerState -eq "PoweredOn"}){
+ForEach ($vm in $VMs.Where{$_.Runtime.PowerState -eq "poweredOn"}){
 	$vmobj = [pscustomobject]@{
 		VMName = $vm.Name
-		HostName = (get-vm -Name $vm.name).vmhost
 		ToolsStatus = $vm.Guest.ToolsStatus
 	}
 	# Process vmtools update of -UpdateNow parameter has been entered

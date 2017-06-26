@@ -33,7 +33,8 @@
 	06.21.2017 JJK: Add Switch Param for showing spreadsheet
 	06.21.2017 JJK:	TODO: work on report file process
 	06.22.2017 JJK: Credenital parameter to connect alternate credentials
-	06.22.2017 JJK: TODO: Install Tools where status is not installed
+	06.26.2017 JJK: TODO: Install Tools where status is not installed
+	06.26.2017 JJK: Added SRM Reference
 #>
 [CmdletBinding(SupportsShouldProcess=$true,ConfirmImpact='Low')]
 Param(

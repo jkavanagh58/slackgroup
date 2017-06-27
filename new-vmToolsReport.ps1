@@ -89,8 +89,8 @@ $Report = @() #Array for assembling report data
 }
 Process {
 ForEach ($vm in $VMs.where{$_.Runtime.PowerState -eq "PoweredOn"}){
-	$valESX = (get-vm -Name $vm.Name -ErrorAction SilentlyContinue).VMHost.Name
-	If ($valESX){$esxName = $valESX}
+	$valESX = ((get-vm -Name $vm.Name -ErrorAction SilentlyContinue).Where{$_.PowerState -eq 'PoweredOn'}).VMHost.Name
+	If ($valESX.gettype().Name -eq "String"){$esxName = $valESX}
 	Else {$esxName = "No Data Returned"}
 	if ($vm.config.managedby.extensionkey -eq "com.vmware.vcDr"){
 		$vmobj = [pscustomobject]@{

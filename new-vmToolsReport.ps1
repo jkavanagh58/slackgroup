@@ -88,11 +88,14 @@ $VMs = Get-View -ViewType VirtualMachine -Property name, guest, config.version, 
 $Report = @() #Array for assembling report data
 }
 Process {
-ForEach ($vm in $VMs){
-	(get-vm -Name $vm.Name).VMHost.Name
+ForEach ($vm in $VMs.where{$_.Runtime.PowerState -eq "PoweredOn"}){
+	$valESX = (get-vm -Name $vm.Name -ErrorAction SilentlyContinue).VMHost.Name
+	If ($valESX){$esxName = $valESX}
+	Else {$esxName = "No Data Returned"}
 	if ($vm.config.managedby.extensionkey -eq "com.vmware.vcDr"){
 		$vmobj = [pscustomobject]@{
 			VMName = $vm.Name
+			Host = $esxName
 			SRM = $True
 			ToolsStatus = $vm.Guest.ToolsStatus
 		}
@@ -100,6 +103,7 @@ ForEach ($vm in $VMs){
 	Else {
 		$vmobj = [pscustomobject]@{
 			VMName = $vm.Name
+			Host = $esxName
 			SRM = $False
 			ToolsStatus = $vm.Guest.ToolsStatus
 		}

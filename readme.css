@@ -1,9 +1,13 @@
 
 Body {
-	background-color: linen;
-	color: black;
+	background-color:gray;
+	font-family: Arial, Helvetica, sans-serif;
+	color: darkolivegreen;
 }
 h1 {
 	background-color: darkblue;
 	color: yellow;
+}
+li {
+	color: black;
 }

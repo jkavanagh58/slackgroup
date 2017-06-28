@@ -35,19 +35,19 @@
 [CmdletBinding(SupportsShouldProcess=$True)]
 Param(
     [Parameter(Mandatory=$true,
-    ValueFromPipeline=$true,
-    ValueFromPipelineByPropertyName=$true,
-    HelpMessage = "Name and Path of Folder to perform search and replace")]
+        ValueFromPipeline=$true,
+        ValueFromPipelineByPropertyName=$true,
+        HelpMessage = "Name and Path of Folder to perform search and replace")]
     [String]$configFldr,
     [Parameter(Mandatory=$true,
-    ValueFromPipeline=$true,
-    ValueFromPipelineByPropertyName=$true,
-    HelpMessage = "Text to be replaced")]
+        ValueFromPipeline=$true,
+        ValueFromPipelineByPropertyName=$true,
+        HelpMessage = "Text to be replaced")]
     [String]$curVal,
     [Parameter(Mandatory=$true,
-    ValueFromPipeline=$true,
-    ValueFromPipelineByPropertyName=$true,
-    HelpMessage = "Replace text with this value")]
+        ValueFromPipeline=$true,
+        ValueFromPipelineByPropertyName=$true,
+        HelpMessage = "Replace text with this value")]
     [String]$newVal
 )
 If (Test-path $configFldr){

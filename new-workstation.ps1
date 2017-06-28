@@ -43,8 +43,9 @@ Begin {
 		"nameit",
 		"ScriptBrowser",
 		"posh-SSH",
-		"TreeSize".
-		"VMware.PowerCLI"
+		"TreeSize",
+		"VMware.PowerCLI",
+		"SplatHelper"
 	)
 	$packages = @(
 		"sysinternals",

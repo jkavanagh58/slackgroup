@@ -1,4 +1,4 @@
-<link href="/readme.css" rel="stylesheet"></link>
+<link href="https://github.com/jkavanagh58/slackgroup/readme.css" rel="stylesheet"></link>
 
 # slackgroup Repo
 

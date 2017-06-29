@@ -1,6 +1,5 @@
 # Collection of system utilities
-function Test-Port 
-{  
+function Test-Port {  
 <#    
 .SYNOPSIS    
 	Tests port on computer.  

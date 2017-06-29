@@ -1,10 +1,10 @@
-# Visual Studio Code extensions.
+# Visual Studio Code extensions
 
-A listing of the Visual Studio Code extensions
+A listing of the Visual Studio Code extensions :nut_and_bolt:
 
 Name | Version | Comment
 ----- | ----- | -----
-Powershell | 0.12.2 | The one that brought us here
+Powershell | 1.4.1 | The one that brought us here
 Powershell Stack Overflow Search | -- | Convenient way to look up a cmdlet right from vscode.
 BlueDawn Theme | 0.0.2 | The editor theme I have been using.
 [Share Code](https://marketplace.visualstudio.com/items?itemName=RolandGreim.sharecode) | 0.4.1 | This makes sharing a piece of code very easy by creating a gist and then you can just send the url
@@ -19,3 +19,4 @@ gerane.Theme-BlueDawn | | One of the themes I am narrowing down to my every day 
 To search online for Visual Studio Code extenstions look [here](https://marketplace.visualstudio.com/VSCode)
 
 Updated 05.30.2017 - JJK
+Updated 06.28.2017 - JJK

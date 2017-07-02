@@ -130,7 +130,20 @@
         ],
         "description": "Switch statement"
     },
-
+    "Try catch": {
+        "prefix": "mytry",
+        "body": [
+            "try {",
+            "\t${_}",
+            "}",
+            "catch [${System.Exception}] {",
+            "\t$ErrorMessage = $$_.Exception.Message"
+            "\t$FailedItem = $$_.Exception.ItemName",
+            "\t$0",
+            "}"
+        ],
+        "description": "Try catch"
+    },
     "Try catch": {
         "prefix": "try",
         "body": [

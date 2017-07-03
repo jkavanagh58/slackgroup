@@ -6,7 +6,6 @@
         ],
         "description": "Switch condition statement"
     },
-
     "Credential Parameter": {
         "prefix": "credparam",
         "body": [
@@ -17,7 +16,6 @@
         ],
         "description": "Add a credential object parameter"
     },
-
     "PS Custom Object": {
         "prefix": "pscustom",
         "body": [
@@ -59,7 +57,6 @@
         ],
         "description": "Do...until loop"
     },
-
     "Else statement": {
         "prefix": "else",
         "body": [
@@ -69,7 +66,6 @@
         ],
         "description": "Else statement"
     },
-
     "ElseIf statement": {
         "prefix": "elseif",
         "body": [
@@ -79,7 +75,6 @@
         ],
         "description": "Elseif statement"
     },
-
     "Foreach statement": {
         "prefix": "foreach",
         "body": [
@@ -89,7 +84,6 @@
         ],
         "description": "Foreach statement"
     },
-
     "For loop": {
         "prefix": "for",
         "body": [
@@ -99,7 +93,6 @@
         ],
         "description": "For loop"
     },
-
     "If statement": {
         "prefix": "if",
         "body": [
@@ -109,7 +102,6 @@
         ],
         "description": "If statement"
     },
-
     "Reverse for loop": {
         "prefix": "forr",
         "body": [
@@ -119,7 +111,6 @@
         ],
         "description": "Reverse for loop"
     },
-
     "Switch statement": {
         "prefix": "switch",
         "body": [
@@ -157,7 +148,6 @@
         ],
         "description": "Try catch statement"
     },
-
     "Try catch finally": {
         "prefix": "trycf",
         "body": [
@@ -176,7 +166,6 @@
         ],
         "description": "Try catch finally statement"
     },
-
     "Try finallly": {
         "prefix": "tryf",
         "body": [
@@ -189,7 +178,6 @@
         ],
         "description": "Try finally"
     },
-
     "While loop": {
         "prefix": "while",
         "body": [
@@ -226,7 +214,6 @@
         ],
         "description": "Method"
     },
-
     "Property": {
         "prefix": "prop",
         "body": [
@@ -234,7 +221,6 @@
         ],
         "description": "Class property"
     },
-
     "Property hidden": {
         "prefix": "proph",
         "body": [
@@ -242,7 +228,6 @@
         ],
         "description": "Hidden class property"
     },
-
     "Function": {
         "prefix": "func",
         "body": [
@@ -252,7 +237,6 @@
         ],
         "description": "Function"
     },
-
     "Function advanced": {
         "prefix": "funcadv",
         "body": [
@@ -288,7 +272,6 @@
         ],
         "description": "Advanced function"
     },
-
     "Help": {
         "prefix": "JJKHelp",
         "body": [
@@ -329,7 +312,6 @@
         ],
         "description": "Help comment block - Customized"
     },
-
     "CmdletBinding - Supports Whatif": {
         "prefix": "cmdletbinding",
         "body": [
@@ -340,7 +322,6 @@
         ],
         "description": "Cmdletbinding with support for whatif"
     },
-
     "Mandatory Parameter with Help Message": {
         "prefix": "manparamhelp",
         "body": [
@@ -352,7 +333,6 @@
         ],
         "description": "Manadatory Parameter of String Type with Help Message"
     },
-
     "Mandatory Parameter with Validation Script": {
         "prefix": "manparamvalidate",
         "body": [
@@ -365,7 +345,6 @@
         ],
         "description": "Mandatory Parameter of a String with Validation Script"
     },
-
     "Standard Logging": {
         "prefix": "addlog",
         "body": [

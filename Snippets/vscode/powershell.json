@@ -128,8 +128,7 @@
             "\t${Process}",
             "}",
             "catch [${System.Exception}] {",
-            "\t\"Messaage: {0}\" -f $$_.Exception.Message",
-            "\t\"Item Referenced: {0}\" -f $$_.Exception.ItemName",
+            "\t\"Message: {0}\" -f $$_.Exception.Message",
             "}"
         ],
         "description": "Try catch"

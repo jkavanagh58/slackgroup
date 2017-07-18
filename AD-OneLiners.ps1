@@ -38,9 +38,13 @@ get-adcomputer -properties OperatingSystem -Filter "OperatingSystem -like 'W*7*'
 # List all Windows Servers in a domain
 Get-ADComputer -SearchBase 'dc=domain,dc=com' -Properties OperatingSystem -Filter {OperatingSystem -like 'W*Server*'} |
 	sort Name | select Name, OperatingSystem
-# Conversely 
+# Conversely
 Get-ADComputer -SearchBase 'dc=domain,dc=com' -Properties OperatingSystem -Filter {OperatingSystem -notlike 'W*Server*'} |
 	sort Name | select Name, OperatingSystem
 
 # List all domain controllers
 Get-ADDomainController -Filter * | select name,OperationMasterRoles,Partitions
+
+# Find Server objects deleted in the last 30 days - Administrative credentials are required just to read deleted objects
+Get-ADObject -Filter {Deleted -eq $True -and OperatingSystem -like "Windows*Server*"} -includeDeletedObjects -Properties * -Credential $Credential |
+	Where-Object {((get-date)-$_.Modified).TotalDays -lt 30}

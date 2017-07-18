@@ -357,5 +357,27 @@
             "} #End write-logevent\r"
         ],
         "description": "Need to develop a standard logging function/method"
-    }
+    },
+    "Send Mail Message": {
+		"prefix": "mailsnippet",
+		"body": [
+			"$$mailparams = @{\r",
+			"\tTo          = \"$toaddress\"\r",
+			"\tFrom        = \"$fromaddress\"\r",
+			"\tSubject     = \"$mailsubject\"\r",
+			"\tBody        = \"$mailmessage\"\r",
+			"\tbodyAsHTML  = $$True\r",
+			"\tSMTPServer  = \"smtp.somedoamin.com\"\r",
+			"\tErrorAction = \"Stop\"\r",
+			"}\r",
+			"Try {\r",
+			"\tsend-mailmessage @mailparams\r",
+			"}\r",
+			"Catch {\r",
+			"\t\"Unable to send message\"\r",
+			"\t\"Reason: {0}:\" -f $$error[0].exception.message\r",
+			"}"
+		],
+		"description": "Splatted send mail message"
+	}
 }

@@ -379,5 +379,13 @@
 			"}"
 		],
 		"description": "Splatted send mail message"
+    },
+    	"Initiate Garbage Collection": {
+		"prefix": "freememory",
+		"body":[
+			"Remove-Variable -Name $variablestoberemoved\r"
+			"[System.GC]::Collect()\r"
+		],
+		"description": "Free up memory when script completes"
 	}
 }

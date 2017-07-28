@@ -1,7 +1,7 @@
 [CmdletBinding(SupportsShouldProcess=$true,ConfirmImpact='Medium')]
 Param(
 	[String]$snippetFolder,
-	[String]$url = "https://github.com/jkavanagh58/slackgroup/blob/master/Snippets/vscode/powershell.json"
+	[String]$url = "https://raw.githubusercontent.com/jkavanagh58/slackgroup/master/Snippets/vscode/powershell.json"
 )
 Begin{
 $snippetFolder = Join-Path -Path $env:USERPROFILE -ChildPath "\AppData\Roaming\Code\User\Snippets"
@@ -13,12 +13,10 @@ If (Test-Path -Path "$snippetFolder\Powershell.json" -PathType Leaf){
 }
 Process {
 # Copy file from github repo
-$webclient = New-Object System.Net.WebClient
-$file = "c:\etc\badjjk.json"
-# $webclient.DownloadString($url,$file)
-$webclient.DownloadData($url)
+$source = (invoke-WebRequest -Uri $url).Content
+$source | out-file "$snippetFolder\Powershell.json"
 }
 End {
-	Remove-Variable -Name snippetFolder, url, file
+	Remove-Variable -Name snippetFolder, url, source
 	[System.GC]::Collect()
 }

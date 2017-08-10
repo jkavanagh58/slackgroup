@@ -1,364 +1,364 @@
 {
-    "Condition statement": {
-        "prefix": "cond",
-        "body": [
-            "${_} { ${0}; break }"
-        ],
-        "description": "Switch condition statement"
-    },
-    "Credential Parameter": {
-        "prefix": "credparam",
-        "body": [
-            "\t[Parameter(Mandatory = $$false,\r",
-            "\t\tValueFromPipeline = $$true,\r",
-            "\t\tHelpMessage = 'Ensure you are using the correct credentials for this operation')]\r",
-            "\t[System.Management.Automation.PSCredential]$$Credential\r"
-        ],
-        "description": "Add a credential object parameter"
-    },
-    "PS Custom Object": {
-        "prefix": "pscustom",
-        "body": [
-            "$$obj = [pscustomobject]@{",
-            "\tFieldName = FieldValue;",
-            "}"
-        ],
-        "description": "Skeleton for adding a PowerShell Custom Object"
-    },
-    "Condition double quoted string statement": {
-        "prefix": "conddqstr",
-        "body": [
-            "\"${_}\" { ${0}; break }"
-        ],
-        "description": "Switch condition double quoted string statement"
-    },
-    "Condition expression statement": {
-        "prefix": "condexpr",
-        "body": [
-            "{${_}} { ${0}; break }"
-        ],
-        "description": "Switch condition expression statement"
-    },
-    "Do...while loop": {
-        "prefix": "do",
-        "body": [
-            "do {",
-            "\t$0",
-            "} while (${$variable});"
-        ],
-        "description": "Do...while loop"
-    },
-    "Do...until loop": {
-        "prefix": "do",
-        "body": [
-            "do {",
-            "\t$0",
-            "} until (${$variable});"
-        ],
-        "description": "Do...until loop"
-    },
-    "Else statement": {
-        "prefix": "else",
-        "body": [
-            "else {",
-            "\t$0",
-            "}"
-        ],
-        "description": "Else statement"
-    },
-    "ElseIf statement": {
-        "prefix": "elseif",
-        "body": [
-            "elseif (${$variable}) {",
-            "\t$0",
-            "}"
-        ],
-        "description": "Elseif statement"
-    },
-    "Foreach statement": {
-        "prefix": "foreach",
-        "body": [
-            "foreach (${$item} in ${$collection}) {",
-            "\t$0",
-            "}"
-        ],
-        "description": "Foreach statement"
-    },
-    "For loop": {
-        "prefix": "for",
-        "body": [
-            "for (${$i} = 0; ${$i} -lt ${$length}; ${$i}++) {",
-            "\t$0",
-            "}"
-        ],
-        "description": "For loop"
-    },
-    "If statement": {
-        "prefix": "if",
-        "body": [
-            "if (${$variable}) {",
-            "\t$0",
-            "}"
-        ],
-        "description": "If statement"
-    },
-    "Reverse for loop": {
-        "prefix": "forr",
-        "body": [
-            "for (${$i} = ${$length} - 1; ${$i} -ge 0; ${$i}--) {",
-            "\t$0",
-            "}"
-        ],
-        "description": "Reverse for loop"
-    },
-    "Switch statement": {
-        "prefix": "switch",
-        "body": [
-            "switch (${$variable}) {",
-            "\t${condition} { ${action}; break }",
-            "\tDefault {}",
-            "}"
-        ],
-        "description": "Switch statement"
-    },
-    "My Try catch": {
-        "prefix": "mytry",
-        "body": [
-            "try {",
-            "\t${Process}",
-            "}",
-            "catch [${System.Exception}] {",
-            "\t\"Message: {0}\" -f $$_.Exception.Message\r",
-            "}"
-        ],
-        "description": "Try catch"
-    },
-    "Try catch": {
-        "prefix": "try",
-        "body": [
-            "try {",
-            "\t# Process to run\r",
-            "\t${1:code}\r",
-            "}",
-            "catch  {\r",
-            "\t# Handle the failure\r",
-            "\t${2:error}",
-            "}"
-        ],
-        "description": "Try catch statement"
-    },
-    "Try catch finally": {
-        "prefix": "trycf",
-        "body": [
-            "try {",
-            "\t# Process to run\r",
-            "\t${1:code}\r",
-            "}",
-            "catch  {\r",
-            "\t# Handle the failure\r",
-            "\t${2:error}",
-            "}\r",
-            "finally  {\r",
-            "\t# Finalize try statement\r",
-            "\t${3:finally}",
-            "}"
-        ],
-        "description": "Try catch finally statement"
-    },
-    "Try finallly": {
-        "prefix": "tryf",
-        "body": [
-            "try {",
-            "\t${_}",
-            "}",
-            "finally {",
-            "\t$0",
-            "}"
-        ],
-        "description": "Try finally"
-    },
-    "While loop": {
-        "prefix": "while",
-        "body": [
-            "while (${$variable}) {",
-            "\t$0",
-            "}"
-        ],
-        "description": "While loop"
-    },
-    "Class": {
-        "prefix": "class",
-        "body": [
-            "class ${Name} {",
-            "\t$0",
-            "}"
-        ],
-        "description": "Class"
-    },
-    "Enum": {
-        "prefix": "enum",
-        "body": [
-            "enum ${Name} {",
-            "\t$0",
-            "}"
-        ],
-        "description": "Enum"
-    },
-    "Method": {
-        "prefix": "meth",
-        "body": [
-            "[$1] $2() {",
-            "\t$0",
-            "}"
-        ],
-        "description": "Method"
-    },
-    "Property": {
-        "prefix": "prop",
-        "body": [
-            "[${string}] ${$Property}$0"
-        ],
-        "description": "Class property"
-    },
-    "Property hidden": {
-        "prefix": "proph",
-        "body": [
-            "hidden [${string}] ${$Property}$0"
-        ],
-        "description": "Hidden class property"
-    },
-    "Function": {
-        "prefix": "func",
-        "body": [
-            "function $1() {",
-            "\t$0",
-            "}"
-        ],
-        "description": "Function"
-    },
-    "Function advanced": {
-        "prefix": "funcadv",
-        "body": [
-            "<#",
-            ".SYNOPSIS",
-            "\tShort description",
-            ".DESCRIPTION",
-            "\tLong description",
-            ".EXAMPLE",
-            "\tExample of how to use this cmdlet",
-            ".EXAMPLE",
-            "\tAnother example of how to use this cmdlet",
-            "#>",
-            "function ${verb}-${noun} {",
-            "\t[CmdletBinding()]",
-            "\t[OutputType([${int}])]",
-            "\tparam(",
-            "\t\t[Parameter(Mandatory=$true)]",
-            "\t\t[${string}]",
-            "\t\t${Param1}",
-            "\t)",
-            "\t",
-            "\tbegin {",
-            "\t}",
-            "\t",
-            "\tprocess {",
-            "\t\t$0",
-            "\t}",
-            "\t",
-            "\tend {",
-            "\t}",
-            "}"
-        ],
-        "description": "Advanced function"
-    },
-    "Help": {
-        "prefix": "JJKHelp",
-        "body": [
-            "<#\r",
-            ".SYNOPSIS\r",
-            "\tShort description",
-            ".DESCRIPTION\r",
-            "\tLong description",
-            ".PARAMETER Path\r",
-            "\tSpecifies a path to one or more locations.",
-            ".PARAMETER LiteralPath",
-            "\tSpecifies a path to one or more locations. Unlike Path, the value of LiteralPath is used exactly as it",
-            "\tis typed. No characters are interpreted as wildcards. If the path includes escape characters, enclose",
-            "\tit in single quotation marks. Single quotation marks tell Windows PowerShell not to interpret any",
-            "\tcharacters as escape sequences.",
-            ".PARAMETER InputObject\r",
-            "\tSpecifies the object to be processed.  You can also pipe the objects to this command.",
-            ".EXAMPLE\r",
-            "\tC:\\PS>",
-            "\tExample of how to use this cmdlet",
-            ".EXAMPLE\r",
-            "\tC:\\PS>",
-            "\tAnother example of how to use this cmdlet",
-            ".INPUTS\r",
-            "\tInputs to this cmdlet (if any)",
-            ".OUTPUTS\r",
-            "\tOutput from this cmdlet (if any)",
-            ".NOTES\r",
-            "\t===========================================================================\r",
-            "\tCreated with:\tVisual Studio Code\r",
-            "\tCreated on:\t\t$datecreated\r",
-            "\tCreated by:\t\tJohn Kavanagh\r",
-            "\tOrganization:\tTekSystems\r",
-            "\tFilename:\t\t$TM_FILENAME\r",
-            "\t===========================================================================\r",
-            "\t$date $initials: Enter first comment here\r",
-            "#>\r"
-        ],
-        "description": "Help comment block - Customized"
-    },
-    "CmdletBinding - Supports Whatif": {
-        "prefix": "cmdletbinding",
-        "body": [
-            "[CmdletBinding(SupportsShouldProcess=$$true,ConfirmImpact='Medium')]\r",
-            "Param(\r",
-            "\t\r",
-            ")\r"
-        ],
-        "description": "Cmdletbinding with support for whatif"
-    },
-    "Mandatory Parameter with Help Message": {
-        "prefix": "manparamhelp",
-        "body": [
-            "\t[Parameter(Mandatory=$$true,\r",
-            "\tValueFromPipeline=$$true,\r",
-            "\tValueFromPipelineByPropertyName=$$true,\r",
-            "\tHelpMessage = \"Enter Help Message Here\")]\r",
-            "\t[String]${2:parametername}\r"
-        ],
-        "description": "Manadatory Parameter of String Type with Help Message"
-    },
-    "Mandatory Parameter with Validation Script": {
-        "prefix": "manparamvalidate",
-        "body": [
-            "\t[Parameter(Mandatory = $$true,\r",
-            "\tValueFromPipeline = $$true,\r",
-            "\tPosition = 1,\r",
-            "\tHelpMessage = \"Enter Help Message Here\")]\r",
-            "\t[ValidateScript({ ${2:ValidationScript} })]\r",
-            "\t[System.String]${3:paramName}\r"
-        ],
-        "description": "Mandatory Parameter of a String with Validation Script"
-    },
-    "Standard Logging": {
-        "prefix": "addlog",
-        "body": [
-            "Function write-logevent {\r",
-            "Param(\r",
-            "\t[String]$$script:Logfile = 'c:\\etc\\testlog.txt',\r",
-            "\t[String]$$logText,\r",
-            "\t[String]$$logTime = (get-date -UFormat %m%d%Y%H%M%S)\r",
-            ")\r",
-            "'{0}:{1}' -f $$logTime, $$logText | out-file $$script:logfile -Append\r",
-            "} #End write-logevent\r"
-        ],
-        "description": "Need to develop a standard logging function/method"
-    },
-    "Send Mail Message": {
+	"Condition statement": {
+		"prefix": "cond",
+		"body": [
+			"${_} { ${0}; break }"
+		],
+		"description": "Switch condition statement"
+	},
+	"Credential Parameter": {
+		"prefix": "credparam",
+		"body": [
+			"\t[Parameter(Mandatory = $$false,\r",
+			"\t\tValueFromPipeline = $$true,\r",
+			"\t\tHelpMessage = 'Ensure you are using the correct credentials for this operation')]\r",
+			"\t[System.Management.Automation.PSCredential]$$Credential\r"
+		],
+		"description": "Add a credential object parameter"
+	},
+	"PS Custom Object": {
+		"prefix": "pscustom",
+		"body": [
+			"$$obj = [pscustomobject]@{",
+			"\tFieldName = FieldValue;",
+			"}"
+		],
+		"description": "Skeleton for adding a PowerShell Custom Object"
+	},
+	"Condition double quoted string statement": {
+		"prefix": "conddqstr",
+		"body": [
+			"\"${_}\" { ${0}; break }"
+		],
+		"description": "Switch condition double quoted string statement"
+	},
+	"Condition expression statement": {
+		"prefix": "condexpr",
+		"body": [
+			"{${_}} { ${0}; break }"
+		],
+		"description": "Switch condition expression statement"
+	},
+	"Do...while loop": {
+		"prefix": "do",
+		"body": [
+			"do {",
+			"\t$0",
+			"} while (${$variable});"
+		],
+		"description": "Do...while loop"
+	},
+	"Do...until loop": {
+		"prefix": "do",
+		"body": [
+			"do {",
+			"\t$0",
+			"} until (${$variable});"
+		],
+		"description": "Do...until loop"
+	},
+	"Else statement": {
+		"prefix": "else",
+		"body": [
+			"else {",
+			"\t$0",
+			"}"
+		],
+		"description": "Else statement"
+	},
+	"ElseIf statement": {
+		"prefix": "elseif",
+		"body": [
+			"elseif (${$variable}) {",
+			"\t$0",
+			"}"
+		],
+		"description": "Elseif statement"
+	},
+	"Foreach statement": {
+		"prefix": "foreach",
+		"body": [
+			"foreach (${$item} in ${$collection}) {",
+			"\t$0",
+			"}"
+		],
+		"description": "Foreach statement"
+	},
+	"For loop": {
+		"prefix": "for",
+		"body": [
+			"for (${$i} = 0; ${$i} -lt ${$length}; ${$i}++) {",
+			"\t$0",
+			"}"
+		],
+		"description": "For loop"
+	},
+	"If statement": {
+		"prefix": "if",
+		"body": [
+			"if (${$variable}) {",
+			"\t$0",
+			"}"
+		],
+		"description": "If statement"
+	},
+	"Reverse for loop": {
+		"prefix": "forr",
+		"body": [
+			"for (${$i} = ${$length} - 1; ${$i} -ge 0; ${$i}--) {",
+			"\t$0",
+			"}"
+		],
+		"description": "Reverse for loop"
+	},
+	"Switch statement": {
+		"prefix": "switch",
+		"body": [
+			"switch (${$variable}) {",
+			"\t${condition} { ${action}; break }",
+			"\tDefault {}",
+			"}"
+		],
+		"description": "Switch statement"
+	},
+	"My Try catch": {
+		"prefix": "mytry",
+		"body": [
+			"try {",
+			"\t${Process}",
+			"}",
+			"catch [${System.Exception}] {",
+			"\t\"Message: {0}\" -f $$_.Exception.Message\r",
+			"}"
+		],
+		"description": "Try catch"
+	},
+	"Try catch": {
+		"prefix": "try",
+		"body": [
+			"try {",
+			"\t# Process to run\r",
+			"\t${1:code}\r",
+			"}",
+			"catch  {\r",
+			"\t# Handle the failure\r",
+			"\t${2:error}",
+			"}"
+		],
+		"description": "Try catch statement"
+	},
+	"Try catch finally": {
+		"prefix": "trycf",
+		"body": [
+			"try {",
+			"\t# Process to run\r",
+			"\t${1:code}\r",
+			"}",
+			"catch  {\r",
+			"\t# Handle the failure\r",
+			"\t${2:error}",
+			"}\r",
+			"finally  {\r",
+			"\t# Finalize try statement\r",
+			"\t${3:finally}",
+			"}"
+		],
+		"description": "Try catch finally statement"
+	},
+	"Try finallly": {
+		"prefix": "tryf",
+		"body": [
+			"try {",
+			"\t${_}",
+			"}",
+			"finally {",
+			"\t$0",
+			"}"
+		],
+		"description": "Try finally"
+	},
+	"While loop": {
+		"prefix": "while",
+		"body": [
+			"while (${$variable}) {",
+			"\t$0",
+			"}"
+		],
+		"description": "While loop"
+	},
+	"Class": {
+		"prefix": "class",
+		"body": [
+			"class ${Name} {",
+			"\t$0",
+			"}"
+		],
+		"description": "Class"
+	},
+	"Enum": {
+		"prefix": "enum",
+		"body": [
+			"enum ${Name} {",
+			"\t$0",
+			"}"
+		],
+		"description": "Enum"
+	},
+	"Method": {
+		"prefix": "meth",
+		"body": [
+			"[$1] $2() {",
+			"\t$0",
+			"}"
+		],
+		"description": "Method"
+	},
+	"Property": {
+		"prefix": "prop",
+		"body": [
+			"[${string}] ${$Property}$0"
+		],
+		"description": "Class property"
+	},
+	"Property hidden": {
+		"prefix": "proph",
+		"body": [
+			"hidden [${string}] ${$Property}$0"
+		],
+		"description": "Hidden class property"
+	},
+	"Function": {
+		"prefix": "func",
+		"body": [
+			"function $1() {",
+			"\t$0",
+			"}"
+		],
+		"description": "Function"
+	},
+	"Function advanced": {
+		"prefix": "funcadv",
+		"body": [
+			"<#",
+			".SYNOPSIS",
+			"\tShort description",
+			".DESCRIPTION",
+			"\tLong description",
+			".EXAMPLE",
+			"\tExample of how to use this cmdlet",
+			".EXAMPLE",
+			"\tAnother example of how to use this cmdlet",
+			"#>",
+			"function ${verb}-${noun} {",
+			"\t[CmdletBinding()]",
+			"\t[OutputType([${int}])]",
+			"\tparam(",
+			"\t\t[Parameter(Mandatory=$true)]",
+			"\t\t[${string}]",
+			"\t\t${Param1}",
+			"\t)",
+			"\t",
+			"\tbegin {",
+			"\t}",
+			"\t",
+			"\tprocess {",
+			"\t\t$0",
+			"\t}",
+			"\t",
+			"\tend {",
+			"\t}",
+			"}"
+		],
+		"description": "Advanced function"
+	},
+	"Help": {
+		"prefix": "JJKHelp",
+		"body": [
+			"<#\r",
+			".SYNOPSIS\r",
+			"\tShort description",
+			".DESCRIPTION\r",
+			"\tLong description",
+			".PARAMETER Path\r",
+			"\tSpecifies a path to one or more locations.",
+			".PARAMETER LiteralPath",
+			"\tSpecifies a path to one or more locations. Unlike Path, the value of LiteralPath is used exactly as it",
+			"\tis typed. No characters are interpreted as wildcards. If the path includes escape characters, enclose",
+			"\tit in single quotation marks. Single quotation marks tell Windows PowerShell not to interpret any",
+			"\tcharacters as escape sequences.",
+			".PARAMETER InputObject\r",
+			"\tSpecifies the object to be processed.  You can also pipe the objects to this command.",
+			".EXAMPLE\r",
+			"\tC:\\PS>",
+			"\tExample of how to use this cmdlet",
+			".EXAMPLE\r",
+			"\tC:\\PS>",
+			"\tAnother example of how to use this cmdlet",
+			".INPUTS\r",
+			"\tInputs to this cmdlet (if any)",
+			".OUTPUTS\r",
+			"\tOutput from this cmdlet (if any)",
+			".NOTES\r",
+			"\t===========================================================================\r",
+			"\tCreated with:\tVisual Studio Code\r",
+			"\tCreated on:\t\t$datecreated\r",
+			"\tCreated by:\t\tJohn Kavanagh\r",
+			"\tOrganization:\tTekSystems\r",
+			"\tFilename:\t\t$TM_FILENAME\r",
+			"\t===========================================================================\r",
+			"\t$date $initials: Enter first comment here\r",
+			"#>\r"
+		],
+		"description": "Help comment block - Customized"
+	},
+	"CmdletBinding - Supports Whatif": {
+		"prefix": "cmdletbinding",
+		"body": [
+			"[CmdletBinding(SupportsShouldProcess=$$true,ConfirmImpact='Medium')]\r",
+			"Param(\r",
+			"\t\r",
+			")\r"
+		],
+		"description": "Cmdletbinding with support for whatif"
+	},
+	"Mandatory Parameter with Help Message": {
+		"prefix": "manparamhelp",
+		"body": [
+			"\t[Parameter(Mandatory=$$true,\r",
+			"\tValueFromPipeline=$$true,\r",
+			"\tValueFromPipelineByPropertyName=$$true,\r",
+			"\tHelpMessage = \"Enter Help Message Here\")]\r",
+			"\t[String]${2:parametername}\r"
+		],
+		"description": "Manadatory Parameter of String Type with Help Message"
+	},
+	"Mandatory Parameter with Validation Script": {
+		"prefix": "manparamvalidate",
+		"body": [
+			"\t[Parameter(Mandatory = $$true,\r",
+			"\tValueFromPipeline = $$true,\r",
+			"\tPosition = 1,\r",
+			"\tHelpMessage = \"Enter Help Message Here\")]\r",
+			"\t[ValidateScript({ ${2:ValidationScript} })]\r",
+			"\t[System.String]${3:paramName}\r"
+		],
+		"description": "Mandatory Parameter of a String with Validation Script"
+	},
+	"Standard Logging": {
+		"prefix": "addlog",
+		"body": [
+			"Function write-logevent {\r",
+			"Param(\r",
+			"\t[String]$$script:Logfile = 'c:\\etc\\testlog.txt',\r",
+			"\t[String]$$logText,\r",
+			"\t[String]$$logTime = (get-date -UFormat %m%d%Y%H%M%S)\r",
+			")\r",
+			"'{0}:{1}' -f $$logTime, $$logText | out-file $$script:logfile -Append\r",
+			"} #End write-logevent\r"
+		],
+		"description": "Need to develop a standard logging function/method"
+	},
+	"Send Mail Message": {
 		"prefix": "mailsnippet",
 		"body": [
 			"$$mailparams = @{\r",
@@ -379,8 +379,17 @@
 			"}"
 		],
 		"description": "Splatted send mail message"
-    },
-    	"Initiate Garbage Collection": {
+	},
+		"General Splat": {
+		"prefix": "splatsnippet",
+		"body": [
+			"$varname = @{\r",
+			"\t$Field = $fieldval",
+			"}"
+		],
+		"description": "General Splatting Structure"
+	},
+		"Initiate Garbage Collection": {
 		"prefix": "freememory",
 		"body":[
 			"Remove-Variable -Name $variablestoberemoved\r"

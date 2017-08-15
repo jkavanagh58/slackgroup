@@ -6,3 +6,4 @@ $varUninstall = get-itemproperty hklm:\software\wow6432node\microsoft\windows\cu
 If ($varUninstall){
 	start-process -FilePath $varUninstall.UninstallString -Verb RunAs
 }
+# No version available via Chocolatey

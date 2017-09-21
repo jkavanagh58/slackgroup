@@ -17,16 +17,22 @@
 	05.16.2017 JJK: TODO: If sdelete is not found, function will throw exit
 	09.12.2017 JJK: FIXME: Handle folders better
 #>
-Function get-sdcmdline {
-[CmdletBinding(SupportsShouldProcess=$true,ConfirmImpact='Medium')]
-Param(
-)
-write-information "Building SDelete cmdline" -Tags "Process"
-$script:sdelete = (get-childitem sdelete.exe -Path c:\ -Recurse -ErrorAction SilentlyContinue ).FullName
-}
+
 Begin {
+	Function get-sdcmdline {
+		[CmdletBinding(SupportsShouldProcess=$true,ConfirmImpact='Medium')]
+		Param(
+
+		)
+		write-information "Building SDelete cmdline" -Tags "Process"
+		$script:sdelete = (get-childitem sdelete.exe -Path c:\ -Recurse -ErrorAction SilentlyContinue ).FullName
+	}
 	#$sdelete = "C:\Chocolatey\lib\sdelete.2.00\tools\sdelete.exe"
-	get-sdcmdline # Function to generate sdelete command line
+	try { get-sdcmdline }
+	Catch {
+		"SDelete could not be found"
+		"You could use install-package -Name SDelete"
+	}
 }
 Process {
 	if (test-path $sdelete){

@@ -19,7 +19,7 @@
 	===========================================================================
 	05.19.2017 JJK: Removed wakatime as the install name does not match publisher provided name
 	05.19.2017 JJK: TODO: Add higher level process to check to see if vscode is installed
-	05.19.2017 JJK: TODO: need to handle already installed differently than unable to install 
+	05.19.2017 JJK: TODO: need to handle already installed differently than unable to install
 	05.19.2017 JJK: TODO: Use and external source for preferred extensions to allow that list to be built
 					dynamically
 	05.21.2017 JJK: Added a font install routine for the firacode font
@@ -27,6 +27,7 @@
 	05.21.2017 JJK: Test for presence of vscode
 	05.21.2017 JJK: Testing - to delete extensions remove-item but be necessary
 	06.12.2017 JJK: TODO: Use call operator versus invoke-expression
+	09.12.2017 JJK: FIXME Use git clone to pull fonts from repo
 #>
 [CmdletBinding(SupportsShouldProcess=$true,ConfirmImpact='Low')]
 Param(
@@ -40,7 +41,7 @@ Begin{
     "`tYou are currently running PowerShell $($PSVersionTable.PSVersion)."
     "#------------------------------------------------------------------------------------------------------#"
     ""
-# Check to verify Visual Studio Code is installed 
+# Check to verify Visual Studio Code is installed
  if (!(get-package -Name "Microsoft Visual Studio Code*" -ErrorAction SilentlyContinue)){
 	 "Visual Studio Code is not installed"
 	 Exit
@@ -90,18 +91,18 @@ ForEach ($ext in $extArray){
 	Else{
 		# This needs work as it is not catching all result strings
 		$instVal = & code --install-extension $ext
-		#Need to test return verbiage 
+		#Need to test return verbiage
 		Switch -wildcard ($instVal){
 			"*successfully installed!"	{"{0} Installed" -f $ext}
 			"*returned 400"				{"{0} returned a 400 error" -f $ext}
 			"*already installed."		{"{0} is already installed" -f $ext}
-			default 					{"Return message {0}" -f $instval}	
+			default 					{"Return message {0}" -f $instval}
 		}
 	}
 }
-# Just because it should be 
+# Just because it should be
 & code --enable-proposed-api powershell
-<# 
+<#
 Install suggested fonts
 $FONTS = 0x14
 $objShell = New-Object -ComObject Shell.Application

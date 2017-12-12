@@ -13,10 +13,15 @@ If (Test-Path -Path "$snippetFolder\Powershell.json" -PathType Leaf){
 }
 Process {
 # Copy file from github repo
-$source = (invoke-WebRequest -Uri $url).Content
-$source | out-file "$snippetFolder\Powershell.json"
+	Try {
+		invoke-WebRequest -Uri $url -OutFile "$snippetFolder\PowerShell.json"
+	}
+	Catch {
+		"Unable to download VSCode PowerShell Snippet file"
+		$Error[0].Exception.Message
+	}
 }
 End {
-	Remove-Variable -Name snippetFolder, url, source
+	Remove-Variable -Name snippetFolder, url
 	[System.GC]::Collect()
 }

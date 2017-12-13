@@ -344,6 +344,17 @@
 		],
 		"description": "Mandatory Parameter of a String with Validation Script"
 	},
+	"Mandatory Parameter with Validation Set": {
+		"prefix": "manparamvalidateset",
+		"body": [
+				"[Parameter(Mandatory = $$true,\r",
+				"\tValueFromPipeline = $$true,\r",
+				"\tHelpMessage = \"Enter Help Message Here\")]\r",
+				"[ValidateSet(${2:ValidDataSet})]\r",
+				"[System.String]${3:paramName}\r"
+				],
+		"description": "Mandatory Parameter of a String with set of values to validate against."
+	},
 	"Standard Logging": {
 		"prefix": "addlog",
 		"body": [

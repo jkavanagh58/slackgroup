@@ -324,7 +324,7 @@
 	"Mandatory Parameter with Help Message": {
 		"prefix": "manparamhelp",
 		"body": [
-			"\t[Parameter(Mandatory=$$true,\r",
+			"[Parameter(Mandatory=$$true,\r",
 			"\tValueFromPipeline=$$true,\r",
 			"\tValueFromPipelineByPropertyName=$$true,\r",
 			"\tHelpMessage = \"Enter Help Message Here\")]\r",
@@ -395,7 +395,7 @@
 		"prefix": "splatsnippet",
 		"body": [
 			"$varname = @{\r",
-			"\t$Field = $fieldval",
+			"\t$Field = $fieldval\r",
 			"}"
 		],
 		"description": "General Splatting Structure"

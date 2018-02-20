@@ -9,6 +9,15 @@ Function get-weather {
             Mandatory parameter to retrieve the weather data for a specific city. You can also call
         .PARAMETER apiKey
             Enter the API key you have received from openweather.org
+        .EXAMPLE
+            I ♥ PS # get-weather -apiZipCode 19149
+            Example of calling this function and getting a brief current weather report.
+        .EXAMPLE
+            I ♥ PS # if ((get-weather -apiZipCode 44011) -gt 72){"Kick on your AC"}
+            Example of calling the function and then responding to the returned value
+        .EXAMPLE
+             I ♥ PS # $curTemp = get-weather -zipcode 44011
+             Example of calling the function and storing the current temperature into a variable.
         .LINK
             http://openweathermap.org/appid
         .NOTES
@@ -39,6 +48,7 @@ Function get-weather {
             Else {
                 "Current temperature is {0} with {1}" -f $weather.main.temp, $weather.weather.description
             }
+            Return $weather.main.temp
         }
         Catch {
             Write-Output "Unable to query weather data"

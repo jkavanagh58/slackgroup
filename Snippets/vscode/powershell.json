@@ -272,7 +272,7 @@
 		"description": "Advanced function"
 	},
 	"Help": {
-		"prefix": "JJKHelp",
+		"prefix": "PSDocHelp",
 		"body": [
 			"<#\r",
 			".SYNOPSIS\r",
@@ -289,10 +289,10 @@
 			".PARAMETER InputObject\r",
 			"\tSpecifies the object to be processed.  You can also pipe the objects to this command.",
 			".EXAMPLE\r",
-			"\tC:\\PS>",
+			"\tC:\\PS\\$TM_FILENAME>",
 			"\tExample of how to use this cmdlet",
 			".EXAMPLE\r",
-			"\tC:\\PS>",
+			"\tC:\\PS>.\\ $TM_FILENAME",
 			"\tAnother example of how to use this cmdlet",
 			".INPUTS\r",
 			"\tInputs to this cmdlet (if any)",

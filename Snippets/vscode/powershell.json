@@ -402,7 +402,7 @@
 		"Initiate Garbage Collection": {
 		"prefix": "freememory",
 		"body":[
-			"Remove-Variable -Name $variablestoberemoved\r"
+			"Remove-Variable -Name $variablestoberemoved\r",
 			"[System.GC]::Collect()"
 		],
 		"description": "Free up memory when script completes"

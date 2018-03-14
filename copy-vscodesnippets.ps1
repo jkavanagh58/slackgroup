@@ -45,7 +45,7 @@ If (Test-Path -Path "$snippetFolder\Powershell.json" -PathType Leaf){
 Process {
 # Copy file from github repo
 	Try {
-		invoke-WebRequest -Uri $url -OutFile "$snippetFolder\PowerShell.json"
+		invoke-WebRequest -Uri $url -OutFile "d:\tools\powershell.json" #"$snippetFolder\PowerShell.json"
 	}
 	Catch {
 		"Unable to download VSCode PowerShell Snippet file"

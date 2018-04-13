@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<plasterManifest
+  schemaVersion="1.1"
+  templateType="Project" xmlns="http://www.microsoft.com/schemas/PowerShell/Plaster/v1">
+  <metadata>
+    <name>JJKModules</name>
+    <id>c03d710a-2ad5-4c0d-a2e3-a0cd075e3729</id>
+    <version>1.0.0</version>
+    <title>JJK Modules Template</title>
+    <description></description>
+    <author></author>
+    <tags></tags>
+  </metadata>
+  <parameters></parameters>
+  <content></content>
+</plasterManifest>

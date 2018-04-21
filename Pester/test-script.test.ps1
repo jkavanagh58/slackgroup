@@ -11,5 +11,10 @@ Describe 'Simple Test' {
         It 'List of folders was created' {
             $tFiles.count | Should -BeGreaterThan 0
         }
+            ForEach ($fldr in $tFiles){
+                it 'Should have resolvable folder names' {
+                    $fldr.Fullname | Should -BeOfType [System.String]
+            }
+        }
     }
 }

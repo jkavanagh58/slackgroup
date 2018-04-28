@@ -390,21 +390,38 @@
 		],
 		"description": "Splatted send mail message"
 	},
+		// JJK: Updated 04.28.2018
 		"General Splat": {
-		"prefix": "splatsnippet",
-		"body": [
-			"$varname = @{\r",
-			"\t$Field = $fieldval\r",
-			"}"
-		],
-		"description": "General Splatting Structure"
-	},
-		"Initiate Garbage Collection": {
-		"prefix": "freememory",
-		"body":[
-			"Remove-Variable -Name ${1:variablestoberemoved}\r",
-			"[System.GC]::Collect()\r"
-		],
-		"description": "Free up memory when script completes"
-	}
+            "prefix": "splatsnippet",
+            "body": [
+                "${1:\\$varname} = [pscustomobject]@{\r",
+                "\t$Field = $fieldval",
+                "}"
+            ],
+            "description": "General Splatting Structure"
+        },
+		// JJK: Added 04.28.2018 
+        "Initiate Garbage Collection": {
+            "prefix": "freememory",
+            "body":[
+                "Remove-Variable -Name ${1:variablestoberemoved}\r",
+                "[System.GC]::Collect()\r",
+                "$0"
+            ],
+            "description": "Free up memory when script completes"
+        },
+		// JJK: Added 04.28.2018 
+        "Count Files in Folder and Subfolders": {
+            "prefix": "filecount",
+            "body": ["${1:\\$paramName} = (Get-ChildItem -Path ${2:ProvideAPath} | Measure-Object).Count\r"],
+            "description": "Performs a count on all files in a folder, including subfolders"
+        },
+        // Can't break some habits
+        // Replace the alpha character "R" in my version for EST with the appropriate Time Zone
+        // https://www.timetemperature.com/abbreviations/military-time-zone-codes.shtml
+        "LogFile Compact Mil DTG": {
+            "prefix": "mildtg",
+            "body": ["Get-Date -UFormat '%d%H%MR%b%y'"],
+            "description": "Uses Get-Date with UFormat to specify Military DTG"
+        }
 }

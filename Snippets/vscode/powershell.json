@@ -6,6 +6,19 @@
 		],
 		"description": "Switch condition statement"
 	},
+	// Creates a Parameter in Param statement to ensure operator enters a valid Day of Week
+	// 04.29.2018 JJK: Added
+	"Day of Week Validated Parameter":{
+		"prefix": "DOWParam",
+		"body": [
+			"[Parameter(Mandatory = $$true,\r",
+			"\tValueFromPipeline = $$true,\r",
+			"\tHelpMessage = \"${1:Enter Help Message Here}\")]\r",
+			"[ValidateSet('Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday')]\r",
+			"[System.String]$${2:parametername}\r"
+		],
+		"description": "Creates a Day of Week param with validation is entered."
+	},
 	"Credential Parameter": {
 		"prefix": "credparam",
 		"body": [

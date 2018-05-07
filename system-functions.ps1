@@ -324,26 +324,30 @@ End {
 	remove-variable userlogon, Credential 
 }
 } #End unlock-useraccount
-Function show-installedmodules {
+Function Show-Installedmodules {
 	#Requires -Version 5
-		[CmdletBinding()]
-		Param(
-			$varModules = (get-installedmodule)
-		)
-		Begin {
-			"-" * 52
-			"`tReporting on {0} modules" -f $varModules.Count
-			"-" * 52
-		}# End Begin
-		Process {
-			$varModules |
-				sort-object -Property Name |
-				select-object -Property Name,
+	[CmdletBinding()]
+	Param(
+		$varModules = (get-installedmodule)
+	)
+	BEGIN {
+		"-" * 52
+		"`tReporting on {0} modules" -f $varModules.Count
+		"-" * 52
+	}# End Begin
+	PROCESS {
+		$varModules |
+			sort-object -Property Name |
+			select-object -Property Name,
 										Version,
 										@{
 											Label = "Online Version";
 											Expression = {(find-module -Name $_.Name).Version}
 										} |
-				format-table -AutoSize
-		}# End Process
+			format-table -AutoSize
+	}# End Process
+	END {
+		Remove-Variable varModules
+		[System.GC]::Collect()
 	}
+}

@@ -436,5 +436,43 @@
             "prefix": "mildtg",
             "body": ["Get-Date -UFormat '%d%H%MR%b%y'"],
             "description": "Uses Get-Date with UFormat to specify Military DTG"
-        }
+        },
+			// Adds verbose messaging in the BEGIN block
+		"Add Verbose in Begin block": {
+			"prefix": "verbBEGIN",
+			"body": ["Write-Verbose -Message \"[BEGIN]${1:Message}\""],
+			"description": "Add verbose messaging for activity in the BEGIN block"
+		},
+
+		// Adds verbose messaging in the PROCESS block
+		"Add Verbose in Process block": {
+			"prefix": "verbPROCESS",
+			"body": ["Write-Verbose -Message \"[PROCESS]${1:Message}\""],
+			"description": "Add verbose messaging for activity in the PROCESS block"
+		},
+
+		// Adds verbose messaging in the END block
+		"Add Verbose in END": {
+			"prefix": "verbEND",
+			"body": ["Write-Verbose -Message \"[END]${1:Message}\""],
+			"description": "Add verbose messaging for activity in the END section"
+		},
+
+		// Adds error messaging
+		"Add Error Message": {
+			"prefix": "errMessage",
+			"body": ["Write-Error -Message \"${1:Message}\""],
+			"description": "Add verbose messaging for activity in the BEGIN section"
+		},
+
+		// General Parameter Definition
+		"Parameter Statement": {
+			"prefix": "paramStatement",
+			"body": [
+				"[parameter(Mandatory=$${1|True,False|}, ValueFromPipeline=${2|$True,$False|})]\r",
+				"\t\tHelpMessage = \"${3:HelpMessage}\")]\r",
+				"[${4:VariableType}]$${5:VariableName}"
+			],
+			"description": "Scaffold for Parameter creation"
+		}
 }

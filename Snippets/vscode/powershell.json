@@ -30,7 +30,7 @@
 		"description": "Add a credential object parameter"
 	},
 	"PS Custom Object": {
-		"prefix": "pscustom",
+		"prefix": "custompsobj",
 		"body": [
 			"$$obj = [pscustomobject]@{",
 			"\tFieldName = FieldValue;",

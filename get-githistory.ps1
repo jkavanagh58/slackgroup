@@ -35,27 +35,38 @@
 	05.14.2018 JJK:	TODO: Approach reporting with new info git log is repo specific not computer specific
 	05.14.2018 JJK:	DONE: Look for git date value - use get-Date to make commit Date easier to read
 	05.14.2018 JJK:	Tested new Report format; converted commandling to splat
+	05.17.2018 JJK:	Sterilized Report path to current users documents folder.
+	05.17.2018 JJK: TODO: Use CIM to create a list of physical disks (I believe local clones can only be in physical)
 #>
 [CmdletBinding()]
 Param (
-	[parameter(Mandatory=$False, ValueFromPipeline=$True),
-			HelpMessage = "Path to github repo for reporting on")]
+	[parameter(Mandatory=$False, ValueFromPipeline=$True,
+		HelpMessage = "Path to github repo for reporting on")]
 	[String]$repoPath = "Documents\github\ServiceDelivery",
-	[parameter(Mandatory=$False, ValueFromPipeline=$False)
-			HelpMessage = "git log statement")]
+	[parameter(Mandatory=$False, ValueFromPipeline=$False,
+		HelpMessage = "git log statement")]
 	[String]$logStmnt = " log --since=1.week",
+	[parameter(Mandatory=$False, ValueFromPipeline=$False,
+		HelpMessage = "Necessary Executable")]
 	[String]$gitRun = "git.exe",
 	[Parameter(Mandatory=$False)]
 	[System.Array]$gitRepos,
-	[String]$gitSep = ";",
+	[parameter(Mandatory=$False, ValueFromPipeline=$True,
+		HelpMessage = "String seperator, usage based on commit syntax")]
+	[String]$gitSep = ";" ,
+	[parameter(Mandatory=$False, ValueFromPipeline=$False,
+		HelpMessage = "Name of tab created in report file")]
 	[String]$wksTabName = (get-date -Format "MM.dd.yyyy"),
-	[String]$wksName = "C:\Users\vndtekjxk\OneDrive - Wegmans Food Markets, Inc\Documents\GitActivity.xlsx"
+	[parameter(Mandatory=$False, ValueFromPipeline=$False,
+		HelpMessage = "Directory to write report file")]
+		[ValidateScript({Test-Path $_ })]
+	[String]$wksName = "$env:USERPROFILE\Documents"
 )
 BEGIN {
 	Try {
 		Write-Verbose "[BEGIN]Getting locally available Respositories"
 		$gitRepos = Get-Childitem .git -Path c:\ -Recurse -Directory -Hidden -ErrorAction SilentlyContinue 
-		$gitRepos | select Parent, LastAccessTime, FullName
+		$gitRepos | select-Object -Property Parent, LastAccessTime, FullName
 	}
 	Catch {
 		Write-Error "No git Repositories Found"
@@ -75,7 +86,7 @@ BEGIN {
 	}
 	Try {
 		Write-Verbose "[BEGIN]Checking for git.exe in the PATH"
-		get-command -Name "git.exe" -ErrorAction Stop | out-Null
+		get-command -Name $gitRun -ErrorAction Stop | out-Null
 	}
 	Catch {
 		Write-Error "Unable to Access git command line; install or ensure you start this script from the root folder"

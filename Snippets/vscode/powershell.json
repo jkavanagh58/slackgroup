@@ -469,7 +469,7 @@
 		"Parameter Statement": {
 			"prefix": "paramStatement",
 			"body": [
-				"[parameter(Mandatory=$${1|True,False|}, ValueFromPipeline=${2|$True,$False|})]\r",
+				"[parameter(Mandatory=$${1|True,False|}, ValueFromPipeline=${2|$True,$False|})\r",
 				"\t\tHelpMessage = \"${3:HelpMessage}\")]\r",
 				"[${4:VariableType}]$${5:VariableName}"
 			],

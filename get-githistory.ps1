@@ -38,7 +38,11 @@
 #>
 [CmdletBinding()]
 Param (
+	[parameter(Mandatory=$False, ValueFromPipeline=$True),
+			HelpMessage = "Path to github repo for reporting on")]
 	[String]$repoPath = "Documents\github\ServiceDelivery",
+	[parameter(Mandatory=$False, ValueFromPipeline=$False)
+			HelpMessage = "git log statement")]
 	[String]$logStmnt = " log --since=1.week",
 	[String]$gitRun = "git.exe",
 	[Parameter(Mandatory=$False)]

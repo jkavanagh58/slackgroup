@@ -2,8 +2,10 @@
 .LINK https://p0w3rsh3ll.wordpress.com/2018/05/04/about-updating-inbox-powershell-modules/
     This is the code that influenced this code
 #>
-$modules = "pester", "packagemanagemen1t1", "PowerShellGet"
+$modules = "pester", "packagemanagement", "PowerShellGet"
 ForEach ($module in $modules){
+    # Inspect module first before wasting time updating it
+    
     # Step 1: Save locally
     Find-Module -Name $module -Repository PSGallery -Verbose | 
     Save-Module -Path  ~/Downloads -Verbose

@@ -1,0 +1,49 @@
+#Requires -RunAsAdministrator
+
+Function Install-VSCode {
+    # .LINK https://github.com/PowerShell/vscode-powershell
+    #   Source for install and additional information
+    # This is a very clean method but Invoke-Expression is bad
+    # iex (iwr https://git.io/vbxjj)
+    Install-Script Install-VSCode -Scope CurrentUser; Install-VSCode.ps1
+    If (!(get-command git -ErrorAction SilentlyContinue)){
+        Write-Host "It is suggested that you install " -ForegroundColor Yellow -NoNewline
+        Write-Host "git " -Foreground Red -NoNewline
+        Write-Host " before using VSCode" -ForegroundColor Yellow
+    }
+}
+Function Test-PackageProvider {
+    $providerList = "NuGet", "Chocolatey"
+    ForEach ($provider in $providerList ){
+        If (!(get-PackageProvider -Name $provider -ErrorAction SilentlyContinue)){
+            Try {
+                Install-PackageProvider -Name $provider
+            }
+            Catch {
+                "Unable to install {0} as a PackageProvider"
+                $Error[0].Exception.Message
+                Write-Error "Unable to continue"
+                Start-Sleep -Seconds 5
+                EXIT
+            }
+        }
+    }
+}
+Function Install-VSCodeExtension {
+    $extensionsPoSH = New-Object System.Collections.ArrayList
+    # Create the array of Extensions approved for base install
+    $extensionsPoSH.Add("ms-vscode.PowerShell")
+    $extensionsPoSH.Add("GrapeCity.gc-excelviewer")
+    $extensionsPoSH.Add("gerane.Theme-Blackboard")
+    $extensionsPoSH.Add("sidthesloth.html5-boilerplate")
+    $extensionsPoSH.Add("docsmsft.docs-markdown")
+    $extensionsPoSH.Add("fabiospampinato.vscode-todo-plus")
+    ForEach ($extension in $extensionsPoSH){
+        Try {
+            code --install-extension $extension
+        }
+        Catch {
+            $Error[0].Exception.Message
+        }
+    }
+}

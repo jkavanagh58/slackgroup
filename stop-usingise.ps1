@@ -1,6 +1,7 @@
 [CmdletBinding()]
 param(
-
+    [Parameter(Mandatory=$False,ValueFromPipeline=$True)]
+    [Switch]$IncludeAll
 )
 BEGIN {
     Function Install-VSCode {
@@ -38,4 +39,7 @@ PROCESS {
 END {
     
 }
-    
+}
+Function Install-VSCodeModules {
+
+}

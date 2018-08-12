@@ -1,3 +1,5 @@
+# Recommended Extensions for VSCode PowerShell
+
 | Extension Name                        |  Priority  | Comments                                                                             |
 |---------------------------------------|:----------:|--------------------------------------------------------------------------------------|
 | ms-vscode.PowerShell                  | 1          | Goes without saying                                                                  |
@@ -10,3 +12,7 @@
 | fabiospampinato.vscode-todo-plus      | 3          | Very nice TODO list Manager                                                          |
 | docsmsft.docs-markdown                | 1          | Very helpful when working in a Markdown file for documentation                       |
 | cyann.kixtart                         | ??         | Just because it was there                                                            |
+
+## Usage
+
+`code --install-extension <Extension Name>`

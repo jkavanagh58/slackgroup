@@ -41,5 +41,18 @@ END {
 }
 }
 Function Install-VSCodeModules {
-
+[CmdletBinding()]
+Param (
+    [Parameter(Mandatory=$False)]
+    [System.String]$extPattern
+)
+BEGIN{
+    $extPattern = "EditorServices*"
+}
+PROCESS {
+    Install-Module -Name $extPattern -Confirm:$false -Force
+}
+END {
+    Remove-Variable -Name extPattern
+}
 }

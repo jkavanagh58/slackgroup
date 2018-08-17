@@ -1,0 +1,27 @@
+# VSCode Install
+
+## Purpose
+
+This collection of code is intended to help System Admins and Engineers to start using Visual Studio as their editor.
+
+## References
+
+Install-VSCode.pse `install-script -Name Install-VSCode`
+This script has been made available in the PSGallery and current script in this repo uses it to provide flexible install options to include installing the PowerShell extension.
+
+## Plan
+
+### Create Easy to use process
+
+- [ ] Build indivual scripts\functions for Troubleshooting
+- [ ] Test each step
+- [ ] Generate list of suggested extensions
+- [ ] Generate list of PowerShell modules
+- [ ] Assemble into single script with command line options
+
+
+
+## NOTES
+
+As of June 2018 release there are two versions of VSCode (User and System). Currently researching the reasoning and best plan going forward.
+Current process will be installing the Stable version based on scope of this project and prospective targets for the process

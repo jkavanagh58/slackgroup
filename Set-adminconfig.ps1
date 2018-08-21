@@ -1,4 +1,5 @@
 Function Enable-RDPAccess {
+#Requires -RunAsAdministrator
 [CmdletBinding()]
 Param (
 
@@ -21,6 +22,7 @@ Param (
     set-ItemProperty @setItemPropertySplat
 }
 Function Enable-WinHyperV {
+#Requires -RunAsAdministrator
 [cmdletBinding()]
 Param (
 

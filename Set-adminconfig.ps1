@@ -1,12 +1,11 @@
 Function Enable-RDPAccess {
-#Requires -RunAsAdministrator
 [CmdletBinding()]
 Param (
 
 )
     # Enable RDP
     $setItemPropertySplat = @{
-        Path = 'HKLM:SystemCurrentControlSetControlTerminal Server'
+        Path = 'HKLM:System\CurrentControlSet\Control\Terminal Server'
         Name = "fDenyTSConnections"
         Value = 0
     }
@@ -15,7 +14,7 @@ Param (
     Enable-NetFirewallRule -DisplayGroup "Remote Desktop"
     # Enforce Secure Connections
     $setItemPropertySplat = @{
-        Path = 'HKLM:SystemCurrentControlSetControlTerminal ServerWinStationsRDP-Tcp'
+        Path = 'HKLM:System\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp'
         Name = "UserAuthentication"
         Value = 1
     }

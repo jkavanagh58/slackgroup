@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<plasterManifest
+	schemaVersion="1.1"
+	templateType="Project" xmlns="http://www.microsoft.com/schemas/PowerShell/Plaster/v1">
+	<metadata>
+		<name>JJK</name>
+		<id>dd02bf66-9960-4014-a6fc-f09d5387c189</id>
+		<version>1.0.0</version>
+		<title>JJK Module Template</title>
+		<description>Customized Manifest for creating Modules</description>
+		<author>Kavanagh</author>
+		<tags>Automation</tags>
+	</metadata>
+		<parameters>
+				<parameter name="ModuleFullName" type="text" prompt="Module author's name" />
+				<parameter name="ModuleName" type="text" prompt="Name of your module" />
+				<parameter name="ModuleDesc" type="text" prompt="Brief description on this module" />
+				<parameter name="Version" type="text" prompt="Initial module version" default="0.0.1" />
+				<parameter name="ModuleCompanyName" type="text" prompt="Company name" default='N/A' />
+				<parameter name="ModulePSVer" type="text" prompt="Minimum PowerShell host version" default="5.1" />
+				<parameter name="ModuleScripts" type="choice" prompt="Create a scripts folder for non function scripts?" default='1'>
+						<choice label="&amp;Yes" help="Creates a en-US folder within the module root" value="Yes" />
+						<choice label="&amp;No" help="Does not create a en-US folder within the module root" value="No" />
+				</parameter>
+		</parameters>
+	<content>
+		<message>&#10;&#10;Scaffolding your PowerShell Module...&#10;&#10;&#10;</message>
+
+				<newModuleManifest destination='${PLASTER_PARAM_ModuleName}.psd1'
+													 author = '$PLASTER_PARAM_ModuleFullName'
+													 moduleVersion='$PLASTER_PARAM_Version'
+													 rootModule='${PLASTER_PARAM_ModuleName}.psm1'
+													 companyName='$PLASTER_PARAM_ModuleCompanyName'
+													 description='$PLASTER_PARAM_ModuleDesc'
+													 powerShellVersion='$PLASTER_PARAM_ModulePSVer'
+													 encoding='UTF8-NoBOM'
+													 openInEditor="true"/>
+				<file source='Module.psm1'
+							destination='${PLASTER_PARAM_ModuleName}.psm1'
+							openInEditor="true"/>
+				<message>Your new PowerShell module project '$PLASTER_PARAM_ModuleName' has been created.</message>
+	</content>
+</plasterManifest>

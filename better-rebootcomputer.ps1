@@ -1,3 +1,4 @@
+#Requires -Version 5
 <#
 .SYNOPSIS
     Better way to reboot computers

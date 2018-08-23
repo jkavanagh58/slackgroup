@@ -94,53 +94,6 @@ End {
 }
 } # Unlock-anAccount function end
 
-
-
-
-# ----Testing PowerShell Snippets -----
-$obj = [pscustomobject]@{
-	FieldName = FieldValue;
-}
-
-# Test easy snippet maker
-Try {
-	# SOME CODE
-}
-Catch{
-	Write-Warning -Message "Some informative message to user"
-}
-Begin {
-	Write-Verbose "[$((Get-Date).TimeofDay) BEGIN] Starting $($mycommand.myinvocation)"
-}
-
-
-# /* Below here is where I am testing work with snippets
-# TODO: Library any snippets added
-
-[Parameter(Mandatory=$true,
-                   ValueFromPipeline=$true,
-                   ValueFromPipelineByPropertyName=$true,
-                   HelpMessage = "Just a test")]
-        [String]$2:parametername
-
-		# Let's try it
-		# help message and parametername are tab stops
-Param(
-	[Parameter(Mandatory=$true,
-		ValueFromPipeline=$true,
-		ValueFromPipelineByPropertyName=$true,
-		HelpMessage = "Test message")]
-		[String]$varParam
-)
-
-# Custom object Snippet
-# Prefix "pscustom"
-$obj = [pscustomobject]@{
-	FieldName = FieldValue;
-}
-
-# Param with validation script
-# Prefix "manparamvalidate"
 Param(
 	[Parameter(Mandatory = $true,
 		ValueFromPipeline = $true,

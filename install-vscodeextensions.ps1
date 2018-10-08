@@ -32,6 +32,9 @@
 [CmdletBinding(SupportsShouldProcess=$true,ConfirmImpact='Low')]
 Param(
 	[array]$extArray,
+	[parameter(Mandatory=$False, ValueFromPipeline=$False,
+			HelpMessage = "List of modules to install")]
+	[array]$modsArray,
 	[String]$curExt,
 	$isRunning = (get-process).Name -contains "code"
 )
@@ -70,6 +73,10 @@ $extArray = @(
 	"sidthesloth.html5-boilerplate",
 	"DougFinke.vscode-PSStackoverflow"
 )
+$modsArray = @(
+	"EditorServicesCommandSuite",
+	"EditorServicesProcess"
+)
 }
 Process {
 
@@ -81,6 +88,11 @@ If ($isRunning){
 	Catch {
 		"Unable to close Visual Studio Code"
 		"In order for your workspace to show the new extension restart Visual Studio Code"
+	}
+}
+ForEach ($codemod in $modsArray){
+	if (!(get-installedmodule -Name $codemod -ErrorAction SilentlyContinue)){
+		Install-Module -Name $codemod -Confirm:$false -verbose -force
 	}
 }
 $curExt = & code --list-extensions

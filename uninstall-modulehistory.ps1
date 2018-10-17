@@ -38,7 +38,7 @@ PROCESS {
     }
 }
 END {
-    Remove-Variable -Name curModule, modInstalled, modInfo, curModule
+    Remove-Variable -Name curModule, modInstalled, modInfo
     [System.GC]::Collect()
     
 }

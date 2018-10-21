@@ -1,51 +1,31 @@
 Function Prompt {
 	$admRole = ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)
-    If ($admRole) {
-		$host.ui.RawUI.WindowTitle = "Admin Console"
-		Write-Host "I " -NoNewline; Write-Host "$([char]9829) " -ForegroundColor Red -NoNewline; Write-Host "PS # " -NoNewline
-		return ' '
-	}
-	Else {
-		$host.ui.RawUI.WindowTitle = "Windows PowerShell"
-		Write-Host "I " -NoNewline; Write-Host "$([char]9829) " -ForegroundColor Red -NoNewline; Write-Host " PS >_ " -NoNewline
-		return ' '
-	}
-}
-Function backup-hostsfile {
-[CmdletBinding()]
-Param(
-	[parameter(Mandatory=$False, ValueFromPipeline=$True,
-		HelpMessage = "Source File")]
-	[System.String]$hostsSource = "$env:windir\system32\drivers\etc\hosts",
-	[parameter(Mandatory=$False, ValueFromPipeline=$True,
-		HelpMessage = "Cloud location for hosts file")]
-	[System.String]$hostsBackup = "C:\Users\johnk\OneDrive\Documents\Tech\Tools\HomeNet"
-)
-BEGIN {
-	# Need to break out for each variable...
-	If ((Test-Path $hostsSource -erroraction silentlycontinue) -AND (Test-Path $hostsBackup -ErrorAction SilentlyContinue) ){
-		"Ready to backup hosts file"
-	}
-	Else {
-		Write-Error "Please check your source and Cloud mapping"
-		Exit
+	If ($psversiontable.psversion.Major -lt 6){
+		If ($admRole) {
+			$host.ui.RawUI.WindowTitle = "KavanaghTech (Admin)"
+			Write-Host "I " -NoNewline; Write-Host "$([char]9829) " -ForegroundColor Red -NoNewline; Write-Host "PS # " -NoNewline
+			return ' '
 		}
-}
-PROCESS {
-	Try {
-		Copy-Item $hostsSource -Destination $hostsBackup -Force
+		Else {
+			$host.ui.RawUI.WindowTitle = "KavanaghTech"
+			Write-Host "I " -NoNewline; Write-Host "$([char]9829) " -ForegroundColor Red -NoNewline; Write-Host " PS >_ " -NoNewline
+			return ' '
+		}
 	}
-	Catch {
-			"Unable to backup your hosts file"
-			$Error[0].Exception.Message
+	ElseIf ($psversiontable.psversion.Major -ge 6){
+		If ($admrole){
+			$host.ui.RawUI.WindowTitle = "KavanaghTech (Admin)"
+			Write-Host "I " -NoNewline; Write-Host "$([char]9829) " -ForegroundColor Red -NoNewline; Write-Host "sudo # " -NoNewline
+			return ' '
+		}
+		Else {
+			$host.ui.RawUI.WindowTitle = "KavanaghTech (Admin)"
+			Write-Host "I " -NoNewline; Write-Host "$([char]9829) " -ForegroundColor Red -NoNewline; Write-Host "Core >_ " -NoNewline
+			return ' '
+		}
 	}
 }
-END {
-	Remove-Variable -Name hostsSource, hostsBackup
-	[System.GC]::Collect()	 
-}
-}
-function simple-countdown {
+function simple-countdown{
 [CmdletBinding()]
 Param(
 	$curdate = (Get-Date),
@@ -54,8 +34,8 @@ Param(
 	$xmas = (Get-Date $curxmas),
 	$tildays = ($xmas - $curdate).Days
 )
-BEGIN{}
-PROCESS{
+Begin{}
+Process{
 if ($curdate.month -eq 12) {
 	switch ($curdate.day)
 	{
@@ -74,7 +54,7 @@ if ($curdate.month -eq 12) {
 else {Write-Host $tildays -ForegroundColor Red -nonewline
 	Write-Host " Days until Christmas" -ForegroundColor Yellow}
 }
-END {
+End {
 	# Just clean up the variables created
 	Remove-Variable -Name curdate, curxmas, curYear, tildays, xmas
 }
@@ -123,29 +103,64 @@ Function Get-QOTD {
 		Write-Warning $msg
 	}
 	#only process if we got a valid quote response
-	if ($quote.description) {
+	if ($quote.description)
+	{
 		Write-Verbose "$(Get-Date) Processing $($quote.OrigLink)"
 		#write a quote string to the pipeline
 		"{0} - {1}" -f $quote.Description,$quote.Title
 	}
-	else {
+	else
+	{
 		Write-Warning "Failed to get expected QOTD data from $url."
 	}
 	 Write-Verbose "$(Get-Date) Ending Get-QOTD"
 } #end Get-QOTD
-#Region Where it begins
 Set-Alias -name "qotd" -Value Get-QOTD
+# Load credential management functions
+. C:\etc\scripts\store-admcreds.ps1
 # Load personal functions from external script
 . C:\etc\scripts\system-functions.ps1
+# Run cmds
+$admcreds = set-adm
 import-module psreadline
 simple-countdown
-$varSeparator = "=" * 62
-$varSeparator
-get-qotd
-$varSeparator
+qotd
+"================================================"
 #get-weather -zipCode 44011
 "------------------------------------------------"
 "`tRunning PowerShell $($PSVersionTable.PSVersion)"
 "------------------------------------------------"
-""
-#EndRegion
+
+
+# SIG # Begin signature block
+# MIIFdgYJKoZIhvcNAQcCoIIFZzCCBWMCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
+# gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU6anxXNCmreA7rX8KbfdD7348
+# DwGgggMOMIIDCjCCAfKgAwIBAgIQXYb1moDIJY5FrtZ1AHC1WjANBgkqhkiG9w0B
+# AQUFADAdMRswGQYDVQQDDBJTZWN1cml0eURlcGFydG1lbnQwHhcNMTgwNTAyMTIy
+# NDQ5WhcNMjMwNTAyMTIzNDQ5WjAdMRswGQYDVQQDDBJTZWN1cml0eURlcGFydG1l
+# bnQwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQCZRBiw8TofNwNueBUN
+# DTzPuQfXc25qEptYFAOYV5Ii3Zw83EGVoxXquidN03KM44KQD3eWDpbaCDx0l97U
+# 7bNMZSuSZndgekblUI21EeXPoYsfqM4Q9Ewab0+gE1qbc8Z1wwQRRHvel5pgLnrO
+# adm16E9b6eE0RKGoK81Qjpp6zM14/tJ6ieValvUDbStoAcjporvao8/maJMUlCH2
+# 9jdHqLzo8D+jTKLNXza1hjDrly+drSjXSp1wXVTvfmqLDLfTTG6nJDrkianXL4cf
+# GEamCDen/VdloBVRPJM+ifGd7CBt0ubkw28twfB0Ggo4Y2AR54DRmxhqeNMWgjuG
+# GUFBAgMBAAGjRjBEMA4GA1UdDwEB/wQEAwIHgDATBgNVHSUEDDAKBggrBgEFBQcD
+# AzAdBgNVHQ4EFgQU5l8CWDBVYathbXCOsFrTy8b1lYIwDQYJKoZIhvcNAQEFBQAD
+# ggEBACfA56qtFHE6RHK5cFGljYdiB+tU25LxL3MZFTRUeUctDQ31vv7vOO//Zyek
+# aE768oz/CzGI4u6USVVWRKFhU+99VaLFAs/wDn4o+1wCwk+81gaf8Dn8sndm29eL
+# KyHAZzR8/tXbz84+KgD4SZ8HGKYu6wSVJ4RbRUGvxiOYyrjl7kVPnyg7hE+zgXA1
+# 1u52sfKkyITxs8uujwL/hMGSb2YfMi4xA6Ik8kzsJ5rPGar1FRRZd83yTljp0UT+
+# CRP4jD2c+lPwq6h+/h6XIT61UY0Ym51Dy6W2hwkkxwXhqAVQXrAlf60p3xbh7Gxj
+# QORXHMyrzBGivtec6adYYf0JWbwxggHSMIIBzgIBATAxMB0xGzAZBgNVBAMMElNl
+# Y3VyaXR5RGVwYXJ0bWVudAIQXYb1moDIJY5FrtZ1AHC1WjAJBgUrDgMCGgUAoHgw
+# GAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZBgkqhkiG9w0BCQMxDAYKKwYBBAGC
+# NwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYBBAGCNwIBFTAjBgkqhkiG9w0BCQQx
+# FgQUNL+DBunJM+jA70ITjyFMQzeDPNUwDQYJKoZIhvcNAQEBBQAEggEAgpYWF8Ey
+# rfHNJeYMz2sKrL58wR35KaJ4CFN7I9Jp2stt837sdHhr9JFNwXUX7yHuXjskepj5
+# OQFdIDvpxnTCkYjB+wmbbCSKrXhKGH0vFhAhLjtjqtp6hpepZ5OveeH0YIFPclMC
+# wzlLUvnpydYsxX19r1tIgpyo/vh+HZBz1ukUW1ZE3jNl7vFfzhinS6ydlyUlStyR
+# EOGr3JI62Vhs1QWo34M8uSrM7V3tWFEtZPa6VT0tOV2I8l/Vo3ZYK0NIaV/uzi2A
+# cLJ9TmB2zIrB3sEs83XvgPn2Vt9quah6fTJmfCpi4cshNxNBTwb3q3XGdn5Gzb0p
+# EJR1YTeoPaeG/w==
+# SIG # End signature block

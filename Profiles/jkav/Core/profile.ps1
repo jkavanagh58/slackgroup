@@ -25,3 +25,6 @@ Function Prompt {
 		}
 	}
 }
+<# 
+	TODO: If elevated check for WindowsPSModulePath and WindowsCompatability modules
+#>

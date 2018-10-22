@@ -117,12 +117,12 @@ Function Get-QOTD {
 } #end Get-QOTD
 Set-Alias -name "qotd" -Value Get-QOTD
 # Load credential management functions
-. C:\etc\scripts\store-admcreds.ps1
+#. C:\etc\scripts\store-admcreds.ps1
 # Load personal functions from external script
-. C:\etc\scripts\system-functions.ps1
+#. C:\etc\scripts\system-functions.ps1
 # Run cmds
-$admcreds = set-adm
-import-module psreadline
+#$admcreds = set-adm
+#import-module psreadline
 simple-countdown
 qotd
 "================================================"

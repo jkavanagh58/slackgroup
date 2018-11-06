@@ -1,0 +1,18 @@
+Simple List of Todo Items - Please add or update 
+
+Fix get-githistory Script:
+    ☐ Address ensure git is available
+    ☐ Address being in the Repo folder
+    ☐ Feature - Check for available repos and run all or select
+
+VSCode:
+    ☐ Update powershell.json based on current working copy @high
+    ☐ Fix download process, current TLS issue
+        Create a download only cert?
+        Use gist versus repo copy?
+    Settings.json ?
+
+Tips:
+
+OneLiners:
+    

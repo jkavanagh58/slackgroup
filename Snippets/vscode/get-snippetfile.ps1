@@ -15,7 +15,8 @@ BEGIN {
 }
 PROCESS {
     Try {
-        Invoke-WebRequest -Uri $snippetURL -OutFile $snippetFile -PassThru
+        [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.SecurityProtocolType]::Tls12
+        $snip = Invoke-WebRequest -Uri $snippetURL -OutFile $snippetFile -PassThru
     }
     Catch {
         $Error[0].Exception.Message

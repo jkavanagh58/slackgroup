@@ -2,7 +2,7 @@ Simple List of Todo Items - Please add or update
 
 Fix get-githistory Script:
     ☐ Address ensure git is available
-    ☐ Address being in the Repo folder
+    ☐ Address being in the Repo folder - will cheat by looking for .gitignore file
     ☐ Feature - Check for available repos and run all or select
 
 VSCode:

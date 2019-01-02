@@ -1,4 +1,4 @@
-#Requires -Modules ImportExcel, PSWriteExcel
+#Requires -Modules ImportExcel
 <#
 .SYNOPSIS
     Short description

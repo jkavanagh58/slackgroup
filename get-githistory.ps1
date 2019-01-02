@@ -63,7 +63,7 @@ Param (
 	[String]$wksName = "$env:USERPROFILE\Documents"
 )
 BEGIN {
-	Try {
+	<#Try {
 		Write-Verbose "[BEGIN]Getting locally available Respositories"
 		# List of local drives
 		$ldrives = (Get-CimInstance -ClassName Win32_LogicalDisk -Filter "DriveType = 3").ForEach{Join-Path $_.DeviceID -ChildPath "\"}
@@ -71,11 +71,12 @@ BEGIN {
 		$gitRepos | select-Object -Property Parent, LastAccessTime, FullName
 	}
 	Catch {
-		Write-Error "No git Repositories Found"
+		Write-Error "No git Repositories Found" -ErrorAction Stop
 		Start-Sleep -Seconds 3
 		Exit
-	}
+	}#>
 	$Report = New-Object System.Collections.ArrayList
+	<#
 	Write-Verbose "[BEGIN]Creating File Path for accessing the Repo"
 	$repoHome = Join-Path -Path $env:USERPROFILE -ChildPath $repoPath
 	If (Test-Path $repoHome) {
@@ -85,6 +86,16 @@ BEGIN {
 	Else {
 		Write-Error "[BEGIN]Path to repository does not exist"
 		Start-Sleep -Seconds 3
+	}
+	#>
+	If (Test-Path .gitignore -PathType File){
+		# gitignore file found - poor man's method of verifying in repo path
+		$repoName = (get-item .).Name
+		$xlsxFile = $wksName + "\" + $repoName
+		"Git History Report will be run for {0}" -f $repoName
+	}
+	Else {
+		Write-Error -Message "Your working directory must be a git base folder" -ErrorAction Stop
 	}
 	Try {
 		Write-Verbose "[BEGIN]Checking for git.exe in the PATH"
@@ -121,7 +132,7 @@ PROCESS {
 	$exportExcelSplat = @{
 		Path          = $wksName
 		AutoSize      = $true
-		WorkSheetname = $wksTabName
+		WorkSheetname = $xlsxFile
 	}
 	if ((Get-ExcelSheetInfo -Path $wksName).Name -eq $wksTabName) {
 		# Clear current worksheet

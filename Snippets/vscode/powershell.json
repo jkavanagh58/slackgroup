@@ -8,7 +8,7 @@
 	},
 	// Creates a Parameter in Param statement to ensure operator enters a valid Day of Week
 	// 04.29.2018 JJK: Added
-	"Day of Week Validated Parameter":{
+	"Day of Week Validated Parameter": {
 		"prefix": "DOWParam",
 		"body": [
 			"[Parameter(Mandatory = $$true,\r",
@@ -359,12 +359,12 @@
 	"Mandatory Parameter with Validation Set": {
 		"prefix": "manparamvalidateset",
 		"body": [
-				"[Parameter(Mandatory = $$true,\r",
-				"\tValueFromPipeline = $$true,\r",
-				"\tHelpMessage = \"Enter Help Message Here\")]\r",
-				"[ValidateSet(${2:ValidDataSet})]\r",
-				"[System.String]${3:paramName}\r"
-				],
+			"[Parameter(Mandatory = $$true,\r",
+			"\tValueFromPipeline = $$true,\r",
+			"\tHelpMessage = \"Enter Help Message Here\")]\r",
+			"[ValidateSet(${2:ValidDataSet})]\r",
+			"[System.String]${3:paramName}\r"
+		],
 		"description": "Mandatory Parameter of a String with set of values to validate against."
 	},
 	"Standard Logging": {
@@ -403,85 +403,107 @@
 		],
 		"description": "Splatted send mail message"
 	},
-		// JJK: Updated 04.28.2018
-		"General Splat": {
-            "prefix": "splatsnippet",
-            "body": [
-                "${1:\\$varname} = [pscustomobject]@{\r",
-                "\t$Field = $fieldval",
-                "}"
-            ],
-            "description": "General Splatting Structure"
-        },
-		// JJK: Added 04.28.2018 
-        "Initiate Garbage Collection": {
-            "prefix": "freememory",
-            "body":[
-                "Remove-Variable -Name ${1:variablestoberemoved}\r",
-                "[System.GC]::Collect()\r",
-                "$0"
-            ],
-            "description": "Free up memory when script completes"
-        },
-		// JJK: Added 04.28.2018 
-        "Count Files in Folder and Subfolders": {
-            "prefix": "filecount",
-            "body": ["${1:\\$paramName} = (Get-ChildItem -Path ${2:ProvideAPath} | Measure-Object).Count\r"],
-            "description": "Performs a count on all files in a folder, including subfolders"
-        },
-        // Can't break some habits
-        // Replace the alpha character "R" in my version for EST with the appropriate Time Zone
-        // https://www.timetemperature.com/abbreviations/military-time-zone-codes.shtml
-        "LogFile Compact Mil DTG": {
-            "prefix": "mildtg",
-            "body": ["Get-Date -UFormat '%d%H%MR%b%y'"],
-            "description": "Uses Get-Date with UFormat to specify Military DTG"
-        },
-			// Adds verbose messaging in the BEGIN block
-		"Add Verbose in Begin block": {
-			"prefix": "verbBEGIN",
-			"body": ["Write-Verbose -Message \"[BEGIN]${1:Message}\""],
-			"description": "Add verbose messaging for activity in the BEGIN block"
-		},
-
-		// Adds verbose messaging in the PROCESS block
-		"Add Verbose in Process block": {
-			"prefix": "verbPROCESS",
-			"body": ["Write-Verbose -Message \"[PROCESS]${1:Message}\""],
-			"description": "Add verbose messaging for activity in the PROCESS block"
-		},
-
-		// Adds verbose messaging in the END block
-		"Add Verbose in END": {
-			"prefix": "verbEND",
-			"body": ["Write-Verbose -Message \"[END]${1:Message}\""],
-			"description": "Add verbose messaging for activity in the END section"
-		},
-
-		// Adds error messaging
-		"Add Error Message": {
-			"prefix": "errMessage",
-			"body": ["Write-Error -Message \"${1:Message}\""],
-			"description": "Add verbose messaging for activity in the BEGIN section"
-		},
-
-		// General Parameter Definition
-		"Parameter Statement": {
-			"prefix": "paramStatement",
-			"body": [
-				"[parameter(Mandatory=$${1|True,False|}, ValueFromPipeline=${2|$True,$False|})\r",
-				"\t\tHelpMessage = \"${3:HelpMessage}\")]\r",
-				"[${4:VariableType}]$${5:VariableName}"
-			],
-			"description": "Scaffold for Parameter creation"
-		},
-		"swith Parameter Statement": {
-			"prefix": "paramSwitchStatement",
-			"body": [
-				"[parameter(Mandatory=$${1|True,False|}, ValueFromPipeline=${2|$True,$False|})\r",
-				"\t\tHelpMessage = \"${3:HelpMessage}\")]\r",
-				"[Switch]$${4:VariableName}"
-			],
-			"description": "Scaffold for Parameter creation"
-		}
+	// JJK: Updated 04.28.2018
+	"General Splat": {
+		"prefix": "splatsnippet",
+		"body": [
+			"${1:\\$varname} = [pscustomobject]@{\r",
+			"\t$Field = $fieldval",
+			"}"
+		],
+		"description": "General Splatting Structure"
+	},
+	// JJK: Added 04.28.2018
+	"Initiate Garbage Collection": {
+		"prefix": "freememory",
+		"body": [
+			"Remove-Variable -Name ${1:variablestoberemoved}\r",
+			"[System.GC]::Collect()\r",
+			"$0"
+		],
+		"description": "Free up memory when script completes"
+	},
+	// JJK: Added 04.28.2018
+	"Count Files in Folder and Subfolders": {
+		"prefix": "filecount",
+		"body": [
+			"${1:\\$paramName} = (Get-ChildItem -Path ${2:ProvideAPath} | Measure-Object).Count\r"
+		],
+		"description": "Performs a count on all files in a folder, including subfolders"
+	},
+	// Can't break some habits
+	// Replace the alpha character "R" in my version for EST with the appropriate Time Zone
+	// https://www.timetemperature.com/abbreviations/military-time-zone-codes.shtml
+	"LogFile Compact Mil DTG": {
+		"prefix": "mildtg",
+		"body": [
+			"Get-Date -UFormat '%d%H%MR%b%y'"
+		],
+		"description": "Uses Get-Date with UFormat to specify Military DTG"
+	},
+	// Adds verbose messaging in the BEGIN block
+	"Add Verbose in Begin block": {
+		"prefix": "verbBEGIN",
+		"body": [
+			"Write-Verbose -Message \"[BEGIN]${1:Message}\""
+		],
+		"description": "Add verbose messaging for activity in the BEGIN block"
+	},
+	// Adds verbose messaging in the PROCESS block
+	"Add Verbose in Process block": {
+		"prefix": "verbPROCESS",
+		"body": [
+			"Write-Verbose -Message \"[PROCESS]${1:Message}\""
+		],
+		"description": "Add verbose messaging for activity in the PROCESS block"
+	},
+	// Adds verbose messaging in the END block
+	"Add Verbose in END": {
+		"prefix": "verbEND",
+		"body": [
+			"Write-Verbose -Message \"[END]${1:Message}\""
+		],
+		"description": "Add verbose messaging for activity in the END section"
+	},
+	// Adds error messaging
+	"Add Error Message": {
+		"prefix": "errMessage",
+		"body": [
+			"Write-Error -Message \"${1:Message}\""
+		],
+		"description": "Add verbose messaging for activity in the BEGIN section"
+	},
+	// General Parameter Definition
+	"Parameter Statement": {
+		"prefix": "paramStatement",
+		"body": [
+			"[parameter(Mandatory=$${1|True,False|}, ValueFromPipeline=${2|$True,$False|})\r",
+			"\t\tHelpMessage = \"${3:HelpMessage}\")]\r",
+			"[${4:VariableType}]$${5:VariableName}"
+		],
+		"description": "Scaffold for Parameter creation"
+	},
+	"swith Parameter Statement": {
+		"prefix": "paramSwitchStatement",
+		"body": [
+			"[parameter(Mandatory=$${1|True,False|}, ValueFromPipeline=${2|$True,$False|})\r",
+			"\t\tHelpMessage = \"${3:HelpMessage}\")]\r",
+			"[Switch]$${4:VariableName}"
+		],
+		"description": "Scaffold for Parameter creation"
+	},
+	"Begin Process End Block": {
+		"prefix": "BeginProcessEnd",
+		"body": [
+			"BEGIN {\r",
+			"\t# Start Begin Block\r",
+			"}\r",
+			"PROCESS {\r",
+			"\t# Start Process Block\r",
+			"}\r",
+			"END {\r",
+			"\t# Start End Block\r",
+			"}\r"
+		]
+	}
 }

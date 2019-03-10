@@ -32,6 +32,7 @@ PROCESS {
     } Until ($weekCounter -eq $stopPoint)
 }
 END {
+    # Need to look at this a little closer
     #Remove-Variable -Name workingset, weekcounter, weeklist, 1stDay, lastDay -ErrorAction SilentlyContinue
     [System.GC]::Collect()
 }

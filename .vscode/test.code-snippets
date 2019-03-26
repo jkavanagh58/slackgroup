@@ -15,11 +15,10 @@
 	// 	],
 	// 	"description": "Log output to console"
 	// }
-	{
-		"Repo based snippet file": {
-			"scope": "powershell",
-			"prefix": "grouponly",
-			"body": ["# Just testing\r"],
-			"description": "Folder/Repo based snippet file"
-		}
+	"Repo based snippet file": {
+		"scope": "powershell",
+		"prefix": "grouponly",
+		"body": ["# Just testing\r"],
+		"description": "Folder/Repo based snippet file"
+	}
 }

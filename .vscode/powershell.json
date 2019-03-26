@@ -1,0 +1,7 @@
+{
+    "Test Workspace based snippets": {
+        "prefix": "grouponly",
+        "body": ["# This worked\r"],
+        "description": "Snippet file in .vscode of repo"
+    }
+}

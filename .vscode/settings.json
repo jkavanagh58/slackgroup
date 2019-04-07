@@ -1,3 +1,5 @@
 {
-    "python.pythonPath": "d:\\Users\\johnk\\Anaconda3\\python.exe"
+    "python.pythonPath": "d:\\Users\\johnk\\Anaconda3\\python.exe",
+    "git.autofetch": true,
+    "git.enableSmartCommit": true
 }

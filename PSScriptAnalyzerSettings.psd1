@@ -30,13 +30,14 @@
     #    version 6.0.0-alpha, on Linux.
     #    PSUseCompatibleCmdlets = @{Compatibility = @("core-6.0.0-alpha-linux")}
     #}
-    PSAvoidUsingCmdletAliases = @{Whitelist = @('where')}
     IncludeDefaultRules = $true
     # Verify Module is installed and the correct path
     # Path to module depends on how installed - this case assumes -Scope AllUsers
     CustomRulePath = "C:\\Program Files\\WindowsPowerShell\\Modules\\InjectionHunter\\1.0.0\\InjectionHunter.psd1"
 }
 Rules = @{
+    PSAvoidUsingCmdletAliases = @{Whitelist = @('where')}
+
     PSPlaceOpenBrace = @{
         Enable             = $true
         OnSameLine         = $true

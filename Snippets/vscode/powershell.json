@@ -505,5 +505,15 @@
 			"\t# Start End Block\r",
 			"}\r"
 		]
-	}
+	},
+	
+	"Pester - Minimal": {
+            "prefix": "pestermin".
+            "body": [
+                "Describe '${Description}' {\r",
+                "\t\r",
+                "}"
+            ],
+            "Description": "Basic Pester Test"
+        }
 }

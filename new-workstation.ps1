@@ -36,7 +36,7 @@ Param(
         				Get-ItemProperty -name Version -EA SilentlyContinue | 
         				Measure-Object -Property Version -Maximum).Maximum
 )
-Begin {
+BEGIN {
 	$modules = @(
 		"ImportExcel",
 		"psreadline",
@@ -59,7 +59,7 @@ Begin {
 	"#------------------------------------------------------------------------------------------------------#"
 	""
 }
-Process {
+PROCESS {
 	switch ([environment]::OSVersion.Version) {
 		-eq 10 { If ($psversion.Major -eq 5 -AND $psversion.Minor -eq 1){"Good to go"}Else{"The most current version of PowerShell is 5.1"} }
 		Default {}
@@ -106,4 +106,9 @@ Process {
 	. C:\etc\scripts\install-adpowershell.ps1
 	# Customize Visual Studio 
 	. c:\etc\scripts\install-vscodeextensions.ps1
+	# Enable WSL
+	Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux
+}
+END {
+	
 }

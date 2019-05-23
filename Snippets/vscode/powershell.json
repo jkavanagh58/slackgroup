@@ -6,8 +6,7 @@
 		],
 		"description": "Switch condition statement"
 	},
-	// Creates a Parameter in Param statement to ensure operator enters a valid Day of Week
-	// 04.29.2018 JJK: Added
+	
 	"Day of Week Validated Parameter": {
 		"prefix": "DOWParam",
 		"body": [
@@ -313,9 +312,9 @@
 			".NOTES\r",
 			"\t===========================================================================\r",
 			"\tCreated with:\tVisual Studio Code\r",
-			"\tCreated on:\t\t$datecreated\r",
+			"\tCreated on:\t\t$CURRENT_YEAR-$CURRENT_MONTH-$CURRENT_DATE $CURRENT_HOUR:$CURRENT_MINUTE:$CURRENT_SECOND\r",
 			"\tCreated by:\t\tAuthor/Developer Name\r",
-			"\tOrganization:\tTekSystems\r",
+			"\tOrganization:\t$CompanyOrganization\r",
 			"\tFilename:\t\t$TM_FILENAME\r",
 			"\t===========================================================================\r",
 			"\t$date $initials: Enter first comment here\r",
@@ -403,7 +402,7 @@
 		],
 		"description": "Splatted send mail message"
 	},
-	// JJK: Updated 04.28.2018
+	
 	"General Splat": {
 		"prefix": "splatsnippet",
 		"body": [
@@ -413,7 +412,7 @@
 		],
 		"description": "General Splatting Structure"
 	},
-	// JJK: Added 04.28.2018
+	
 	"Initiate Garbage Collection": {
 		"prefix": "freememory",
 		"body": [
@@ -423,7 +422,7 @@
 		],
 		"description": "Free up memory when script completes"
 	},
-	// JJK: Added 04.28.2018
+	
 	"Count Files in Folder and Subfolders": {
 		"prefix": "filecount",
 		"body": [
@@ -431,9 +430,7 @@
 		],
 		"description": "Performs a count on all files in a folder, including subfolders"
 	},
-	// Can't break some habits
-	// Replace the alpha character "R" in my version for EST with the appropriate Time Zone
-	// https://www.timetemperature.com/abbreviations/military-time-zone-codes.shtml
+	
 	"LogFile Compact Mil DTG": {
 		"prefix": "mildtg",
 		"body": [
@@ -441,7 +438,7 @@
 		],
 		"description": "Uses Get-Date with UFormat to specify Military DTG"
 	},
-	// Adds verbose messaging in the BEGIN block
+	
 	"Add Verbose in Begin block": {
 		"prefix": "verbBEGIN",
 		"body": [
@@ -449,7 +446,7 @@
 		],
 		"description": "Add verbose messaging for activity in the BEGIN block"
 	},
-	// Adds verbose messaging in the PROCESS block
+	
 	"Add Verbose in Process block": {
 		"prefix": "verbPROCESS",
 		"body": [
@@ -457,7 +454,7 @@
 		],
 		"description": "Add verbose messaging for activity in the PROCESS block"
 	},
-	// Adds verbose messaging in the END block
+	
 	"Add Verbose in END": {
 		"prefix": "verbEND",
 		"body": [
@@ -465,7 +462,7 @@
 		],
 		"description": "Add verbose messaging for activity in the END section"
 	},
-	// Adds error messaging
+	
 	"Add Error Message": {
 		"prefix": "errMessage",
 		"body": [
@@ -473,7 +470,7 @@
 		],
 		"description": "Add verbose messaging for activity in the BEGIN section"
 	},
-	// General Parameter Definition
+	
 	"Parameter Statement": {
 		"prefix": "paramStatement",
 		"body": [
@@ -508,7 +505,7 @@
 	},
 	
 	"Pester - Minimal": {
-            "prefix": "pestermin".
+            "prefix": "pestermin",
             "body": [
                 "Describe '${Description}' {\r",
                 "\t\r",

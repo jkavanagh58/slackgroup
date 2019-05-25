@@ -37,6 +37,7 @@
 		],
 		"description": "Skeleton for adding a PowerShell Custom Object"
 	},
+	
 	"Condition double quoted string statement": {
 		"prefix": "conddqstr",
 		"body": [
@@ -480,6 +481,7 @@
 		],
 		"description": "Scaffold for Parameter creation"
 	},
+
 	"swith Parameter Statement": {
 		"prefix": "paramSwitchStatement",
 		"body": [
@@ -487,7 +489,7 @@
 			"\t\tHelpMessage = \"${3:HelpMessage}\")]\r",
 			"[Switch]$${4:VariableName}"
 		],
-		"description": "Scaffold for Parameter creation"
+		"description": "Scaffold for Switch Parameter creation"
 	},
 	"Begin Process End Block": {
 		"prefix": "BeginProcessEnd",

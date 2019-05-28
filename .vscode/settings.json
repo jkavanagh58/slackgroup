@@ -3,6 +3,7 @@
     "git.autofetch": true,
     "git.enableSmartCommit": true,
     "editor.minimap.enabled": false,
-    "powershell.scriptAnalysis.settingsPath": "C:\\Users\\johnk\\Documents\\GitHub\\slackgroup\\PSSA\\PSScriptAnalyzerSettings.psd1",
-    "files.defaultLanguage": "powershell"
+    "files.defaultLanguage": "powershell",
+    "powershell.codeFormatting.pipelineIndentationStyle": "IncreaseIndentationForFirstPipeline",
+    "powershell.codeFormatting.useCorrectCasing": true
 }

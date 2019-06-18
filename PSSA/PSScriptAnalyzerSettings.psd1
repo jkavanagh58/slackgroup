@@ -30,72 +30,84 @@
     #    version 6.0.0-alpha, on Linux.
     #    PSUseCompatibleCmdlets = @{Compatibility = @("core-6.0.0-alpha-linux")}
     #}
-    #PSAvoidUsingCmdletAliases = @{Whitelist = @('where') }
-    IncludeDefaultRules = $true
+    IncludeDefaultRules = $false
+    IncludeRules        = @(
+        'PSAvoidUsingCmdletAliases',
+        'PSPlaceOpenBrace',
+        'PSPlaceCloseBrace',
+        'PSUseConsistentWhitespace',
+        'PSUseConsistentIndentation',
+        'PSAlignAssignmentStatement',
+        'PSUseCompatibleSyntax',
+        'PSUseCompatibleCommands',
+        'PSUseCorrectCasing'
+    )
     # Verify Module is installed and the correct path
     # Path to module depends on how installed - this case assumes -Scope AllUsers
-    CustomRulePath      = "C:\\Program Files\\WindowsPowerShell\\Modules\\InjectionHunter\\1.0.0\\InjectionHunter.psd1"
+    CustomRulePath = "C:\\Program Files\\WindowsPowerShell\\Modules\\InjectionHunter\\1.0.0\\InjectionHunter.psd1"
+}
+Rules = @{
+    PSAvoidUsingCmdletAliases  = @{
+        Enable      = $true
+        'Whitelist' = @('where')
+    }
 
-    Rules               = @{
+    PSPlaceOpenBrace = @{
+        Enable             = $true
+        OnSameLine         = $true
+        NewLineAfter       = $true
+        IgnoreOneLineBlock = $true
+    }
 
-        PSAvoidUsingCmdletAliases  = @{
-            Whitelist = @('where')
-        }
+    PSPlaceCloseBrace = @{
+        Enable             = $true
+        NewLineAfter       = $true
+        IgnoreOneLineBlock = $true
+        NoEmptyLineBefore  = $false
+    }
 
-        PSPlaceOpenBrace           = @{
-            Enable             = $true
-            OnSameLine         = $true
-            NewLineAfter       = $true
-            IgnoreOneLineBlock = $true
-        }
+    PSUseConsistentIndentation = @{
+        Enable          = $true
+        Kind            = 'tab'
+        IndentationSize = 4
+    }
 
-        PSPlaceCloseBrace          = @{
-            Enable             = $true
-            NewLineAfter       = $true
-            IgnoreOneLineBlock = $true
-            NoEmptyLineBefore  = $false
-        }
+    PSUseConsistentWhitespace = @{
+        Enable         = $true
+        CheckOpenBrace = $true
+        CheckOpenParen = $true
+        CheckOperator  = $true
+        CheckSeparator = $true
+    }
 
-        PSUseConsistentIndentation = @{
-            Enable          = $false
-            Kind            = 'tab'
-            IndentationSize = 4
-        }
+    PSAlignAssignmentStatement = @{
+        Enable         = $true
+        CheckHashtable = $true
+    }
 
-        PSUseConsistentWhitespace  = @{
-            Enable         = $false
-            CheckOpenBrace = $true
-            CheckOpenParen = $true
-            CheckOperator  = $false
-            CheckSeparator = $true
-        }
+    PSUseCompatibleSyntax = @{
+        # This turns the rule on (setting it to false will turn it off)
+        Enable = $true
 
-        PSAlignAssignmentStatement = @{
-            Enable         = $true
-            CheckHashtable = $true
-        }
+        # List the targeted versions of PowerShell here
+        TargetVersions = @(
+            '2.0'
+        )
+    }
 
-        PSUseCompatibleCommands    = @{
-            # Turns the rule on
-            Enable         = $true
+    PSUseCompatibleCommands = @{
+        # Turns the rule on
+        Enable = $true
 
-            # Lists the PowerShell platforms we want to check compatibility with
-            TargetProfiles = @(
-                'win-8_x64_10.0.14393.0_6.1.3_x64_4.0.30319.42000_core',
-                'win-8_x64_10.0.17763.0_5.1.17763.316_x64_4.0.30319.42000_framework',
-                'win-8_x64_6.2.9200.0_3.0_x64_4.0.30319.42000_framework'
-            )
-        }
+        # Lists the PowerShell platforms we want to check compatibility with
+        TargetProfiles = @(
+            'win-8_x64_10.0.17763.0_6.1.3_x64_4.0.30319.42000_core',
+            'win-8_x64_10.0.17763.0_5.1.17763.316_x64_4.0.30319.42000_framework',
+            'win-8_x64_6.2.9200.0_3.0_x64_4.0.30319.42000_framework'
+        )
+    }
 
-        PSUseCompatibleSyntax      = @{
-            # This turns the rule on (setting it to false will turn it off)
-            Enable         = $true
-
-            # Simply list the targeted versions of PowerShell here
-            TargetVersions = @(
-                '2.0',
-                '3.0'
-            )
-        }
+    PSUseCorrectCasing     = @{
+        Enable             = $true
     }
 }

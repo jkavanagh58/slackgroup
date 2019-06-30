@@ -1,3 +1,4 @@
+. C:\etc\scripts\system-functions.ps1
 Function Prompt {
 	$admRole = ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)
 	If ($psversiontable.psversion.Major -lt 6){
@@ -125,13 +126,12 @@ Set-Alias -name "qotd" -Value Get-QOTD
 #import-module psreadline
 simple-countdown
 qotd
-"================================================"
-#get-weather -zipCode 44011
-"------------------------------------------------"
+$osvals = Get-CimInstance -ClassName Win32_OperatingSystem
+"------------------------------------------------------------------"
+"`t$($osvals.Caption) Build: $($osvals.BuildNumber)"
 "`tRunning PowerShell $($PSVersionTable.PSVersion)"
-"------------------------------------------------"
-
-
+"------------------------------------------------------------------"
+remove-variable osvals
 # SIG # Begin signature block
 # MIIFdgYJKoZIhvcNAQcCoIIFZzCCBWMCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR

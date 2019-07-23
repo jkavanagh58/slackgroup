@@ -48,7 +48,7 @@ Function Show-InstalledPackages {
         }
     }
     END {
-        #Remove-Variable -Name package*
+        Remove-Variable -Name package*
         [System.GC]::Collect()
     }
 }

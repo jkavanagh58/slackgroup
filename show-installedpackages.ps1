@@ -6,30 +6,38 @@ Function Show-InstalledPackages {
             07.23.2019 JJK: TODO: Use type casting for Version like
                             [Version]$pkg.Version
             07.23.2019 JJK: DONE: Provide option to only show report of outdated packages
+            07.24.2019 JJK: TODO: Test using wildcard for get-package
+            07.24.2019 JJK: TODO: Hard code the find-package
     #>
     [CmdletBinding()]
     param (
         [parameter(Mandatory = $False, ValueFromPipeline = $True,
             HelpMessage = "Package Provider")]
-        [System.String]$packageProvider = "Chocolatey",
+        [System.String]$packageProvider = "Chocolate*",
         [parameter(Mandatory = $False, ValueFromPipeline = $True,
-                HelpMessage = "Report just outdated")]
+            HelpMessage = "Report just outdated")]
         [Switch]$OnlyOutdated
     )
     BEGIN {
-        $packageInstalled = Get-Package | Where-Object {$_.ProviderName -eq $packageProvider}
+        $packageInstalled = Get-Package | Where-Object { $_.ProviderName -like $packageProvider }
         $packageVersionReport = @()
     }
     PROCESS {
         "Checking {0} Packages from {1}" -f $packageInstalled.Count, $packageProvider
-        ForEach ($pkg in $packageInstalled | Sort-Object -Property Name){
-            $pkg.Name
-            $onlinepkg = Find-Package -Name $pkg.Name -ProviderName $packageProvider
+        ForEach ($pkg in $packageInstalled | Sort-Object -Property Name) {
+            $onlinepkg = Find-Package -Name $pkg.Name -ProviderName "Chocolatey"
             If ($onlinepkg) {
+                If ($onlinepkg.Version -gt $pkg.Version) {
+                    $packageNeedUpdate = $True
+                }
+                Else {
+                    $packageNeedUpdate = $False
+                }
                 $pacakageObj = [PSCustomObject]@{
-                    Package = $pkg.Name
-                    Installed = $pkg.Version
+                    Package          = $pkg.Name
+                    Installed        = $pkg.Version
                     AvailableVersion = $onlinepkg.Version
+                    UpdateAvailable  = $packageNeedUpdate
                 }
                 $packageVersionReport += $pacakageObj
             }
@@ -40,8 +48,8 @@ Function Show-InstalledPackages {
         "Reporting on {0} Packages" -f $PackageVersionReport.Count
         If ($OnlyOutdated) {
             $packageVersionReport |
-            Where-Object {$_.AvailableVersion -gt $_.Installed} | 
-            Format-Table -AutoSize
+                Where-Object { $_.AvailableVersion -gt $_.Installed } | 
+                Format-Table -AutoSize
         }
         Else {
             $packageVersionReport | Format-Table -AutoSize

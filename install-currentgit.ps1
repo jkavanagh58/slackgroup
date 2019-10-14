@@ -41,10 +41,16 @@ Param (
 		HelpMessage = "HelpMessage")]
 	[Int32]$procAvail = ([System.IntPtr]::Size) * 8,
 	[parameter(Mandatory = $False, ValueFromPipeline = $False,
+		HelpMessage = "Path for Chocoaltey install packages")]
+	[System.IO.DirectoryInfo]$chocoInstallPath = "C:\chocolatey\lib",
+	[parameter(Mandatory = $False, ValueFromPipeline = $False,
 		HelpMessage = "Count of current git installs")]
-	[Int32]$chocoInstallPaths = (Get-ChildItem git.install.* -Path C:\Chocolatey\lib -Directory | Measure-Object).Count
+	[System.IO.DirectoryInfo]$chocoInstallPaths
 )
 BEGIN {
+	$chocoInstallPaths = $chocoInstallPath.GetDirectories("git*")
+	$gitMostCurrent = $chocoInstallPaths | measure-object -Property LastWriteTime -Maximum
+	gci -Path $chocoInstallPath | where LastWriteTime -lt $gitMostCurrent.Maximum
 	Function clear-gitinstall {
 		<#
 			.SYNOPSIS
@@ -60,7 +66,7 @@ BEGIN {
 	}
 }
 PROCESS {
-
+	$chocoInstallPaths.count
 }
 END {
 

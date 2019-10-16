@@ -50,7 +50,7 @@ Param (
 BEGIN {
 	$chocoInstallPaths = $chocoInstallPath.GetDirectories("git*")
 	$gitMostCurrent = $chocoInstallPaths | measure-object -Property LastWriteTime -Maximum
-	gci -Path $chocoInstallPath | where LastWriteTime -lt $gitMostCurrent.Maximum
+
 	Function clear-gitinstall {
 		<#
 			.SYNOPSIS
@@ -66,7 +66,12 @@ BEGIN {
 	}
 }
 PROCESS {
-	$chocoInstallPaths.count
+	# Clear up older installs
+	$oldInstalls = $chocoInstallPaths |
+		where-object { $_.LastWriteTime -lt $gitMostCurrent.Maximum.Date }
+	ForEach ($oldInstall in $oldInstalls) {
+		clear-gitinstall
+	}
 }
 END {
 

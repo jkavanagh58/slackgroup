@@ -418,8 +418,7 @@
 		"prefix": "freememory",
 		"body": [
 			"Remove-Variable -Name ${1:variablestoberemoved}\r",
-			"[System.GC]::Collect()\r",
-			"$0"
+			"[System.GC]::Collect()\r"
 		],
 		"description": "Free up memory when script completes"
 	},

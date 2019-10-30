@@ -27,12 +27,12 @@ $taskP = New-Item -ItemType Directory -Path "C:\etc\temp\PTC\PTC issues\$thisdat
 $pubSource = "\\clvprdinfs001\IT_FileSrv\Jkav"
 Foreach ($file in (Get-ChildItem $pubSource)) {
     if ($file.LastWriteTime -gt ($Curr_date).adddays($Max_days)) {
-        Copy-Item -Path $file.fullname -Destination $taskP     
+        Copy-Item -Path $file.fullname -Destination $taskP
     }
 }
 get-installedmodule | sort-object Name | select-object Name, Version, @{N = "OnlineVersion"; e = {(find-module -Name $_.Name).version}}
 
-<# 
+<#
 // CIM //
 .LINK
     https://blogs.msdn.microsoft.com/powershell/2013/08/19/cim-cmdlets-some-tips-tricks/
@@ -52,17 +52,17 @@ $slack = get-ciminstance -ClassName Win32_Process -Filter "Name = 'Slack.exe'"
 $slack | ForEach {Invoke-CimMethod -InputObject $_ -Method Terminate}
 
 
-$usercreds = get-credential "john.kavanagh@wegmans.com"
-send-mailmessage -From "john.kavanagh@wegmans.com" -to "john.kavanagh@wegmans.com" -Body "PowerShell Message" -BodyAsHtml -Subject "Long winded" -SmtpServer "smtp.wegmans.com" -Credential $usercreds
-$usercreds = get-credential "john.kavanagh@wegmans.com"
+$usercreds = get-credential "john.kavanagh@somedomain.com"
+send-mailmessage -From "john.kavanagh@somedomain.com" -to "john.kavanagh@somedomain.com" -Body "PowerShell Message" -BodyAsHtml -Subject "Long winded" -SmtpServer "smtp.somedomain.com" -Credential $usercreds
+$usercreds = get-credential "john.kavanagh@somedomain.com"
 # Now lets splat it
 $mailargs = @{
-    From       = "John.Kavanagh@wegmans.com"
-    To         = "John.Kavanagh@wegmans.com"
+    From       = "John.Kavanagh@somedomain.com"
+    To         = "John.Kavanagh@somedomain.com"
     Body       = "PowerShell Message"
     BodyAsHTML = $true
     Subject    = "Splatted"
-    SmtpServer = "smtp.wegmans.com"
+    SmtpServer = "smtp.somedomain.com"
     Credential = $usercreds
 }
 send-mailmessage @mailargs
@@ -82,7 +82,7 @@ Stop-Service lanmanserver -Force
 # https://www.powershellgallery.com/packages/Test-WannaCryVulnerability/1.4/DisplayScript
 install-script -Name Test-wannacryVulnerability -Path c:\etc\scripts -RequiredVersion 2.0 -Scope AllUsers
 
-# Disable SMB1 Protocol 
+# Disable SMB1 Protocol
 Set-SmbServerConfiguration -EnableSMB1Protocol $false
 
 # Disable SMB1 Feature
@@ -90,14 +90,14 @@ Disable-WindowsOptionalFeature -FeatureName SMB1Protocol -Online
 
 
 # Only check for SMB1 - Remote
-$cimsession = New-CimSession -ComputerName somecomputer -credential $admcreds 
-$smbVals = get-smbserverconfiguration -cimSession $cimsession 
+$cimsession = New-CimSession -ComputerName somecomputer -credential $admcreds
+$smbVals = get-smbserverconfiguration -cimSession $cimsession
 If ($smbvals.EnableSMB1Protocol){"`nSMB1 Should be disabled"}Else{"`nSMB1 is not enabled"}
 $cimsession.Dispose()
 
 # Check for SMB1 and Disable - Remote
-$cimsession = New-CimSession -ComputerName somecomputer -credential $admcreds 
-$smbVals = get-smbserverconfiguration -cimSession $cimsession 
+$cimsession = New-CimSession -ComputerName somecomputer -credential $admcreds
+$smbVals = get-smbserverconfiguration -cimSession $cimsession
 If ($smbvals.EnableSMB1Protocol){
     "`nSMB1 Being disabled"
     try {

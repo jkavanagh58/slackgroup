@@ -70,7 +70,7 @@ Param (
 	[System.String]$wksName = "C:\etc\GitActivity.xlsx",
 	[Parameter(Mandatory=$False, ValueFromPipeline=$True)]
 	[ValidateScript ({Test-Path $_})]
-    [System.String]$wksArchive = "C:\users\vndtekjxk\OneDrive - Wegmans Food Markets, Inc\Documents\GitActivity_Archived.xlsx",
+    [System.String]$wksArchive = "C:\users\vndtekjxk\OneDrive - somedomain Food Markets, Inc\Documents\GitActivity_Archived.xlsx",
 	[parameter(Mandatory=$False, ValueFromPipeline=$True,
 			HelpMessage = "Used if operator wants to view new report file")]
 	[Switch]$ViewReport,

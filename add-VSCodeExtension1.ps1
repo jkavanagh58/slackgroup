@@ -93,7 +93,7 @@ Function Add-Snippetfile {
         If (Test-Path $env:APPDATA\Code\User\Snippets\PowerShell.JSON){
             Rename-Item $env:APPDATA\Code\User\Snippets\PowerShell.JSON -NewName $env:APPDATA\Code\User\Snippets\PowerShell.backup -Force
         }
-        Copy-Item \\wfm.wegmans.com\Departments\InformationTechnology\TechWintel\.Scripts\Automation\powershell.json -Destination $destFolder -force
+        Copy-Item \\wfm.somedomain.com\Departments\InformationTechnology\TechWintel\.Scripts\Automation\powershell.json -Destination $destFolder -force
     }
     Else {
         Write-Error -Message "Unable to find path to Snippet files. Is Visual Studio Code installed?"

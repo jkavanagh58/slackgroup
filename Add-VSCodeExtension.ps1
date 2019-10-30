@@ -58,7 +58,7 @@ PROCESS {
     }
     # Code to implement PowerShell Snippet file
     If ($destFolder = $env:APPDATA\Code\User\Snippets){
-        Copy-Item \\wfm.wegmans.com\Departments\InformationTechnology\TechWintel\.Scripts\Automation\powershell.json -Destination $destFolder -force
+        Copy-Item \\wfm.somedomain.com\Departments\InformationTechnology\TechWintel\.Scripts\Automation\powershell.json -Destination $destFolder -force
     }
 }
 END {

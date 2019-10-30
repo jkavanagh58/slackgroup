@@ -2,12 +2,12 @@ Function Prompt {
     Try {
         $admRole = ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)
         If ($admRole) {
-            $host.ui.RawUI.WindowTitle = "Wegmans - TechWintel Automation (Admin)"
+            $host.ui.RawUI.WindowTitle = "somedomain - TechWintel Automation (Admin)"
             Write-Host "I " -NoNewline; Write-Host "$([char]9829) " -ForegroundColor Red -NoNewline; Write-Host "PS # " -NoNewline
             return ' '
         }
         Else {
-            #$host.ui.RawUI.WindowTitle = "Wegmans - TechWintel Automation"
+            #$host.ui.RawUI.WindowTitle = "somedomain - TechWintel Automation"
             Write-Host "I " -NoNewline; Write-Host "$([char]9829) " -ForegroundColor Red -NoNewline; Write-Host " PS >_ " -NoNewline
             return ' '
         }

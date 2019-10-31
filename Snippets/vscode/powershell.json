@@ -270,14 +270,14 @@
 			"\t\t${Param1}",
 			"\t)",
 			"\t",
-			"\tBEGIN {",
+			"\tBegin {",
 			"\t}",
 			"\t",
-			"\tPROCESS {",
+			"\tProcess {",
 			"\t\t$0",
 			"\t}",
 			"\t",
-			"\tEND {",
+			"\tEnd {",
 			"\t}",
 			"}"
 		],
@@ -493,13 +493,13 @@
 	"Begin Process End Block": {
 		"prefix": "BeginProcessEnd",
 		"body": [
-			"BEGIN {\r",
+			"Begin {\r",
 			"\t# Start Begin Block\r",
 			"}\r",
-			"PROCESS {\r",
+			"Process {\r",
 			"\t# Start Process Block\r",
 			"}\r",
-			"END {\r",
+			"End {\r",
 			"\t# Start End Block\r",
 			"}\r"
 		]

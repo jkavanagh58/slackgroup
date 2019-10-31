@@ -4,12 +4,12 @@ Param (
             HelpMessage = "Perform Update")]
     [Swith]$UpdateModule
 )
-BEGIN {
+Begin {
     $curModules = get-installedmodule | Sort-Object -Property Name
 }
-PROCESS {
+Process {
     ForEach ($varModule in $curModules) {
-        Write-Progress -Activity "Inspecting Module $($varModule.Name)" -Status "Version Check" 
+        Write-Progress -Activity "Inspecting Module $($varModule.Name)" -Status "Version Check"
         [Version]$versionInstalled = $varModule.Version
         [Version]$versionOnline = (Find-Module -Name $varModule.Name).Version
         If ($versionOnline -gt $versionInstalled) {
@@ -17,7 +17,7 @@ PROCESS {
         }
     }
 }
-END {
+End {
     Remove-Variable -Name versionInstalled, versionOnline, curModules
     [System.GC]::Collect()
 }

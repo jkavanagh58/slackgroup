@@ -18,11 +18,11 @@ Function Show-InstalledPackages {
             HelpMessage = "Report just outdated")]
         [Switch]$OnlyOutdated
     )
-    BEGIN {
+    Begin {
         $packageInstalled = Get-Package | Where-Object { $_.ProviderName -like $packageProvider }
         $packageVersionReport = @()
     }
-    PROCESS {
+    Process {
         "Checking {0} Packages from {1}" -f $packageInstalled.Count, $packageProvider
         ForEach ($pkg in $packageInstalled | Sort-Object -Property Name) {
             $onlinepkg = Find-Package -Name $pkg.Name -ProviderName "Chocolatey"
@@ -48,14 +48,14 @@ Function Show-InstalledPackages {
         "Reporting on {0} Packages" -f $PackageVersionReport.Count
         If ($OnlyOutdated) {
             $packageVersionReport |
-                Where-Object { $_.AvailableVersion -gt $_.Installed } | 
+                Where-Object { $_.AvailableVersion -gt $_.Installed } |
                 Format-Table -AutoSize
         }
         Else {
             $packageVersionReport | Format-Table -AutoSize
         }
     }
-    END {
+    End {
         Remove-Variable -Name package*
         [System.GC]::Collect()
     }

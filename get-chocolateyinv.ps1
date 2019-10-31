@@ -39,7 +39,7 @@ Begin {
 		.SYNOPSIS
 			Tests if the user is an administrator
 		.DESCRIPTION
-			Returns true if a user is an administrator, false if the user is not an administrator       
+			Returns true if a user is an administrator, false if the user is not an administrator
 		.EXAMPLE
 			Test-IsAdmin
 		#>

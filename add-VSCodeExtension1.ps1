@@ -30,7 +30,7 @@ Param (
             HelpMessage = "Collection of Recommended Extensions")]
     $extList
 )
-BEGIN {
+Begin {
     If (get-command -Name code.cmd -ErrorAction SilentlyContinue){
         $extInstalled = code --list-extensions
         # Build list of extensions
@@ -70,7 +70,7 @@ BEGIN {
         EXIT
     }
 }
-PROCESS {
+Process {
     ForEach ($extension in $extList){
         If ($extInstalled -contains $extension){
             "{0} Already installed" -f $extension
@@ -80,7 +80,7 @@ PROCESS {
         }
     }
 }
-END {
+End {
     Remove-Variable -Name extList
     [System.GC]::Collect()
 }

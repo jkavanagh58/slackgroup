@@ -8,7 +8,7 @@ Function new-modules {
     Param (
         [System.Array]$varModules = (get-installedmodule)
     )
-    BEGIN {
+    Begin {
 
     }
 
@@ -22,10 +22,9 @@ Function new-modules {
             }
         }
     }
-    END {
+    End {
         Remove-Variable -Name varModules, i
         [System.GC]::Collect()
     }
 }
 
- 

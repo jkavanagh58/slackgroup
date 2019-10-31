@@ -11,7 +11,7 @@ Param (
         HelpMessage = "VSCode Folder location for User Snippets")]
     [System.String]$snippetFile
 )
-BEGIN {
+Begin {
     $snippetFolder = Join-Path $env:APPDATA -ChildPath "\code\User\snippets"
     $snippetFile = Join-Path $snippetFolder -ChildPath "powershell.json"
     If (test-path $snippetFile){
@@ -20,7 +20,7 @@ BEGIN {
         Rename-Item $snippetFile -NewName $snippetBackup
     }
 }
-PROCESS {
+Process {
     Try {
         [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.SecurityProtocolType]::Tls12
         $snip = Invoke-WebRequest -Uri $snippetURL -OutFile $snippetFile -PassThru
@@ -31,7 +31,7 @@ PROCESS {
     }
 
 }
-END {
+End {
     Remove-Variable -Name snip*
     [System.GC]::Collect()
 }

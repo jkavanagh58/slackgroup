@@ -81,7 +81,7 @@ Param (
 		HelpMessage = "Format Excel friendly Table Style")]
 	[System.String]$rptTableStyle = "Medium" + (get-date).Month.ToString()
 )
-BEGIN {
+Begin {
 	Function update-gitreport {
         If (test-path $wksname) {
             $activeSheets = Get-ExcelSheetInfo -Path $wksName | Where-Object {((get-Date) - (Get-Date($_.Name))).TotalDays -gt 30}
@@ -101,7 +101,7 @@ BEGIN {
 	}
 	$Report = New-Object System.Collections.ArrayList
 }
-PROCESS {
+Process {
     #update-gitreport
 	Try {
 		# Hard code repo until search logic works
@@ -173,7 +173,7 @@ PROCESS {
 		}
 	}
 }
-END {
+End {
 	Write-Verbose -Message "[END]Script Cleanup"
 	Remove-Variable -Name Report, wksName, wksTabname, gitrepos
 	[System.GC]::Collect()

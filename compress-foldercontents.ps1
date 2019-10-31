@@ -22,14 +22,14 @@ Param(
 	[ValidateScript({ test-path -Path (Split-Path -Path $_ )})]
 	[System.String]$resultFile
 )
-BEGIN {
+Begin {
 	[Reflection.Assembly]::LoadWithPartialName( "System.IO.Compression.FileSystem" ) | out-null
 	$CompressionLevel = [System.IO.Compression.CompressionLevel]::Optimal
 }
-PROCESS {
+Process {
 	[System.IO.Compression.ZipFile]::CreateFromDirectory($srcFolder, $resultFile, $CompressionLevel, $null)
 }
-END {
+End {
 	Remove-Variable -Name srcFolder, resultfile
 	[System.GC]::Collect()
 }

@@ -27,7 +27,7 @@ Param (
             HelpMessage = "Collection of Recommended Extensions")]
     [System.Collections.ArrayList]$extList
 )
-BEGIN {
+Begin {
     $extInstalled = code --list-extensions
     If (get-command -Name code.cmd -ErrorAction SilentlyContinue){
         # Build list of extensions
@@ -47,7 +47,7 @@ BEGIN {
         EXIT
     }
 }
-PROCESS {
+Process {
     ForEach ($extension in $extList){
         If ($extInstalled -contains $extension){
             "$($extension) Already installed"
@@ -61,7 +61,7 @@ PROCESS {
         Copy-Item \\wfm.somedomain.com\Departments\InformationTechnology\TechWintel\.Scripts\Automation\powershell.json -Destination $destFolder -force
     }
 }
-END {
+End {
     Remove-Variable -Name extList
     [System.GC]::Collect()
 }

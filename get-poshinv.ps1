@@ -40,12 +40,12 @@ Param (
 		HelpMessage = "HelpMessage")]
 	[Switch]$isCore = $False
 )
-BEGIN {
+Begin {
 	If ($psversiontable.PSEdition -eq "Core") {
 		$isCore = $True
 	}
 }
-PROCESS {
+Process {
 	$installedModules = get-installedmodule | Sort-Object -Property Name | Select-Object -Property Name, Version
 	$exportExcelSplat = @{
 		AutoSize      = $true
@@ -82,7 +82,7 @@ PROCESS {
 		Invoke-Item $fileXLSX
 	}
 }
-END {
+End {
 	Remove-Variable -Name install*, exportExcelSplat, fileXLSX, data*
 	[System.GC]::Collect()
 }

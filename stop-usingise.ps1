@@ -3,7 +3,7 @@ param(
     [Parameter(Mandatory=$False,ValueFromPipeline=$True)]
     [Switch]$IncludeAll
 )
-BEGIN {
+Begin {
     Function Install-VSCode {
         #Requires -RunAsAdministrator
             # .LINK https://github.com/PowerShell/vscode-powershell
@@ -32,12 +32,12 @@ BEGIN {
             Remove-Variable rundir, vscodesplat
         }
 }
-PROCESS {
+Process {
     # and away we go
     install-VSCode
 }
-END {
-    
+End {
+
 }
 }
 Function Install-VSCodeModules {
@@ -49,10 +49,10 @@ Param (
 BEGIN{
     $extPattern = "EditorServices*"
 }
-PROCESS {
+Process {
     Install-Module -Name $extPattern -Confirm:$false -Force
 }
-END {
+End {
     Remove-Variable -Name extPattern
 }
 }

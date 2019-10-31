@@ -1,11 +1,11 @@
 <# Scratch file for submitting code, tips, snippets, etc...
 ██╗    ██╗ ██████╗ ██████╗ ██╗  ██╗██╗███╗   ██╗ ██████╗     ███████╗██╗██╗     ███████╗
 ██║    ██║██╔═══██╗██╔══██╗██║ ██╔╝██║████╗  ██║██╔════╝     ██╔════╝██║██║     ██╔════╝
-██║ █╗ ██║██║   ██║██████╔╝█████╔╝ ██║██╔██╗ ██║██║  ███╗    █████╗  ██║██║     █████╗  
-██║███╗██║██║   ██║██╔══██╗██╔═██╗ ██║██║╚██╗██║██║   ██║    ██╔══╝  ██║██║     ██╔══╝  
+██║ █╗ ██║██║   ██║██████╔╝█████╔╝ ██║██╔██╗ ██║██║  ███╗    █████╗  ██║██║     █████╗
+██║███╗██║██║   ██║██╔══██╗██╔═██╗ ██║██║╚██╗██║██║   ██║    ██╔══╝  ██║██║     ██╔══╝
 ╚███╔███╔╝╚██████╔╝██║  ██║██║  ██╗██║██║ ╚████║╚██████╔╝    ██║     ██║███████╗███████╗
  ╚══╝╚══╝  ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝╚═╝  ╚═══╝ ╚═════╝     ╚═╝     ╚═╝╚══════╝╚══════╝
-#>                                                                                        
+#>
 
 # Does vscode warn about function name
 Function machine-code {
@@ -17,12 +17,12 @@ Function machine-code {
 [system.net.dns]::GetHostAddresses($srv.Name)
 
 Unlock-AdAccount -Identity jktest -Verbose
-if ((get-aduser jktest -Properties LockedOut).LockedOut){Unlock-ADAccount -Identity jktest -Verbose}  
+if ((get-aduser jktest -Properties LockedOut).LockedOut){Unlock-ADAccount -Identity jktest -Verbose}
 
 # testing regex
 $String="12.1.1.1"
 $IPv4Regex = '((?:(?:0?0?\d|0?[1-9]\d|1\d\d|2[0-5][0-5]|2[0-4]\d)\.){3}(?:0?0?\d|0?[1-9]\d|1\d\d|2[0-5][0-5]|2[0-4]\d))'
-[regex]::Matches($String, $IPv4Regex) 
+[regex]::Matches($String, $IPv4Regex)
 
 # How to lock an account
 $Password = ConvertTo-SecureString 'NotMyPassword' -AsPlainText -Force
@@ -40,7 +40,7 @@ Do {
     invoke-command {get-process} -computername clvprddom007 -Credential $badacct
 }
 # the command runs enough times to lock it out and then stops
-Until ((get-aduser -identity jktest -Properties LockedOut).LockedOut) 
+Until ((get-aduser -identity jktest -Properties LockedOut).LockedOut)
 
 # Qualified Function for unlocking an AD account
 function unlock-anaccount {
@@ -52,7 +52,7 @@ function unlock-anaccount {
 	.PARAMETER logonName
 		This value should match the User Account samAccountName aka User Logon Name from AD Users and Computers.
 	.EXAMPLE
-				PS C:\> unlock-anaccount -logonName 'Value1'	
+				PS C:\> unlock-anaccount -logonName 'Value1'
 	.NOTES
 		03.06.2017 JJK: Function written and added to profile.ps1
         03.06.2017 JJK: TODO: Modify paramater validation to perform search-adaccount to consolidate validating
@@ -101,11 +101,11 @@ Param(
 		HelpMessage = "Type the help message here in quotes")]
 		[ValidateScript({ test-path $_ })]
 		[System.String]$varSome
-	
+
 )
 # Prefix ipparam
 Param (
-	
+
 )
 # 4 - forceful
 # 0 - graceful

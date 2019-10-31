@@ -10,13 +10,13 @@ Param (
     [ValidateScript({Test-Path $_ -PathType 'Container'}]
     [System.String[]]$homeFolder
 )
-BEGIN {
+Begin {
 
 }
-PROCESS {
+Process {
     Foreach ($file in (Get-ChildItem $pubSource)) {
         if ($file.LastWriteTime -gt ($Curr_date).adddays($Max_days)) {
-            Copy-Item -Path $file.fullname -Destination $taskP     
+            Copy-Item -Path $file.fullname -Destination $taskP
         }
     }
 }

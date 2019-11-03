@@ -32,7 +32,7 @@
 Param (
 	[parameter(Mandatory = $False, ValueFromPipeline = $True,
 		HelpMessage = "Excel Workbook Full Path")]
-	[System.IO.FileInfo]$fileXLSX = "c:\temp\powershell-goodies.xlsx",
+	[System.IO.FileInfo]$fileXLSX = "c:\temp\$($env:computername)_powershell-goodies.xlsx",
 	[parameter(Mandatory = $False, ValueFromPipeline = $True,
 		HelpMessage = "Show report")]
 	[Switch]$rptShow,
@@ -43,6 +43,10 @@ Param (
 Begin {
 	If ($psversiontable.PSEdition -eq "Core") {
 		$isCore = $True
+	}
+	If (Test-Path $fileXLSX) {
+		"Removing existing file"
+		Remove-Item $fileXLSX -Force
 	}
 }
 Process {

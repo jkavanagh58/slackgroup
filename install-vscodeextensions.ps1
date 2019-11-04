@@ -51,7 +51,7 @@ Begin{
 }
 Else {
 	# Also just to check in case vscode has been installed and no reboot
-	if (!(invoke-expression -command "code -v" )){
+	if (!( "code -v" )){
 		"Visual Studio Code appears to be installed but requires a reboot"
 	}
 }

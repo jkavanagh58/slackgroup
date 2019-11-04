@@ -89,13 +89,13 @@ Process {
 	}#end catch
 
 	Foreach($Event in $LockedOutEvents) {
-		If($Event | Where {$_.Properties[2].value -match $UserInfo.SID.Value}) {
+		If($Event | Where-Object {$_.Properties[2].value -match $UserInfo.SID.Value}) {
 			$Event | Select-Object -Property @(
 				@{Label = 'User';               Expression = {$_.Properties[0].Value}}
 				@{Label = 'DomainController';   Expression = {$_.MachineName}}
 				@{Label = 'EventId';            Expression = {$_.Id}}
 				@{Label = 'LockedOutTimeStamp'; Expression = {$_.TimeCreated}}
-				@{Label = 'Message';            Expression = {$_.Message -split "`r" | Select -First 1}}
+				@{Label = 'Message';            Expression = {$_.Message -split "`r" | Select-Object -First 1}}
 				@{Label = 'LockedOutLocation';  Expression = {$_.Properties[1].Value}}
 			)
 		}#end ifevent

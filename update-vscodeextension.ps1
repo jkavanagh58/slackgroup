@@ -1,10 +1,10 @@
 # // The commands to interact with Visual Studio code
-<# 
+<#
 	/*
 		Visual Studio Code (Stable):  code
 		Visual Studio Code (Insiders): code-insiders
 
-		Note: if you mistype anything after the code command name you will be 
+		Note: if you mistype anything after the code command name you will be
 		rewarded with a new VSCode blank session
 	/*
 #>
@@ -40,7 +40,7 @@ param (
 	[System.String]$codeCommand = (get-command -Name Code*).Name.Replace(".cmd",""),
 	$needExtensions
 )
-BEGIN {
+Begin {
 	If ($codeCommand.Count -gt 1){
 		Write-Error -Message "Hey I said this was a quick example"
 		Write-Error -Message "Pick one version or the other I am not working on two"
@@ -54,7 +54,7 @@ BEGIN {
 	}
 	$refExtensions = Invoke-Command @invokeCommandSplat
 }
-PROCESS {
+Process {
 	$needExtensions = compare-object -ReferenceObject $refExtensions -DifferenceObject $curExtensions
 	ForEach ($thisExtension in $needExtensions){
 		$thisExtension.InputObject
@@ -68,7 +68,7 @@ PROCESS {
 		}
 	}
 }
-END {
+End {
 	Remove-Variable -Name curExtensions, refExtensions, needExtensions, invokeCommandSplat
 	[System.GC]::Collect()
 }

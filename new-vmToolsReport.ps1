@@ -53,7 +53,7 @@ Param(
 	[Parameter(Mandatory = $false,
 		ValueFromPipeline = $true,
 		HelpMessage = 'Ensure you are using the correct credentials for this operation')]
-	[System.Management.Automation.PSCredential]$vctrCreds	
+	[System.Management.Automation.PSCredential]$vctrCreds
 )
 Begin{
 if (!($defaultVIServers)){
@@ -115,7 +115,7 @@ $Report | Group-Object -Property ToolsStatus | Select-Object -Property Name, Cou
 # Create Excel File
 $Report | Group-Object -Property ToolsStatus | Select-Object -Property Name, Count | Sort-Object -Property Count |
 	Export-Excel -Path c:\etc\VMReport.xlsx  -Worksheetname "1 - VM Tools Report" -TitleFillPattern None -TitleBackgroundColor Gray -Title "VM Tools Report" -AutoSize
-$Report = $Report | Sort-Object -Property VMName 
+$Report = $Report | Sort-Object -Property VMName
 $Report.Where{$_.ToolsStatus -eq "ToolsOld"} | export-excel -Path c:\etc\VMReport.xlsx -WorkSheetname "Tools Need Updated" -AutoSize -TableName "NeedUpdate" -TableStyle Light1
 $Report.Where{$_.ToolsStatus -eq "ToolsOk"} | export-excel -Path c:\etc\VMReport.xlsx -WorkSheetname "Tools Up-To-Date" -AutoSize -TableName "Current" -TableStyle Light2
 $Report.Where{$_.ToolsStatus -eq "ToolsNotInstalled" -OR $_.ToolsStatus -eq "ToolsNotRunning"} | export-excel -Path c:\etc\VMReport.xlsx -WorkSheetname "No Tools or Not Running" -TableName "NotInstalledRunning" -TableStyle Light3 -AutoSize

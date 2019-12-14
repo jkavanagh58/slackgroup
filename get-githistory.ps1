@@ -70,7 +70,7 @@ Param (
 	[System.String]$wksName = "C:\etc\GitActivity.xlsx",
 	[Parameter(Mandatory=$False, ValueFromPipeline=$True)]
 	[ValidateScript ({Test-Path $_})]
-    [System.String]$wksArchive = "C:\users\vndtekjxk\OneDrive - Wegmans Food Markets, Inc\Documents\GitActivity_Archived.xlsx",
+    [System.String]$wksArchive = "C:\users\vndtekjxk\OneDrive - somedomain Food Markets, Inc\Documents\GitActivity_Archived.xlsx",
 	[parameter(Mandatory=$False, ValueFromPipeline=$True,
 			HelpMessage = "Used if operator wants to view new report file")]
 	[Switch]$ViewReport,
@@ -81,7 +81,7 @@ Param (
 		HelpMessage = "Format Excel friendly Table Style")]
 	[System.String]$rptTableStyle = "Medium" + (get-date).Month.ToString()
 )
-BEGIN {
+Begin {
 	Function update-gitreport {
         If (test-path $wksname) {
             $activeSheets = Get-ExcelSheetInfo -Path $wksName | Where-Object {((get-Date) - (Get-Date($_.Name))).TotalDays -gt 30}
@@ -101,7 +101,7 @@ BEGIN {
 	}
 	$Report = New-Object System.Collections.ArrayList
 }
-PROCESS {
+Process {
     #update-gitreport
 	Try {
 		# Hard code repo until search logic works
@@ -173,7 +173,7 @@ PROCESS {
 		}
 	}
 }
-END {
+End {
 	Write-Verbose -Message "[END]Script Cleanup"
 	Remove-Variable -Name Report, wksName, wksTabname, gitrepos
 	[System.GC]::Collect()

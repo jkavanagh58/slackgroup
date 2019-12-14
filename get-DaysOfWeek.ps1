@@ -1,4 +1,4 @@
-BEGIN {
+Begin {
     Function convertto-WeekofYear {
         $caldays = @()
         $startday = Get-Date "1.1.2019"
@@ -18,7 +18,7 @@ BEGIN {
         Return $caldays
     }
 }
-PROCESS {
+Process {
     $workingset = convertto-WeekofYear
     $stopPoint = [int](Get-date -UFormat %V)
     $weekCounter = 0
@@ -31,7 +31,7 @@ PROCESS {
 
     } Until ($weekCounter -eq $stopPoint)
 }
-END {
+End {
     # Need to look at this a little closer
     #Remove-Variable -Name workingset, weekcounter, weeklist, 1stDay, lastDay -ErrorAction SilentlyContinue
     [System.GC]::Collect()

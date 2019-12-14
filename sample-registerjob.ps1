@@ -19,11 +19,11 @@
 Param (
 	#$runJob=$False
 )
-BEGIN {
+Begin {
 	$Option = New-ScheduledJobOption -RunElevated -RequireNetwork
 	$Trigger = New-JobTrigger -Daily -At 09:00
 }
-PROCESS {
+Process {
 	# Test formalizing the jobsplat as an array
 	$JobSplat = @{
 		Name               = 'PSUpdateHelp'

@@ -32,7 +32,7 @@
 Param (
 	[parameter(Mandatory = $False, ValueFromPipeline = $True,
 		HelpMessage = "Excel Workbook Full Path")]
-	[System.IO.FileInfo]$fileXLSX = "c:\temp\powershell-goodies.xlsx",
+	[System.IO.FileInfo]$fileXLSX = "c:\temp\$($env:computername)_powershell-goodies.xlsx",
 	[parameter(Mandatory = $False, ValueFromPipeline = $True,
 		HelpMessage = "Show report")]
 	[Switch]$rptShow,
@@ -40,12 +40,16 @@ Param (
 		HelpMessage = "HelpMessage")]
 	[Switch]$isCore = $False
 )
-BEGIN {
+Begin {
 	If ($psversiontable.PSEdition -eq "Core") {
 		$isCore = $True
 	}
+	If (Test-Path $fileXLSX) {
+		"Removing existing file"
+		Remove-Item $fileXLSX -Force
+	}
 }
-PROCESS {
+Process {
 	$installedModules = get-installedmodule | Sort-Object -Property Name | Select-Object -Property Name, Version
 	$exportExcelSplat = @{
 		AutoSize      = $true
@@ -82,7 +86,7 @@ PROCESS {
 		Invoke-Item $fileXLSX
 	}
 }
-END {
+End {
 	Remove-Variable -Name install*, exportExcelSplat, fileXLSX, data*
 	[System.GC]::Collect()
 }

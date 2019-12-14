@@ -10,11 +10,11 @@ Param(
             HelpMessage = "Collection of locally installed modules")]
     [System.Array]$modInstalled
 )
-BEGIN {
+Begin {
     "Gathering list of Installed Modules"
     $modInstalled = Get-InstalledModule
 }
-PROCESS {
+Process {
     ForEach ($curModule in $modInstalled){
         $modInfo = Get-InstalledModule $curModule.Name -AllVersions
         "{0} has an installed history of {1} versions, Latest version is {2}" -f $curModule.Name, $modinfo.count, $curModule.Version
@@ -37,8 +37,8 @@ PROCESS {
 
     }
 }
-END {
+End {
     Remove-Variable -Name curModule, modInstalled, modInfo
     [System.GC]::Collect()
-    
+
 }

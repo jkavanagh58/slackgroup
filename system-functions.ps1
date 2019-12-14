@@ -330,12 +330,12 @@ Function Show-Installedmodules {
 	Param(
 		$varModules = (get-installedmodule)
 	)
-	BEGIN {
+	Begin {
 		"-" * 52
 		"`tReporting on {0} modules" -f $varModules.Count
 		"-" * 52
 	}# End Begin
-	PROCESS {
+	Process {
 		$varModules |
 			sort-object -Property Name |
 			select-object -Property Name,
@@ -346,7 +346,7 @@ Function Show-Installedmodules {
 										} |
 			format-table -AutoSize
 	}# End Process
-	END {
+	End {
 		Remove-Variable varModules
 		[System.GC]::Collect()
 	}

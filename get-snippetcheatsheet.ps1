@@ -53,7 +53,7 @@ Param(
     [System.String]$snipSourceFile = "C:\Users\vndTekJXK\.vscode-insiders\extensions\ms-vscode.powershell-1.12.1\snippets\powershell.json"
 
 )
-BEGIN {
+Begin {
     Function New-ExcelCheatSheet {
         [CmdletBinding()]
         Param (
@@ -134,7 +134,7 @@ BEGIN {
         Write-Error -Message "Unable to determine Visual Studio Code is installed"
     }
 }
-PROCESS {
+Process {
 
     $snippetInfo = New-Object System.Collections.ArrayList
     $snipSource = get-content $snipSourceFile -raw
@@ -156,7 +156,7 @@ PROCESS {
     New-WordCheatSheet -tbldata $snippetList
 
 }
-END {
+End {
     Remove-Variable -Name OutputType, OutPutLocation
     [System.GC]::Collect()
 }

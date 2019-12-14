@@ -32,11 +32,11 @@
 [CmdletBinding(SupportsShouldProcess=$true,ConfirmImpact='Medium')]
 Param(
 	$psVersion = $psversiontable.psversion,
-	$dotNetVersion = 	(Get-ChildItem 'HKLM:\SOFTWARE\Microsoft\NET Framework Setup\NDP' -recurse | 
-        				Get-ItemProperty -name Version -EA SilentlyContinue | 
+	$dotNetVersion = 	(Get-ChildItem 'HKLM:\SOFTWARE\Microsoft\NET Framework Setup\NDP' -recurse |
+        				Get-ItemProperty -name Version -EA SilentlyContinue |
         				Measure-Object -Property Version -Maximum).Maximum
 )
-BEGIN {
+Begin {
 	$modules = @(
 		"ImportExcel",
 		"psreadline",
@@ -59,7 +59,7 @@ BEGIN {
 	"#------------------------------------------------------------------------------------------------------#"
 	""
 }
-PROCESS {
+Process {
 	switch ([environment]::OSVersion.Version) {
 		-eq 10 { If ($psversion.Major -eq 5 -AND $psversion.Minor -eq 1){"Good to go"}Else{"The most current version of PowerShell is 5.1"} }
 		Default {}
@@ -72,7 +72,7 @@ PROCESS {
 				"Module {0} installed" -f $module
 			}
 			Catch{
-				Write-error -Message "Unable to install $module" 
+				Write-error -Message "Unable to install $module"
 			}
 		}
 		Else {
@@ -104,11 +104,11 @@ PROCESS {
 	If(!(get-module -Name ActiveDirectory -ListAvailable)){"RSAT needs to be installed."}
 	# Install AD Powershell Module
 	. C:\etc\scripts\install-adpowershell.ps1
-	# Customize Visual Studio 
+	# Customize Visual Studio
 	. c:\etc\scripts\install-vscodeextensions.ps1
 	# Enable WSL
 	Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux
 }
-END {
-	
+End {
+
 }

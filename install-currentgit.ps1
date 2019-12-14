@@ -47,7 +47,7 @@ Param (
 		HelpMessage = "Count of current git installs")]
 	[System.IO.DirectoryInfo]$chocoInstallPaths
 )
-BEGIN {
+Begin {
 	$chocoInstallPaths = $chocoInstallPath.GetDirectories("git*")
 	$gitMostCurrent = $chocoInstallPaths | measure-object -Property LastWriteTime -Maximum
 
@@ -65,7 +65,7 @@ BEGIN {
 
 	}
 }
-PROCESS {
+Process {
 	# Clear up older installs
 	$oldInstalls = $chocoInstallPaths |
 		where-object { $_.LastWriteTime -lt $gitMostCurrent.Maximum.Date }
@@ -73,6 +73,6 @@ PROCESS {
 		clear-gitinstall
 	}
 }
-END {
+End {
 
 }

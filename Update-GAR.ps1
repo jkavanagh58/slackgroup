@@ -33,10 +33,10 @@ Param (
         HelpMessage = "Number of days used for established archival")]
     [int32]$reportMilestone = 30
 )
-BEGIN {
+Begin {
     $activesheets = get-excelsheetinfo -Path $reportActive
 }
-PROCESS {
+Process {
     ForEach ($sheet in $activeSheets){
         If ((([System.DateTime]::Now) - (Get-Date $sheet.Name)).TotalDays -gt $reportMilestone){
             Copy-ExcelWorkSheet -SourceWorkBook $reportActive -SourceWorkSheet $sheet.Name -DestinationWorkbook $reportArchive $sheet.Name
@@ -45,7 +45,7 @@ PROCESS {
         }
     }
 }
-END {
+End {
     Remove-Variable -Name reportActive, reportarchive, activesheets
     [System.GC]::Collect()
 }

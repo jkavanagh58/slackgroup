@@ -9,7 +9,7 @@
 	Stopwatch instance for recording  amount of time from beginning to the completed
 	restart process.
 .PARAMETER followUp
-	If restart takes longer than 90 seconds this will be set to True to trigger 
+	If restart takes longer than 90 seconds this will be set to True to trigger
 	follow up message is needed.
 .EXAMPLE
 	C:\etc\scripts>.\test-betterreboot.ps1 -victim somecomputer
@@ -25,7 +25,7 @@
 	06.02.2017 JJK:	TODO: Add graceful logoff process if necessary, since this is
 					targetted for maintenance window this might be not necessary.
 	06.02.2017 JJK:	TODO: Craft send-mail message for reboot notification.
-	06.02.2017 JJK: Monitor reboot, notify if successful restart did not 
+	06.02.2017 JJK: Monitor reboot, notify if successful restart did not
 					occur within 90 seconds.
 #>
 

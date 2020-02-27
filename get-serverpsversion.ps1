@@ -33,7 +33,8 @@ Begin {
 	$Report = @()
 	$reportFile = "$env:USERPROFILE\Documents\WMF5Audit.XLSX"
 	$wksName = get-date -f MMddyyy
-	$serverList = get-adcomputer -filter {OperatingSystem -like "*windows Server*"} -Properties OperatingSystem | select-Object -Property Name, OperatingSystem
+	$serverList = get-adcomputer -filter { OperatingSystem -like "*windows Server*" } -Properties OperatingSystem |
+		Select-Object -Property Name, OperatingSystem
 }
 Process {
 	ForEach ($srv in $serverList | sort-Object -Property Name){
@@ -96,9 +97,10 @@ Process {
 }
 End {
 	If ($Report){
-		if (test-path $reportFile){
-			remove-item $reportFile -Force
+		if (Test-Path $reportFile) {
+			Remove-Item $reportFile -Force
 		}
-		$Report | export-excel $reportFile -WorkSheetName $wksName -AutoSize
+		$Report |
+			Export-Excel $reportFile -WorkSheetName $wksName -AutoSize
 	}
 }

@@ -1,0 +1,1 @@
+wget https://aka.ms/install-powershell.sh; sudo bash install-powershell.sh -includeide; rm install-powershell.sh

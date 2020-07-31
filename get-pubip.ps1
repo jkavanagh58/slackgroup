@@ -1,0 +1,1 @@
+(Invoke-WebRequest -Uri "https://ipv4.icanhazip.com/").content

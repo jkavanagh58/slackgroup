@@ -28,7 +28,7 @@ Process {
 		If ($oldVersions){
 			ForEach ($deprecated in $oldversions){
 				Try {
-					$deprecated | Uninstall-Module -Confirm:$false -Force
+					$deprecated | Uninstall-Module -Confirm:$false -Force -ErrorAction Stop
 					"`tUninstalled Version: {0}" -f $deprecated.Version
 				}
 				Catch {
@@ -45,6 +45,7 @@ Process {
 }
 End {
 	$endFree = Get-FreeSpace
+
 	Remove-Variable -Name curModule, modInstalled, modInfo
 	[System.GC]::Collect()
 

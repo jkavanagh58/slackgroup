@@ -10,7 +10,7 @@
 [CmdletBinding()]
 Param(
 	[parameter(
-		Mandatory = $False, 
+		Mandatory = $False,
 		ValueFromPipeline = $False,
 		HelpMessage = 'Collection of locally installed modules')
 	]
@@ -33,7 +33,7 @@ Process {
 		$progParams = @{
 			Activity        = 'PowerShell Module Cleanup'
 			Status          = "$($curModule.Name)"
-			PercentComplete = (($progCounter * 100) / $modInstalled.Count) 
+			PercentComplete = (($progCounter * 100) / $modInstalled.Count)
 		}
 		Write-Progress  @progParams
 		$modInfo = Get-InstalledModule $curModule.Name -AllVersions
@@ -42,7 +42,7 @@ Process {
 		If ($oldVersions) {
 			ForEach ($deprecated in $oldversions) {
 				Try {
-					$deprecated | Uninstall-Module -Confirm:$false -Force -ErrorAction Stop -WhatIf
+					$deprecated | Uninstall-Module -Confirm:$false -Force -ErrorAction Stop
 					"`tUninstalled Version: {0}" -f $deprecated.Version
 				}
 				Catch {

@@ -8,8 +8,9 @@ Param (
 	[Switch]$IPV6
 )
 If ($IPV4) {
-	(Invoke-WebRequest -Uri 'https://ipv4.icanhazip.com/').content
+	$pubIP = (Invoke-WebRequest -Uri 'https://ipv4.icanhazip.com/').content
 }
 If ($IPV6) {
-	(Invoke-WebRequest -Uri 'https://ipv6.icanhazip.com/').content
+	$pubIP = (Invoke-WebRequest -Uri 'https://ipv6.icanhazip.com/').content.Trim()
 }
+Return $pubIP.Trim()

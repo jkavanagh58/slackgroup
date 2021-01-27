@@ -14,3 +14,6 @@ If ($IPV6) {
 	$pubIP = (Invoke-WebRequest -Uri 'https://ipv6.icanhazip.com/').content.Trim()
 }
 Return $pubIP.Trim()
+
+# Use REST
+(Invoke-RestMethod -Uri 'ipinfo.io/json').ip

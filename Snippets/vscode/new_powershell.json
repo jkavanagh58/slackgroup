@@ -505,5 +505,43 @@
         "prefix": "psarray",
         "body": "$${1:VariableName} = [System.Collections.ArrayList]@()",
         "description": "Formal array declaration"
+    },
+    "AD User Query": {
+        "prefix": "jjk -  AD Query",
+        "body": [
+            "$$adQry = @{\r",
+            "\tSearchBase = 'OU=Associates,DC=corp,DC=sagentlending,DC=com'\r",
+            "\tFilter     = { Enabled -eq 'True' }\r",
+            "\tProperties = 'Company'\r",
+            "}\r",
+            "$$users = get-aduser @adQry\r"
+        ],
+        "description": "Perform AD User query from designated OU and filtered on Enabled users"
+    },
+    "Test session vars": {
+        "prefix": "jjk - test",
+        "body": [
+            "$BLOCK_COMMENT_START ${1| Visual Studio Code , Microsoft ISE , Notepad++|} $BLOCK_COMMENT_END"
+        ],
+        "description": "Testing automating snippet use and local values"
+    },
+    "ISO 8601 with Tz Offset": {
+        "prefix": "jjk - ISO 8601",
+        "body": [
+            "[System.String]$${5:VariableName} = Get-Date -Format \"yyy-MM-ddTHH:mm$((Get-TimeZone).BaseUtcOffset)\""
+        ],
+        "description": "Use ISO 8601 with TZ offset"
+    },
+    "Use existing Azure PowerShell connection if Available": {
+        "prefix": "jjk - AzConnect",
+        "body": [
+            "If ($$azctx = get-AzContext -ErrorAction Silentl) {\r",
+            "\t\"Azure Connect current using {0}\" -f $$azctx.Account\r",
+            "}\r",
+            "Else {\r",
+            "\tConnect-AzAccount\r",
+            "}\r"
+        ],
+        "description": "Checks Az connection, if not connected prompts"
     }
 }

@@ -1,10 +1,8 @@
 {
     "$schema": "https://aka.ms/terminal-profiles-schema",
-    "actions": 
-    [
+    "actions": [
         {
-            "command": 
-            {
+            "command": {
                 "action": "openSettings",
                 "target": "settingsUI"
             },
@@ -18,14 +16,12 @@
     // Add custom keybindings to this array.
     // To unbind a key combination from your defaults.json, set the command to "unbound".
     // To learn more about keybindings, visit https://aka.ms/terminal-keybindings
-    "keybindings": 
-    [
+    "keybindings": [
         // Copy and paste are bound to Ctrl+Shift+C and Ctrl+Shift+V in your defaults.json.
         // These two lines additionally bind them to Ctrl+C and Ctrl+V.
         // To learn more about selection, visit https://aka.ms/terminal-selection
         {
-            "command": 
-            {
+            "command": {
                 "action": "copy",
                 "singleLine": false
             },
@@ -45,20 +41,23 @@
         // - "splitMode": "duplicate" makes the new pane use the focused pane's profile.
         // To learn more about panes, visit https://aka.ms/terminal-panes
         {
-            "command": 
-            {
+            "command": {
                 "action": "splitPane",
                 "split": "auto",
                 "splitMode": "duplicate"
             },
             "keys": "alt+shift+d"
+        },
+        {
+            "command": {
+                "action": "quakeMode"
+            },
+            "keys": "Ctrl+f12"
         }
     ],
-    "profiles": 
-    {
+    "profiles": {
         "defaults": {},
-        "list": 
-        [
+        "list": [
             {
                 "backgroundImage": "c:/users/johnk/pictures/console/backgrounds/windows.jpg",
                 "backgroundImageOpacity": 0.5,
@@ -67,7 +66,9 @@
                 "fontSize": 11,
                 "guid": "{61c54bbd-c2c6-5271-96e7-009a87ff44bf}",
                 "hidden": false,
-                "name": "Windows PowerShell"
+                "name": "Windows PowerShell",
+                "tabTitle": "WindowsPowerShell",
+                "tabColor": "#1a1280"
             },
             {
                 "commandline": "cmd.exe",
@@ -105,6 +106,7 @@
                 "hidden": false,
                 "name": "Raspberry Pi 4",
                 "tabTitle": "pi 4",
+                "tabColor": "#6b1e1e",
                 "useAcrylic": false
             },
             {
@@ -115,7 +117,8 @@
                 "guid": "{7dc274b1-73ac-4a36-b289-b38caf52aeca}",
                 "icon": "c:\\users\\johnk\\pictures\\console\\icons\\pi_color.jpg",
                 "name": "Raspberry Pi",
-                "tabTitle": "Pi"
+                "tabTitle": "Pi",
+                "tabColor": "#6b1e1e"
             },
             {
                 "acrylicOpacity": 0.5,
@@ -176,7 +179,9 @@
                 "padding": "0, 0, 0, 0",
                 "snapOnInput": true,
                 "suppressApplicationTitle": true,
-                "useAcrylic": false
+                "useAcrylic": false,
+                "tabTitle": "Ubuntu Desktop",
+                "tabColor": "#9e7928"
             },
             {
                 "closeOnExit": "graceful",
@@ -208,12 +213,12 @@
                 "fontSize": 11,
                 "guid": "{a3a2e83a-884a-5379-baa8-16f193a13b21}",
                 "hidden": false,
-                "name": "PowerShell 7"
+                "name": "PowerShell 7",
+                "tabColor": "#434446"
             }
         ]
     },
-    "schemes": 
-    [
+    "schemes": [
         {
             "background": "#F7F7F7",
             "black": "#090300",
